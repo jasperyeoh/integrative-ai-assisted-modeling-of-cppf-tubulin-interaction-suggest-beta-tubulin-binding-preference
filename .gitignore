@@ -1,0 +1,37 @@
+# Python / general cache
+__pycache__/
+*.py[cod]
+*.so
+.DS_Store
+
+# Environment and local IDE
+.env
+.venv/
+venv/
+.idea/
+.vscode/
+
+# Logs and temporary files
+nohup.out
+*.log
+*.log.*
+\#*#
+*.tmp
+*.bak
+
+# GROMACS / MD large or generated binaries
+*.xtc
+*.trr
+*.tng
+*.edr
+*.cpt
+*.gro
+*.trj
+
+# Common analysis outputs
+*.xvg
+*.eps
+*.xpm
+*.pdbqt
+
+# Keep primary docs/scripts/config under version control.

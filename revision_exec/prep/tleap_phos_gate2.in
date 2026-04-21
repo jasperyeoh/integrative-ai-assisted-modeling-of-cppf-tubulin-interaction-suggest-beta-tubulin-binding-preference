@@ -1,0 +1,17 @@
+source leaprc.protein.ff14SB
+source leaprc.water.tip3p
+
+loadAmberParams ../input/cofactors_params/frcmod.phos
+loadAmberPrep   ../input/cofactors_params/GTP.prep
+loadAmberPrep   ../input/cofactors_params/GDP.prep
+
+# sanity: try to create units directly from the prep-defined residues
+# (if the prep is loaded correctly, the following should work)
+GTPU = sequence { GTP }
+GDPU = sequence { GDP }
+
+# then try loading the PDB
+cof = loadpdb cofactors_gtp_gdp_mg_ambernames.pdb
+check cof
+charge cof
+quit

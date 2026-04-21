@@ -1,0 +1,11 @@
+source leaprc.protein.ff14SB
+source leaprc.water.tip3p
+
+loadAmberParams ../input/cofactors_params/frcmod.phos
+loadAmberPrep   ../input/cofactors_params/GTP.prep
+loadAmberPrep   ../input/cofactors_params/GDP.prep
+
+cof = loadpdb cofactors_gtp_gdp_mg_bryce.pdb
+check cof
+charge cof
+quit
