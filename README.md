@@ -37,7 +37,7 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
   - analysis outputs
 - `cppf/`: CPPF provenance assets (for example, source structure files)
 - `inputs/`: downloaded source inputs and provenance records
-- `legacy_from_yfeng494/`: archived legacy templates (reference only)
+- `legacy_templates/`: archived legacy templates (reference only)
 - `work/`: auxiliary scratch area
 
 ### Key Files
