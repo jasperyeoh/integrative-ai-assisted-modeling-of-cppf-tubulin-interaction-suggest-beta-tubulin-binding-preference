@@ -1,0 +1,19 @@
+; CPPF_pubchem_GMX_OPLS.top created by acpype (v: 2023.10.27) on Thu Apr 16 19:59:33 2026
+
+; Include forcefield parameters
+#include "ffoplsaa.itp"
+
+; Include CPPF_pubchem_GMX.itp topology
+#include "CPPF_pubchem_GMX.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_CPPF_pubchem.itp"
+#endif
+
+[ system ]
+ CPPF_pubchem
+
+[ molecules ]
+; Compound        nmols
+ CPPF_pubchem     1     

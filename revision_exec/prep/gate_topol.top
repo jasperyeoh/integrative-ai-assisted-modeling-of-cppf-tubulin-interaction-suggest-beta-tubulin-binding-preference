@@ -1,0 +1,60 @@
+;
+;	File 'revision_exec/prep/gate_topol.top' was generated
+;	By user: jyang577 (203293)
+;	On host: ac38d33c30c5
+;	At date: Thu Apr 16 16:24:00 2026
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	              :-) GROMACS - gmx pdb2gmx, 2024.5-conda_forge (-:
+;	
+;	Executable:   /hpc2hdd/home/jyang577/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+;	Data prefix:  /hpc2hdd/home/jyang577/miniconda3/envs/gmx-lite
+;	Working dir:  /hpc2hdd/home/jyang577/jasperyeoh/TUB-CPPF/md-simulation-plan-2026-04
+;	Command line:
+;	  gmx pdb2gmx -f revision_exec/prep/protein_only_ab.pdb -o revision_exec/prep/gate_processed.gro -p revision_exec/prep/gate_topol.top -ff amber99sb-ildn -water tip3p
+;	Force field was read from the standard GROMACS share directory.
+;
+
+; Include forcefield parameters
+#include "amber99sb-ildn.ff/forcefield.itp"
+
+; Include CPPF ligand topology (GAFF2 + RESP2(0.5) charges)
+; NOTE: this file defines [ atomtypes ], so it MUST be included before any [ moleculetype ].
+#include "../input/ligand/CPPF_RESP2.itp"
+
+; Include chain topologies
+#include "gate_topol_Protein_chain_A.itp"
+#include "gate_topol_Protein_chain_B.itp"
+
+; Ligand position restraints (used in NVT/NPT when -DPOSRES)
+#ifdef POSRES
+#include "../input/ligand/posre_CPPF_RESP2.itp"
+#endif
+
+; Include water topology
+#include "amber99sb-ildn.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "amber99sb-ildn.ff/ions.itp"
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Protein_chain_A     1
+Protein_chain_B     1
+CPPF_RESP2          1
+SOL         53989
+NA               207
+CL               161

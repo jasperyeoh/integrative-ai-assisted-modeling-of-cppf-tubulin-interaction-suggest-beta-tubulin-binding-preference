@@ -1,0 +1,87 @@
+## 2026-04-16
+- **建立 MD 修回主线框架**：锁定 heterodimer（5IJ0）+ 3×replicates + 200 ns + MM-PBSA 作为回应 reviewer 的主证据链。
+- **锁定 CPPF 结构来源**：PubChem CID `763830`，并记录 Canonical SMILES / InChIKey；下载 3D conformer SDF 用于后续参数化一致性。
+- **建立参数化/准备环境**：创建 `mdprep` conda 环境并安装 AmberTools/OpenBabel/RDKit/ParmEd/ACPYPE。
+- **补齐开源 QM**：在 `mdprep` 安装 Psi4（`psi4 1.10`），使 RESP2 流程不依赖 Gaussian/ORCA。
+- **结构准备自动化**：完成 pose1 + 5IJ0 对齐与清理脚本链路，生成并验证 `complex_start_clean.pdb`；将 ligand 统一命名为 `CPP`、链 `C`。
+- **CPPF 临时拓扑打通管线**：用 ACPYPE 生成 CPPF 的 GAFF2 拓扑（临时 BCC 电荷用于 gate），并将“带氢配体”刚体拟合回 pose 位点，完成溶剂化/加离子/EM gate 跑通。
+- **吸收外部反馈并升级 cofactor 策略**：否决 “GTP/GDP 用 GAFF2 + gas charge 当主路线”，转为 **reviewer-proof** 的权威参数路线：
+  - 下载 Bryce/AMBER Parameter Database 的 `GTP.prep`、`GDP.prep`、`frcmod.phos`（polyphosphate）。
+  - 发现 residue 名大小写与 atom-name 记号不一致（prime vs star），新增预处理脚本：
+    - `rename_resname_case.py`：将 `GTP/GDP` → `gtp/gdp`
+    - `rename_nucleotide_prime_to_star.py`：对需要的残基做 prime→star
+  - **tleap gate 验证通过**：加载 `GTP.prep/GDP.prep + frcmod.phos` 后，`does not have a type` 消失，且总电荷检查为 **-5**（与 GTP(-4)+GDP(-3)+Mg2+(+2)一致）。
+- **整理项目工作区结构**：将 MD 工作区统一为 `tubulin-cppf-md/`，并按 `docs/ inputs/ work/ legacy/` 重新归档；关键执行入口（`revision_exec/`、`cppf/`、`reference_from_yfeng494/`）为真实目录（无软链接）。
+- **Phase 1.5 gate 点火前静态自检（通过）**：
+  - `grompp` 预检确认 **EM/NVT/NPT 输入拓扑自洽**（无 Fatal error）。
+  - 修复 NVT/NPT 的关键依赖：
+    - 生成并补齐 `revision_exec/input/index.ndx`（创建 `Protein_CPP`；将配体 group 从 `MOL` 重命名为 `CPP` 以匹配 `energygrps`）。
+    - 恢复蛋白 `posre_Protein_chain_{A,B}.itp` 到 `revision_exec/prep/` 以满足链 `.itp` 的相对 include。
+    - 在 `revision_exec/prep/gate_topol.top` 中加入 `CPPF` 的 `posre_CPPF.itp`（`#ifdef POSRES`）以提升 NVT/NPT 稳定性。
+- **Phase 1.5 gate（rep1）实跑完成**：
+  - **EM 完成并收敛**：`revision_exec/rep1/em/em.log` 显示 `Potential Energy = -2.8607960e+06`，`Maximum force = 9.6687445e+02 (<1000)`。
+  - **NVT 完成**：`revision_exec/rep1/nvt/nvt.log` 运行至 `step 50000 (100 ps)`，无 Fatal error。
+  - **NPT 完成**：`revision_exec/rep1/npt/npt.log` 运行至 `step 50000 (100 ps)`，无 Fatal error。
+  - **关键输出已落盘**：`revision_exec/rep1/npt/{npt.gro,npt.cpt,npt.edr,npt.log,npt.tpr}`。
+- **Phase 1.5 gate（rep2）完成**：
+  - **EM 完成并收敛**：与 rep1 同量级（`Epot ~ -2.86e6`，`Fmax < 1000`）。
+  - **NVT 完成**：`revision_exec/rep2/nvt/` 产出 `nvt.gro`、`nvt.cpt` 等。
+  - **NPT 完成**：`revision_exec/rep2/npt/npt.log` 正常结束（`Finished mdrun`）。
+- **Phase 1.5 gate（rep3）完成**：
+  - **EM 完成并收敛**：`Potential Energy = -2.8607960e+06`，`Maximum force = 9.6687445e+02 (<1000)`。
+  - **NVT 完成**：`revision_exec/rep3/nvt/` 产出 `nvt.gro`、`nvt.cpt` 等。
+  - **NPT 完成**：`revision_exec/rep3/npt/` 产出 `npt.gro`、`npt.cpt`、`npt.log`，`mdrun` 正常结束。
+- **阶段里程碑**：`rep1/rep2/rep3` 的 Phase 1.5 gate（EM+NVT+NPT）已全部跑通，可进入 200 ns production。
+
+## 2026-04-17
+- **RESP2 阻塞已解除（方案1落地）**：安装并验证 `Multiwfn`（noGUI 版），建立 `Psi4 + Multiwfn` 可执行链路。
+- **CPPF RESP2(0.5) 电荷已产出**：
+  - `revision_exec/input/ligand/charges_gas.txt`
+  - `revision_exec/input/ligand/charges_water.txt`
+  - `revision_exec/input/ligand/charges_resp2_05.txt`
+  - 原子数 `n=32`，总电荷近似 `0`（数值误差级别）。
+- **RESP2 拓扑已生成并入库**：
+  - `revision_exec/input/ligand/CPPF_RESP2.mol2`
+  - `revision_exec/input/ligand/CPPF_RESP2.itp`
+  - `revision_exec/input/ligand/CPPF_RESP2.gro`
+  - `revision_exec/input/ligand/posre_CPPF_RESP2.itp`
+- **主拓扑切换到 RESP2**：`revision_exec/prep/gate_topol.top` 已把配体 include 从 BCC 版本替换为 `CPPF_RESP2.itp`，并切换对应 `posre` 与 `[molecules]` 的配体名。
+- **预检状态**：已完成 RESP2 版本的 `grompp` 预检查（EM），下一步执行短回归 gate（EM + NVT + NPT）确认动力学稳定后启动 200 ns production。
+- **RESP2 回归 gate（rep1，短程）完成**：
+  - 路径：`revision_exec/rep1_resp2_gate/`
+  - **EM 收敛**：`Potential Energy = -2.8656418e+06`，`Maximum force = 8.8533337e+02 (<1000)`。
+  - **NVT（20 ps）完成**：`step 10000` 写 checkpoint 并正常 `Finished mdrun`。
+  - **NPT（20 ps）完成**：`step 10000` 写 checkpoint 并正常 `Finished mdrun`。
+  - 结论：RESP2 拓扑替换后体系可稳定通过短程回归 gate，可进入 200 ns 生产阶段。
+- **dimer 生产阶段已启动（RESP2）**：
+  - 新增生产参数文件：`revision_exec/input/mdp/md_prod_200ns.mdp`（`dt=0.002`, `nsteps=100000000`，目标 200 ns）。
+  - 已生成 `rep1/rep2/rep3` 的生产 `tpr`：`revision_exec/rep{1,2,3}/prod/md_200ns.tpr`。
+  - `rep1` 已启动正式 production：`revision_exec/rep1/prod/md_200ns.*` 持续写出（`log/edr/xtc` 已增长）。
+- **GPU 利用修复（关键）**：
+  - 发现原 `gmx-lite` 为 OpenCL 构建，`mdrun` 提示 GPU 检测失败，导致 production 回落到 CPU。
+  - 已在 `gmx-lite` 环境替换为 CUDA 构建的 `gromacs 2024.5`（`GPU support: CUDA`）。
+  - 生产参数中移除 `energygrps`（避免 `Multiple energy groups ... falling back to CPU`）。
+  - `rep1` 已按 GPU offload 重启：`-nb gpu -pme gpu -bonded gpu`（`-update gpu` 因约束耦合限制不适用）。
+  - 运行态验证通过：`md_200ns.log` 显示 `1 compatible GPU`（A800），`nvidia-smi` 显示 `gmx` 进程占用 GPU（util ~66%）。
+- **后台可靠性与串行队列提交（dimer）**：
+  - 新增脚本：`revision_exec/scripts/dimer_queue_nohup.sh`，顺序执行 `rep1 -> rep2 -> rep3` 的 200 ns production。
+  - 采用 `nohup` 提交队列，日志：`revision_exec/logs/dimer_queue_20260417_164735.log`，PID 文件：`revision_exec/logs/dimer_queue.pid`。
+  - 当前状态：队列已启动并自动从 checkpoint 续跑 `rep1`；`nvidia-smi` 显示 `gmx` 正在占用 A800（util ~67%）。
+
+## 2026-04-21
+- **rep1 production 完成**：
+  - `revision_exec/rep1/prod/md_200ns.log` 已记录 `Finished mdrun on rank 0`（200 ns 完整跑完）。
+  - 产物完整：`md_200ns.{xtc,edr,tpr,cpt,gro,log}` 均已落盘。
+- **rep2 / rep3 并行双卡启动（nohup，抗 SSH 断线）**：
+  - 采用独立后台命令并固定 GPU：`rep2 -> CUDA_VISIBLE_DEVICES=0`，`rep3 -> CUDA_VISIBLE_DEVICES=1`。
+  - nohup 日志：
+    - `revision_exec/logs/rep2_gpu0_200ns.nohup.log`
+    - `revision_exec/logs/rep3_gpu1_200ns.nohup.log`
+  - 生产日志持续写入：
+    - `revision_exec/rep2/prod/md_200ns.log`
+    - `revision_exec/rep3/prod/md_200ns.log`
+  - 进程与 GPU 运行态已核验：两个 `gmx mdrun` 进程均在运行，双 A800 同时有占用（util ~60-70%）。
+- **并行启动中的修复点（已处理）**：
+  - 首次并行启动失败原因为 `rep2/rep3` 的旧 `md_200ns.tpr` 仍含 `energygrps`，触发 `Nonbonded interactions on the GPU were required, but not supported`。
+  - 已用当前 `md_prod_200ns.mdp`（去除 `energygrps`）重新 `grompp` 生成 `rep2/rep3` 的生产 `tpr`，随后后台重启成功。
+  - 结论：当前 `rep2/rep3` **可直接并行 GPU 跑，无需再改配置**；若后续重建 `tpr`，请继续使用同一份无 `energygrps` 的生产 mdp。

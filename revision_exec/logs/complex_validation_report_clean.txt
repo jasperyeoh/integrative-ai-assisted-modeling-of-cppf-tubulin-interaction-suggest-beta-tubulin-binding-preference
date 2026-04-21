@@ -1,0 +1,5 @@
+PDB: revision_exec/prep/complex_start_clean.pdb
+Total atoms: 7144
+Chains: {'A': 3558, 'B': 3565, 'C': 21}
+Selected resnames counts: {'GTP': 32, 'MG': 1, 'GDP': 28, 'CPP': 21}
+VALIDATION_STATUS: PASS

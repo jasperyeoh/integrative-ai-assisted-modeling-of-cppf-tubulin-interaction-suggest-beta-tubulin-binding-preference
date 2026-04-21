@@ -1,0 +1,54 @@
+title       = Protein-ligand complex production MD (200 ns)
+; Run parameters
+integrator  = md
+dt          = 0.002
+nsteps      = 100000000
+
+; Output control
+nstxout-compressed = 5000
+compressed-x-grps  = System
+nstvout            = 0
+nstfout            = 0
+nstenergy          = 1000
+nstlog             = 1000
+
+; Bond parameters
+continuation       = yes
+constraint_algorithm = lincs
+constraints        = all-bonds
+lincs_iter         = 1
+lincs_order        = 4
+
+; Neighborsearching
+cutoff-scheme      = Verlet
+ns_type            = grid
+nstlist            = 10
+rcoulomb           = 1.4
+rvdw               = 1.4
+
+; Electrostatics
+coulombtype        = PME
+pme_order          = 4
+fourierspacing     = 0.16
+
+; Temperature coupling
+tcoupl             = V-rescale
+tc-grps            = Protein_CPP Water_and_ions
+tau_t              = 0.1   0.1
+ref_t              = 300   300
+
+; Pressure coupling
+pcoupl             = C-rescale
+pcoupltype         = isotropic
+tau_p              = 1.0
+ref_p              = 1.0
+compressibility    = 4.5e-5
+
+; Periodic boundary conditions
+pbc                = xyz
+
+; Dispersion correction
+DispCorr           = EnerPres
+
+; Velocity generation
+gen_vel            = no

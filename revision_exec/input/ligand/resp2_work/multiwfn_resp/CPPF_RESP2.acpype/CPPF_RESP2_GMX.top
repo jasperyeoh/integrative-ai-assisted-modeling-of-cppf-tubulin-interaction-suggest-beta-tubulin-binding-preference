@@ -1,0 +1,20 @@
+; CPPF_RESP2_GMX.top created by acpype (v: 2023.10.27) on Fri Apr 17 15:29:26 2026
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               2               yes             0.5     0.8333333333
+
+; Include CPPF_RESP2_GMX.itp topology
+#include "CPPF_RESP2_GMX.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_CPPF_RESP2.itp"
+#endif
+
+[ system ]
+ CPPF_RESP2
+
+[ molecules ]
+; Compound        nmols
+ CPPF_RESP2       1     

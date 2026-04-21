@@ -1,0 +1,36 @@
+; Topology skeleton for heterodimer + CPPF + cofactors
+; Fill generated protein includes after pdb2gmx and add validated cofactor includes.
+
+#include "amber99sb-ildn.ff/forcefield.itp"
+
+; Protein include (generated after pdb2gmx step)
+; #include "protein_chain_A.itp"
+; #include "protein_chain_B.itp"
+
+; Cofactor includes (to be supplied from validated literature parameter set)
+; #include "cofactors/GTP.itp"
+; #include "cofactors/GDP.itp"
+; #include "cofactors/MG.itp"
+
+; Ligand include (RESP2-updated)
+; #include "ligand/CPPF_RESP2.itp"
+
+#ifdef POSRES
+; Optional position restraints
+; #include "ligand/posre_CPPF.itp"
+#endif
+
+[ system ]
+Heterodimer tubulin + CPPF + cofactors
+
+[ molecules ]
+; MoleculeName   count
+; Protein_chain_A 1
+; Protein_chain_B 1
+; GTP             1
+; GDP             1
+; MG              1
+; CPPF            1
+; SOL             <auto>
+; NA              <auto>
+; CL              <auto>

@@ -1,0 +1,20 @@
+; CPPF_pubchem_GMX.top created by acpype (v: 2023.10.27) on Thu Apr 16 19:59:33 2026
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               2               yes             0.5     0.8333333333
+
+; Include CPPF_pubchem_GMX.itp topology
+#include "CPPF_pubchem_GMX.itp"
+
+; Ligand position restraints
+#ifdef POSRES_LIG
+#include "posre_CPPF_pubchem.itp"
+#endif
+
+[ system ]
+ CPPF_pubchem
+
+[ molecules ]
+; Compound        nmols
+ CPPF_pubchem     1     

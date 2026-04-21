@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+psi4 --qcschema C16ClH11N2O2_82688b796f0852ccc9f5624f331c1c6199699091_4d9bb6d245f75e8aea535e7b9676614d130d864b.msgpack
