@@ -7,7 +7,7 @@
 - Key structural context detected in 5IJ0:
   - chain A (alpha1B), chain B (beta3), with `GTP A501`, `GDP B501`, `MG A502`.
 - Legacy workflow references curated:
-  - `reference_from_yfeng494/` contains reusable templates (`mdp`, `CPPF` files, index examples).
+  - `legacy_from_yfeng494/` contains reusable templates (`mdp`, `CPPF` files, index examples).
 - Runtime environment validated:
   - `gmx-lite` is available and usable (`gmx 2024.5-conda_forge`).
 - Protenix best starting pose located:
@@ -91,9 +91,9 @@ Locked status in this iteration:
 
 ## Available Assets and Reuse Strategy
 - Legacy references have been curated under:
-  - `reference_from_yfeng494/common/`
-  - `reference_from_yfeng494/alpha_template/`
-  - `reference_from_yfeng494/tubb3_template/`
+- `legacy_from_yfeng494/common/`
+- `legacy_from_yfeng494/alpha_template/`
+- `legacy_from_yfeng494/tubb3_template/`
 - Reuse policy:
   - Reuse ligand parameter assets (`CPPF.itp`, `CPPF.gro`, `CPPF.mol2`) as starting point.
   - Reuse `em/nvt/npt/md.mdp` parameter blocks as templates only.
