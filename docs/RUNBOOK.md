@@ -24,7 +24,7 @@ Current directory layout (cleaned):
 Top-level working directories (real directories, no symlinks):
 - `revision_exec/`: main execution workspace (scripts, prep, reps, analysis)
 - `cppf/`: PubChem CPPF assets (SDF, etc.)
-- `reference_from_yfeng494/`: archived legacy templates (mdp, examples)
+- `legacy_from_yfeng494/`: archived legacy templates (mdp, examples)
 
 ## 1) Directory Setup
 Create execution directories:
@@ -48,18 +48,18 @@ cp "Protenix/CPPF/ab Tub-CPPF/AlphaFold3_abTub_CPPF_pose1_V236_ptm0.96802771091.
 cp "cppf/Conformer3D_COMPOUND_CID_763830.sdf" "revision_exec/input/ligand_sources/CPPF_PubChem_CID_763830_3D.sdf"
 
 # Legacy template ligand files (optional; use only as templates, not as final charge source):
-cp "reference_from_yfeng494/common/CPPF.mol2" "revision_exec/input/ligand/CPPF_legacy_template.mol2"
-cp "reference_from_yfeng494/common/ions.mdp" "revision_exec/input/mdp/ions.mdp"
-cp "reference_from_yfeng494/alpha_template/em.mdp" "revision_exec/input/mdp/em.mdp"
-cp "reference_from_yfeng494/alpha_template/nvt.mdp" "revision_exec/input/mdp/nvt.mdp"
-cp "reference_from_yfeng494/alpha_template/npt.mdp" "revision_exec/input/mdp/npt.mdp"
+cp "legacy_from_yfeng494/common/CPPF.mol2" "revision_exec/input/ligand/CPPF_legacy_template.mol2"
+cp "legacy_from_yfeng494/common/ions.mdp" "revision_exec/input/mdp/ions.mdp"
+cp "legacy_from_yfeng494/alpha_template/em.mdp" "revision_exec/input/mdp/em.mdp"
+cp "legacy_from_yfeng494/alpha_template/nvt.mdp" "revision_exec/input/mdp/nvt.mdp"
+cp "legacy_from_yfeng494/alpha_template/npt.mdp" "revision_exec/input/mdp/npt.mdp"
 ```
 
 ## 2) Build `md_200ns.mdp` From Legacy Template
 Use legacy `md.mdp` as base and create upgraded production control file:
 
 ```bash
-cp "reference_from_yfeng494/alpha_template/md.mdp" "revision_exec/input/mdp/md_200ns.mdp"
+cp "legacy_from_yfeng494/alpha_template/md.mdp" "revision_exec/input/mdp/md_200ns.mdp"
 ```
 
 Then edit `revision_exec/input/mdp/md_200ns.mdp`:

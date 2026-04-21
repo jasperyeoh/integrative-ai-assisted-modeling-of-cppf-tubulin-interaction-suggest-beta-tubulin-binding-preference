@@ -11,7 +11,7 @@
     - `rename_resname_case.py`：将 `GTP/GDP` → `gtp/gdp`
     - `rename_nucleotide_prime_to_star.py`：对需要的残基做 prime→star
   - **tleap gate 验证通过**：加载 `GTP.prep/GDP.prep + frcmod.phos` 后，`does not have a type` 消失，且总电荷检查为 **-5**（与 GTP(-4)+GDP(-3)+Mg2+(+2)一致）。
-- **整理项目工作区结构**：将 MD 工作区统一为 `tubulin-cppf-md/`，并按 `docs/ inputs/ work/ legacy/` 重新归档；关键执行入口（`revision_exec/`、`cppf/`、`reference_from_yfeng494/`）为真实目录（无软链接）。
+- **整理项目工作区结构**：将 MD 工作区统一为 `tubulin-cppf-md/`，并按 `docs/ inputs/ work/ legacy/` 重新归档；关键执行入口（`revision_exec/`、`cppf/`、`legacy_from_yfeng494/`）为真实目录（无软链接）。
 - **Phase 1.5 gate 点火前静态自检（通过）**：
   - `grompp` 预检确认 **EM/NVT/NPT 输入拓扑自洽**（无 Fatal error）。
   - 修复 NVT/NPT 的关键依赖：
