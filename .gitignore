@@ -7,6 +7,7 @@ __pycache__/
 # Secrets (Zenodo, Hugging Face, etc.)
 .zenodo_token
 .huggingface_token
+revision_exec/scripts/HF_DATASET_REPO.env
 
 # Environment and local IDE
 .env

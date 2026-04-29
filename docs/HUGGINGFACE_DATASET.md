@@ -2,6 +2,26 @@
 
 Large `.xtc` files (~80 GiB total) fit comfortably on the Hub (LFS). Use this as the **main** public archive; you can still add a small **Zenodo** entry later if the journal insists on a DOI for a *manifest* or subset.
 
+## Let Cursor / an agent upload automatically (safe pattern)
+
+The agent runs **terminal commands on your server**. It **cannot** use your Hugging Face password interactively, but it **can** run uploads if **you have already authenticated on that same machine**:
+
+1. **On the server (SSH), once:**  
+   `hf auth whoami` → should print your user (e.g. `HUB_NAMESPACE`).  
+   If not: `hf auth login` and complete the browser/token flow **without pasting the token into chat**.
+
+2. **Optional:** put a write token in `~/.huggingface_token` (chmod 600). Never commit it.
+
+3. **Tell the agent your dataset id** (public info, not a secret), e.g.  
+   `HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers`  
+   Example: `export HF_DATASET_REPO='HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers'`
+
+4. The agent runs `revision_exec/scripts/huggingface_upload_trajectories.sh` (often under `nohup` for multi-hour uploads).
+
+There is **no** way to safely paste a **secret token** into the chat for the agent to “remember”; always use **server-side login** or a **local file** the agent reads only by path, never by pasting the secret in messages.
+
+See also `revision_exec/scripts/HF_DATASET_REPO.env.example`.
+
 ## 1. One-time setup
 
 ```bash
@@ -23,7 +43,7 @@ Script: `revision_exec/scripts/huggingface_upload_trajectories.sh`
 
 ```bash
 cd /path/to/tubulin-cppf-md
-export HF_DATASET_REPO='YourUser/cppf-tubulin-md-trajectories'
+export HF_DATASET_REPO='HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers'
 
 # preview
 bash revision_exec/scripts/huggingface_upload_trajectories.sh --dry-run

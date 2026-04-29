@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 # Upload MD trajectories to Hugging Face Hub (Dataset repo, large files via Hub LFS).
 #
-# Prereq: pip install -U "huggingface_hub[cli]"  (or use conda base where huggingface-cli exists)
+# Prereq: pip install -U "huggingface_hub[cli]"  (provides both `hf` and `huggingface-cli`)
 #
-# Auth (pick one):
-#   export HF_TOKEN='hf_...'
+# Auth (pick one) — do NOT paste tokens into chat; run on the server only:
+#   hf auth login
 #   or: huggingface-cli login
-#   or: single line in ~/.huggingface_token (chmod 600)
+#   or: export HF_TOKEN='hf_...'
+#   or: ~/.huggingface_token (chmod 600)
 #
-# Repo: export HF_DATASET_REPO='YourUser/cppf-tubulin-md-trajectories'
+# Repo: export HF_DATASET_REPO='HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers'
 #
 # Usage:
 #   HF_DATASET_REPO=YourUser/cppf-tubulin-md bash .../huggingface_upload_trajectories.sh --dry-run
@@ -27,6 +28,28 @@ BUNDLE="all"
 CREATE_REPO=0
 
 HF_REPO="${HF_DATASET_REPO:-${HF_REPO:-}}"
+
+run_hf() {
+  if command -v hf >/dev/null 2>&1; then
+    hf "$@"
+  else
+    huggingface-cli "$@"
+  fi
+}
+
+hf_upload() {
+  local local_path="$1" path_in_repo="$2" msg="$3"
+  if [[ -n "${HF_TOKEN:-}" ]]; then
+    run_hf upload "$HF_REPO" "$local_path" "$path_in_repo" \
+      --repo-type dataset \
+      --token "$HF_TOKEN" \
+      --commit-message "$msg"
+  else
+    run_hf upload "$HF_REPO" "$local_path" "$path_in_repo" \
+      --repo-type dataset \
+      --commit-message "$msg"
+  fi
+}
 
 load_hf_token() {
   if [[ -n "${HF_TOKEN:-}" ]]; then
@@ -82,8 +105,8 @@ case "$BUNDLE" in
   *) echo "ERROR: --bundle must be all, monomer, or dimer" >&2; exit 2 ;;
 esac
 
-if ! command -v huggingface-cli >/dev/null 2>&1; then
-  echo "ERROR: huggingface-cli not found. Install: pip install -U 'huggingface_hub[cli]'" >&2
+if ! command -v hf >/dev/null 2>&1 && ! command -v huggingface-cli >/dev/null 2>&1; then
+  echo "ERROR: Install: pip install -U 'huggingface_hub[cli]'" >&2
   exit 1
 fi
 
@@ -118,9 +141,9 @@ load_hf_token
 if [[ "$CREATE_REPO" -eq 1 ]]; then
   echo "Creating dataset repo $HF_REPO (if missing)..."
   if [[ -n "${HF_TOKEN:-}" ]]; then
-    huggingface-cli repo create "$HF_REPO" --repo-type dataset --exist-ok --token "$HF_TOKEN"
+    run_hf repo create "$HF_REPO" --repo-type dataset --exist-ok --token "$HF_TOKEN"
   else
-    huggingface-cli repo create "$HF_REPO" --repo-type dataset --exist-ok
+    run_hf repo create "$HF_REPO" --repo-type dataset --exist-ok
   fi
 fi
 
@@ -134,30 +157,12 @@ done
 
 SUM_KEY="HF_UPLOAD_SHA256SUMS_${BUNDLE}.txt"
 echo "Uploading $SUM_KEY ..."
-if [[ -n "${HF_TOKEN:-}" ]]; then
-  huggingface-cli upload "$HF_REPO" "$SUMS" "$SUM_KEY" \
-    --repo-type dataset \
-    --token "$HF_TOKEN" \
-    --commit-message "Add SHA256 checksums (bundle=$BUNDLE)"
-else
-  huggingface-cli upload "$HF_REPO" "$SUMS" "$SUM_KEY" \
-    --repo-type dataset \
-    --commit-message "Add SHA256 checksums (bundle=$BUNDLE)"
-fi
+hf_upload "$SUMS" "$SUM_KEY" "Add SHA256 checksums (bundle=$BUNDLE)"
 
 for f in "${FILES[@]}"; do
   key="$(remote_name "$f")"
   echo "=== Uploading $key ($(du -h "$f" | cut -f1)) ==="
-  if [[ -n "${HF_TOKEN:-}" ]]; then
-    huggingface-cli upload "$HF_REPO" "$f" "$key" \
-      --repo-type dataset \
-      --token "$HF_TOKEN" \
-      --commit-message "Add $key"
-  else
-    huggingface-cli upload "$HF_REPO" "$f" "$key" \
-      --repo-type dataset \
-      --commit-message "Add $key"
-  fi
+  hf_upload "$f" "$key" "Add $key"
 done
 
 echo "Done. Dataset: https://huggingface.co/datasets/$HF_REPO"
