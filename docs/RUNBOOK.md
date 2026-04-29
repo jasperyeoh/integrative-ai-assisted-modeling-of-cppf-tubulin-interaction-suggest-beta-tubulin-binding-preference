@@ -1,7 +1,8 @@
 # RUNBOOK: Heterodimer-CPPF MD Revision Workflow
 
 ## 0) Scope and Locked Inputs
-- MD engine environment: `gmx-lite` (`gmx 2024.5-conda_forge`)
+- **Conda setup (recipes + verification):** `docs/CONDA_ENVIRONMENTS.md`, `conda/environment-gmx-lite.yml`, `conda/environment-mdprep.yml`
+- MD engine environment: `gmx-lite` (`gmx 2024.5-conda_forge`, **CUDA** build on GPU nodes)
 - Protein template: `revision_exec/5IJ0.pdb`
 - Starting complex pose (Protenix dimer pose1):
   - `Protenix/CPPF/ab Tub-CPPF/AlphaFold3_abTub_CPPF_pose1_V236_ptm0.96802771091.pdb`

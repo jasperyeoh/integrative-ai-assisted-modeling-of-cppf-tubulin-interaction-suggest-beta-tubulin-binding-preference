@@ -1,10 +1,34 @@
 #!/usr/bin/env bash
 # Late-window (200-300 ns) GROMACS analysis for dimer reps, targeting extension decision criteria.
 set -euo pipefail
-BASE="${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE="$(cd "${SCRIPT_DIR}/.." && pwd)"
 OUT="${BASE}/analysis_dimer_rep123_300ns"
+
 # Use gmx binary directly: `conda run` does not forward stdin for interactive group selection.
-GMX="${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx"
+# Set GMX to override (see docs/CONDA_ENVIRONMENTS.md).
+resolve_gmx() {
+  if [[ -n "${GMX:-}" && -x "${GMX}" ]]; then
+    printf '%s' "${GMX}"
+    return
+  fi
+  if command -v gmx >/dev/null 2>&1; then
+    command -v gmx
+    return
+  fi
+  if [[ -n "${CONDA_PREFIX:-}" ]]; then
+    local c
+    for c in "${CONDA_PREFIX}/bin.AVX2_256/gmx" "${CONDA_PREFIX}/bin.AVX_256/gmx" "${CONDA_PREFIX}/bin/gmx"; do
+      if [[ -x "${c}" ]]; then
+        printf '%s' "${c}"
+        return
+      fi
+    done
+  fi
+  echo "ERROR: gmx not found. conda activate gmx-lite or export GMX=/path/to/gmx" >&2
+  exit 1
+}
+GMX="$(resolve_gmx)"
 
 run_rep () {
   local rep="$1"

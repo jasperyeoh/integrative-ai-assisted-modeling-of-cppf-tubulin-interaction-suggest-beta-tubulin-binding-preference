@@ -25,6 +25,8 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 ### Start Here
 
 - `docs/RUNBOOK.md`: operational runbook for execution
+- `docs/CONDA_ENVIRONMENTS.md`: **two conda envs** (`mdprep`, `gmx-lite`) and how to recreate them
+- `conda/environment-mdprep.yml` / `conda/environment-gmx-lite.yml`: minimal install recipes (+ `conda/exports/*-full.yml` snapshots)
 - `docs/MD_revision_plan.md`: reviewer-oriented revision plan
 - `docs/pregress.md`: chronological experiment and execution log
 
@@ -49,9 +51,10 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 
 ## Reproducibility Notes
 
+- **Conda:** see `docs/CONDA_ENVIRONMENTS.md` and the YAML files under `conda/`.
 - The execution history, parameter changes, and troubleshooting decisions are tracked in `docs/pregress.md`.
 - Current production workflow supports replicate-based runs and checkpoint continuation.
-- For practical repository management, very large MD binaries may be stored outside Git history and referenced by path/log metadata.
+- Large trajectories (multi-GB `xtc`) are listed in `revision_exec/LARGE_FILES_NOT_IN_GIT.txt` if not in git; see also `docs/git_binary_data.md`.
 
 ## Data and Large Files
 

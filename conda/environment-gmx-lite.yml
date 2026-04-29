@@ -1,0 +1,21 @@
+# Minimal recipe: GROMACS with CUDA + light Python stack for small analysis scripts.
+# Create:  conda env create -f conda/environment-gmx-lite.yml
+# Update: conda env update -f conda/environment-gmx-lite.yml --prune
+#
+# After install, verify GPU build (must show "GPU support: CUDA"):
+#   gmx -version
+#
+# If conda picks a CPU-only build, force the CUDA variant (conda-forge):
+#   conda install -n gmx-lite -c conda-forge "gromacs=2024.5=*cuda*"
+name: gmx-lite
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python >=3.11,<3.13
+  - pip
+  # Pin major.minor to match production; sub-build must include CUDA on GPU nodes.
+  - "gromacs=2024.5=*cuda*"
+  - numpy
+  - matplotlib
+  - scipy

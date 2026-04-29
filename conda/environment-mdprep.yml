@@ -1,0 +1,28 @@
+# Minimal recipe: structure preparation, ACPYPE/AmberTools, RDKit, Psi4 (RESP2 route).
+# Create:  conda env create -f conda/environment-mdprep.yml
+# Update: conda env update -f conda/environment-mdprep.yml --prune
+#
+# Verify:
+#   obabel -V
+#   tleap -h 2>&1 | head -1
+#   psi4 --version
+#   python -c "import rdkit; print(rdkit.__version__)"
+#
+# Multiwfn is not shipped via conda here; see docs/CONDA_ENVIRONMENTS.md (bundled under revision_exec/tools/multiwfn).
+name: mdprep
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - acpype
+  - ambertools
+  - openbabel
+  - parmed
+  - rdkit
+  - psi4
+  - pandas
+  - numpy
+  - scipy
+  - matplotlib
+  - seaborn
