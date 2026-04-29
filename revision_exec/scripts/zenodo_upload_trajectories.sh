@@ -4,9 +4,11 @@
 # Never commit tokens. Revoke any token that was pasted in chat/email.
 #
 # Usage:
-#   bash revision_exec/scripts/zenodo_upload_trajectories.sh --dry-run
-#   bash revision_exec/scripts/zenodo_upload_trajectories.sh              # create draft + upload files
-#   bash revision_exec/scripts/zenodo_upload_trajectories.sh --publish     # upload + publish (gets DOI)
+#   bash .../zenodo_upload_trajectories.sh --dry-run
+#   bash .../zenodo_upload_trajectories.sh --bundle monomer   # ~22 GiB — fits typical Zenodo quota
+#   bash .../zenodo_upload_trajectories.sh --bundle dimer     # ~57 GiB — may exceed 50 GB/record; use HF or split reps
+#   bash .../zenodo_upload_trajectories.sh --bundle all         # ~79 GiB — usually too large for one Zenodo record
+#   bash .../zenodo_upload_trajectories.sh --publish          # publish after upload (same run)
 #
 # Long runs: use tmux/screen; each file is one full PUT (resume = re-run same command after fixing network).
 set -euo pipefail
@@ -16,6 +18,7 @@ ZENODO_API="${ZENODO_API:-https://zenodo.org/api}"
 TOKEN_FILE="${ZENODO_TOKEN_FILE:-$HOME/.zenodo_token}"
 DRY_RUN=0
 DO_PUBLISH=0
+BUNDLE="all"
 
 load_token() {
   if [[ -n "${ZENODO_TOKEN:-}" ]]; then
@@ -43,11 +46,12 @@ zenodo_remote_name() {
   basename "$f"
 }
 
-# Default: production trajectories + rep1 extension chunk (same as LARGE_FILES_NOT_IN_GIT core set).
-DEFAULT_RELS=(
+MONOMER_RELS=(
   revision_exec/monomer_alpha_rep1/prod/md_200ns.xtc
   revision_exec/monomer_alpha_rep2/prod/md_200ns.xtc
   revision_exec/monomer_beta_rep1/prod/md_200ns.xtc
+)
+DIMER_RELS=(
   revision_exec/rep1/prod/md_200ns.xtc
   revision_exec/rep2/prod/md_200ns.xtc
   revision_exec/rep3/prod/md_200ns.xtc
@@ -58,17 +62,29 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --dry-run) DRY_RUN=1; shift ;;
     --publish) DO_PUBLISH=1; shift ;;
+    --bundle)
+      BUNDLE="$2"
+      shift 2
+      ;;
     *) echo "Unknown arg: $1" >&2; exit 2 ;;
   esac
 done
 
+case "$BUNDLE" in
+  all|monomer|dimer) ;;
+  *) echo "ERROR: --bundle must be all, monomer, or dimer" >&2; exit 2 ;;
+esac
+
 FILES=()
-for rel in "${DEFAULT_RELS[@]}"; do
-  FILES+=("$ROOT/$rel")
-done
+if [[ "$BUNDLE" == "all" || "$BUNDLE" == "monomer" ]]; then
+  for rel in "${MONOMER_RELS[@]}"; do FILES+=("$ROOT/$rel"); done
+fi
+if [[ "$BUNDLE" == "all" || "$BUNDLE" == "dimer" ]]; then
+  for rel in "${DIMER_RELS[@]}"; do FILES+=("$ROOT/$rel"); done
+fi
 
 if [[ "$DRY_RUN" -eq 1 ]]; then
-  echo "=== Zenodo upload dry-run (repo: $ROOT) ==="
+  echo "=== Zenodo upload dry-run (bundle=$BUNDLE, repo: $ROOT) ==="
   total=0
   for f in "${FILES[@]}"; do
     if [[ ! -f "$f" ]]; then
@@ -105,13 +121,23 @@ BUCKET="$(python3 -c "import json,sys; print(json.load(sys.stdin)['links']['buck
 echo "Deposition id: $DEP_ID"
 echo "Bucket: $BUCKET"
 
-META_JSON="$(python3 <<'PY'
-import json, textwrap
+META_JSON="$(ZEN_BUNDLE="$BUNDLE" python3 <<'PY'
+import json, os
+b = os.environ.get("ZEN_BUNDLE", "all")
+if b == "monomer":
+    title = "MD trajectories (xtc) – CPPF with tubulin monomers (alpha/beta replicates)"
+    desc = "<p>All-atom GROMACS production trajectories for CPPF with alpha- and beta-tubulin monomer systems (200 ns per replicate where applicable). Complementary dimer trajectories may be deposited separately. Topology, tpr, and workflow: GitHub repository for this project.</p>"
+elif b == "dimer":
+    title = "MD trajectories (xtc) – CPPF with tubulin heterodimer (three replicates)"
+    desc = "<p>All-atom GROMACS production trajectories for CPPF with the tubulin heterodimer (three replicates, 200 ns each) plus rep1 extension segment (md_350ns.part0004.xtc). Monomer trajectories may be deposited separately. Topology, tpr, and workflow: GitHub repository for this project.</p>"
+else:
+    title = "MD trajectories (xtc) – CPPF–tubulin heterodimer and monomers (combined)"
+    desc = "<p>Combined upload: dimer and monomer production trajectories. Prefer separate Zenodo records if quota limits apply (~50 GB/record).</p>"
 meta = {
   "metadata": {
-    "title": "MD trajectories (xtc) – CPPF–tubulin heterodimer and monomers",
+    "title": title,
     "upload_type": "dataset",
-    "description": "<p>All-atom GROMACS trajectories for tubulin–CPPF revision MD: three dimer replicates (200 ns), monomer alpha/beta replicates (200 ns where completed), and dimer rep1 extension segment (md_350ns.part0004.xtc). Matching tpr/topology and workflow are in the GitHub repository linked from the project.</p>",
+    "description": desc,
     "creators": [{"name": "Yang, J.", "affiliation": "See publication"}],
     "access_right": "open",
     "license": "cc-by-4.0",
@@ -133,7 +159,7 @@ if [[ "$HTTP" != "200" ]]; then
   exit 1
 fi
 
-SUMS="$ROOT/revision_exec/ZENODO_UPLOAD_SHA256SUMS.txt"
+SUMS="$ROOT/revision_exec/ZENODO_UPLOAD_SHA256SUMS_${BUNDLE}.txt"
 : >"$SUMS"
 for f in "${FILES[@]}"; do
   key="$(zenodo_remote_name "$f")"
@@ -141,10 +167,11 @@ for f in "${FILES[@]}"; do
   sha256sum "$f" | awk -v k="$key" '{print $1"  "k}' >>"$SUMS"
 done
 
+SUM_KEY="ZENODO_UPLOAD_SHA256SUMS_${BUNDLE}.txt"
 echo "Uploading checksum manifest..."
 curl -fS --upload-file "$SUMS" \
   -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-  "${BUCKET}/ZENODO_UPLOAD_SHA256SUMS.txt"
+  "${BUCKET}/${SUM_KEY}"
 
 for f in "${FILES[@]}"; do
   key="$(zenodo_remote_name "$f")"

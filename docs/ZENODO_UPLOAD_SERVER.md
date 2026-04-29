@@ -38,26 +38,41 @@ To change the file list, edit the `DEFAULT_RELS` array in the script.
 
 If the total size of one upload **exceeds** the Zenodo quota for that record, split into **two deposits** (e.g. dimers in one, monomers in another) or contact Zenodo. **Hugging Face Hub** (Dataset repo + `git lfs`) is a workable alternative for very large static files; cite the HF URL in the paper if the journal allows URLs without DOI (many accept both; check author guidelines).
 
-## 3. Dry run
+## 3. Split uploads (recommended)
+
+| Bundle | Approx. size | Typical Zenodo fit |
+|--------|----------------|---------------------|
+| `--bundle monomer` | ~22 GiB | Usually **OK** under 50 GB |
+| `--bundle dimer` | ~57 GiB | **May exceed** 50 GB/record → use **Hugging Face** for dimers, or **three separate Zenodo records** (one per replicate), or request a quota increase |
+| `--bundle all` | ~79 GiB | Usually **too large** for one record |
+
+See also `docs/HUGGINGFACE_DATASET.md`.
+
+## 4. Dry run
 
 From repo root:
 
 ```bash
 cd /path/to/tubulin-cppf-md
 bash revision_exec/scripts/zenodo_upload_trajectories.sh --dry-run
+bash revision_exec/scripts/zenodo_upload_trajectories.sh --bundle monomer --dry-run
+bash revision_exec/scripts/zenodo_upload_trajectories.sh --bundle dimer --dry-run
 ```
 
-## 4. Upload (draft)
+## 5. Upload (draft)
 
-Creates a **new** Zenodo draft, sets metadata, uploads checksums + all trajectories.
+Creates a **new** Zenodo draft, sets metadata, uploads checksums + trajectories for that bundle.
 
 ```bash
-bash revision_exec/scripts/zenodo_upload_trajectories.sh
+bash revision_exec/scripts/zenodo_upload_trajectories.sh --bundle monomer
+bash revision_exec/scripts/zenodo_upload_trajectories.sh --bundle dimer
+# or combined (only if quota allows):
+bash revision_exec/scripts/zenodo_upload_trajectories.sh --bundle all
 ```
 
 Use **`tmux` or `screen`**; multi‑GiB uploads can take a long time. If a `curl` fails, fix the network and re‑run **only after** handling the half‑empty draft on the Zenodo website (or create a fresh draft and adjust the script to skip `POST` if you reuse an existing deposition—by default each run creates a new deposition).
 
-## 5. Publish (DOI)
+## 6. Publish (DOI)
 
 After checking the draft in the browser:
 
@@ -68,6 +83,6 @@ After checking the draft in the browser:
 bash revision_exec/scripts/zenodo_upload_trajectories.sh --publish
 ```
 
-## 6. Paper + GitHub
+## 7. Paper + GitHub
 
 Put the Zenodo **DOI** in the manuscript *Data availability* and in `README.md`. Link to this GitHub repo for code, small inputs, and `docs/CONDA_ENVIRONMENTS.md`.
