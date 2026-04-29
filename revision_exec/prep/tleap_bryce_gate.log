@@ -1,0 +1,207 @@
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/prep to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd to search path.
+-f: Source tleap_bryce_gate.in.
+
+Welcome to LEaP!
+(no leaprc in search path)
+Sourcing: ./tleap_bryce_gate.in
+----- Source: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.protein.ff14SB
+----- Source of ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.protein.ff14SB done
+Log file: ./leap.log
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/parm10.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ff14SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff14SB protein backbone and sidechain parameters
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/amino12.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/aminoct12.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/aminont12.lib
+----- Source: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.water.tip3p
+----- Source of ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.water.tip3p done
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/atomic_ions.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/solvents.lib
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+This is the additional/replacement parameter set for TIP3P water
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ions1lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of monovalent ions for TIP3P water model (12-6 normal usage set)
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ionsjc_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Monovalent ion parameters for Ewald and TIP3P water from Joung & Cheatham JPCB (2008)
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ions234lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 normal usage set)
+Loading parameters: ../input/cofactors_params/frcmod.phos
+Reading force field modification type file (frcmod)
+Reading title:
+#  Modifications to the AMBER94 force field for polyphosphates
+Loading Prep file: ../input/cofactors_params/GTP.prep
+Loading Prep file: ../input/cofactors_params/GDP.prep
+Loading PDB file: ./cofactors_gtp_gdp_mg_bryce.pdb
+ (starting new molecule for chain B)
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+One sided connection. Residue (MG) missing connect0 atom.
+Created a new atom named: O5' within residue: .R<gdp 503>
+Created a new atom named: C5' within residue: .R<gdp 503>
+Created a new atom named: C4' within residue: .R<gdp 503>
+Created a new atom named: O4' within residue: .R<gdp 503>
+Created a new atom named: C3' within residue: .R<gdp 503>
+Created a new atom named: O3' within residue: .R<gdp 503>
+Created a new atom named: C2' within residue: .R<gdp 503>
+Created a new atom named: O2' within residue: .R<gdp 503>
+Created a new atom named: C1' within residue: .R<gdp 503>
+  Added missing heavy atom: .R<gdp 503>.A<C1* 16>
+  Added missing heavy atom: .R<gdp 503>.A<O4* 15>
+  Added missing heavy atom: .R<gdp 503>.A<C2* 35>
+  Added missing heavy atom: .R<gdp 503>.A<C4* 13>
+  Added missing heavy atom: .R<gdp 503>.A<C3* 33>
+  Added missing heavy atom: .R<gdp 503>.A<O2* 37>
+  Added missing heavy atom: .R<gdp 503>.A<C5* 10>
+  Added missing heavy atom: .R<gdp 503>.A<O3* 39>
+  Added missing heavy atom: .R<gdp 503>.A<O5* 9>
+  total atoms in file: 61
+  Leap added 33 missing atoms according to residue templates:
+       9 Heavy
+       24 H / lone pairs
+  The file contained 9 atoms not in residue templates
+Checking 'cof'....
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+The unperturbed charge of the unit (-5.000000) is not zero.
+FATAL:  Atom .R<gdp 503>.A<O5' 41> does not have a type.
+FATAL:  Atom .R<gdp 503>.A<C5' 42> does not have a type.
+FATAL:  Atom .R<gdp 503>.A<C4' 43> does not have a type.
+FATAL:  Atom .R<gdp 503>.A<O4' 44> does not have a type.
+FATAL:  Atom .R<gdp 503>.A<C3' 45> does not have a type.
+FATAL:  Atom .R<gdp 503>.A<O3' 46> does not have a type.
+FATAL:  Atom .R<gdp 503>.A<C2' 47> does not have a type.
+FATAL:  Atom .R<gdp 503>.A<O2' 48> does not have a type.
+FATAL:  Atom .R<gdp 503>.A<C1' 49> does not have a type.
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 0.635 angstroms between nonbonded atoms H3* and O3'
+-------  .R<gdp 503>.A<H3* 40> and .R<gdp 503>.A<O3' 46>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.236 angstroms between nonbonded atoms O3* and O3'
+-------  .R<gdp 503>.A<O3* 39> and .R<gdp 503>.A<O3' 46>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.094 angstroms between nonbonded atoms H2* and C2'
+-------  .R<gdp 503>.A<H2* 38> and .R<gdp 503>.A<C2' 47>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.218 angstroms between nonbonded atoms H2* and O2'
+-------  .R<gdp 503>.A<H2* 38> and .R<gdp 503>.A<O2' 48>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 0.677 angstroms between nonbonded atoms O2* and C2'
+-------  .R<gdp 503>.A<O2* 37> and .R<gdp 503>.A<C2' 47>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 0.783 angstroms between nonbonded atoms O2* and O2'
+-------  .R<gdp 503>.A<O2* 37> and .R<gdp 503>.A<O2' 48>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.210 angstroms between nonbonded atoms H20 and C3'
+-------  .R<gdp 503>.A<H20 36> and .R<gdp 503>.A<C3' 45>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.024 angstroms between nonbonded atoms C2* and C3'
+-------  .R<gdp 503>.A<C2* 35> and .R<gdp 503>.A<C3' 45>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 0.874 angstroms between nonbonded atoms C2* and C2'
+-------  .R<gdp 503>.A<C2* 35> and .R<gdp 503>.A<C2' 47>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.474 angstroms between nonbonded atoms C2* and C1'
+-------  .R<gdp 503>.A<C2* 35> and .R<gdp 503>.A<C1' 49>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.024 angstroms between nonbonded atoms H30 and C4'
+-------  .R<gdp 503>.A<H30 34> and .R<gdp 503>.A<C4' 43>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 0.755 angstroms between nonbonded atoms C3* and C4'
+-------  .R<gdp 503>.A<C3* 33> and .R<gdp 503>.A<C4' 43>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.252 angstroms between nonbonded atoms C3* and C3'
+-------  .R<gdp 503>.A<C3* 33> and .R<gdp 503>.A<C3' 45>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.485 angstroms between nonbonded atoms N9 and C1'
+-------  .R<gdp 503>.A<N9 18> and .R<gdp 503>.A<C1' 49>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.179 angstroms between nonbonded atoms H10 and C1'
+-------  .R<gdp 503>.A<H10 17> and .R<gdp 503>.A<C1' 49>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 0.092 angstroms between nonbonded atoms C1* and C1'
+-------  .R<gdp 503>.A<C1* 16> and .R<gdp 503>.A<C1' 49>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.068 angstroms between nonbonded atoms O4* and O4'
+-------  .R<gdp 503>.A<O4* 15> and .R<gdp 503>.A<O4' 44>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.405 angstroms between nonbonded atoms O4* and C1'
+-------  .R<gdp 503>.A<O4* 15> and .R<gdp 503>.A<C1' 49>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.335 angstroms between nonbonded atoms C4* and C4'
+-------  .R<gdp 503>.A<C4* 13> and .R<gdp 503>.A<C4' 43>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.128 angstroms between nonbonded atoms C4* and O4'
+-------  .R<gdp 503>.A<C4* 13> and .R<gdp 503>.A<O4' 44>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.151 angstroms between nonbonded atoms H51 and O5'
+-------  .R<gdp 503>.A<H51 12> and .R<gdp 503>.A<O5' 41>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.142 angstroms between nonbonded atoms O5* and C5'
+-------  .R<gdp 503>.A<O5* 9> and .R<gdp 503>.A<C5' 42>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.425 angstroms between nonbonded atoms O5' and C5'
+-------  .R<gdp 503>.A<O5' 41> and .R<gdp 503>.A<C5' 42>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.428 angstroms between nonbonded atoms C4' and O4'
+-------  .R<gdp 503>.A<C4' 43> and .R<gdp 503>.A<O4' 44>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.429 angstroms between nonbonded atoms O4' and C1'
+-------  .R<gdp 503>.A<O4' 44> and .R<gdp 503>.A<C1' 49>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.430 angstroms between nonbonded atoms C3' and O3'
+-------  .R<gdp 503>.A<C3' 45> and .R<gdp 503>.A<O3' 46>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.430 angstroms between nonbonded atoms C2' and O2'
+-------  .R<gdp 503>.A<C2' 47> and .R<gdp 503>.A<O2' 48>
+Checking parameters for unit 'cof'.
+Checking for bond parameters.
+Checking for angle parameters.
+check:  Errors:  9   Warnings: 28
+Total unperturbed charge:  -5.000000
+Total perturbed charge:    -5.000000
+	Quit
+
+Exiting LEaP: Errors = 0; Warnings = 29; Notes = 0.
+

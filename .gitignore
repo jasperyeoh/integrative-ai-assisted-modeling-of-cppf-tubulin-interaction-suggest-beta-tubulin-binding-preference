@@ -35,3 +35,11 @@ nohup.out
 *.pdbqt
 
 # Keep primary docs/scripts/config under version control.
+
+# Allow selected GROMACS text/binary outputs under revision_exec (still < GitHub 100 MiB/file in practice).
+# Large *.xtc / most *.trr remain ignored; see docs/git_binary_data.md and revision_exec/LARGE_FILES_NOT_IN_GIT.txt
+!revision_exec/**/*.edr
+!revision_exec/**/*.cpt
+!revision_exec/**/*.gro
+!revision_exec/**/*.xvg
+!revision_exec/**/*.log

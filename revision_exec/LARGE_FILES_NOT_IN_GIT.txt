@@ -1,0 +1,85 @@
+# Files >= 100 MiB — not in git (GitHub limit). Paths relative to repo root.
+
+328508104	revision_exec/analysis_quick/last50_center.xtc
+331195876	revision_exec/analysis_quick/last50_fit.xtc
+371993388	revision_exec/analysis_quick/last50_nojump.xtc
+331880540	revision_exec/analysis_quick/last50_nojump_center.xtc
+8959348900	revision_exec/monomer_alpha_rep1/prod/md_200ns.xtc
+8681895108	revision_exec/monomer_alpha_rep2/prod/md_200ns.xtc
+5668148208	revision_exec/monomer_beta_rep1/prod/md_200ns.xtc
+427188792	revision_exec/rep1/npt/npt.trr
+427188792	revision_exec/rep1/nvt/nvt.trr
+19648540788	revision_exec/rep1/prod/md_200ns.xtc
+2344041400	revision_exec/rep1/prod/md_350ns.part0004.xtc
+427188792	revision_exec/rep2/npt/npt.trr
+427188792	revision_exec/rep2/nvt/nvt.trr
+19648694636	revision_exec/rep2/prod/md_200ns.xtc
+427188792	revision_exec/rep3/npt/npt.trr
+427188792	revision_exec/rep3/nvt/nvt.trr
+19648728272	revision_exec/rep3/prod/md_200ns.xtc
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#contacts_protein_ligand.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#mindist_protein_ligand.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#rg_protein.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#rg_protein.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#rmsd_backbone.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#rmsd_backbone.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#rmsd_ligand.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#rmsd_ligand.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#rmsf_ca.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#rmsf_ca.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#sasa_protein.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#sasa_protein.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#contacts_protein_ligand.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#mindist_protein_ligand.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#rg_protein.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#rg_protein.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#rmsd_backbone.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#rmsd_backbone.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#rmsd_ligand.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#rmsd_ligand.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#rmsf_ca.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#rmsf_ca.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#sasa_protein.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep2/#sasa_protein.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep3/#contacts_protein_ligand.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep3/#mindist_protein_ligand.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep3/#rmsd_backbone.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep3/#rmsd_backbone.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep3/#rmsd_ligand.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep3/#rmsd_ligand.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep3/#rmsf_ca.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep3/#rmsf_ca.xvg.2#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep3/#sasa_protein.xvg.1#
+# emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep3/#sasa_protein.xvg.2#
+# emacs_backup	revision_exec/analysis_monomer_status/monomer_alpha_rep1/#rg_protein.xvg.1#
+# emacs_backup	revision_exec/analysis_monomer_status/monomer_alpha_rep1/#rmsd_backbone.xvg.1#
+# emacs_backup	revision_exec/analysis_monomer_status/monomer_alpha_rep2/#rg_protein.xvg.1#
+# emacs_backup	revision_exec/analysis_monomer_status/monomer_alpha_rep2/#rmsd_backbone.xvg.1#
+# emacs_backup	revision_exec/analysis_monomer_status/monomer_beta_rep1/#rg_protein.xvg.1#
+# emacs_backup	revision_exec/analysis_monomer_status/monomer_beta_rep1/#rmsd_backbone.xvg.1#
+# emacs_backup	revision_exec/analysis_rep1_full/#eigenval.xvg.1#
+# emacs_backup	revision_exec/analysis_rep1_full/#eigenvec.trr.1#
+# emacs_backup	revision_exec/input/#index.ndx.1#
+# emacs_backup	revision_exec/input/#index.ndx.2#
+# emacs_backup	revision_exec/prep/#em_cppf.log.1#
+# emacs_backup	revision_exec/prep/#em_cppf.log.2#
+# emacs_backup	revision_exec/prep/#em_cppf.log.3#
+# emacs_backup	revision_exec/prep/#gate_topol.top.1#
+# emacs_backup	revision_exec/prep/#gate_topol.top.2#
+# emacs_backup	revision_exec/prep/#gate_topol.top.3#
+# emacs_backup	revision_exec/prep/#gate_topol.top.4#
+# emacs_backup	revision_exec/prep/#gate_topol_Protein_chain_A.itp.1#
+# emacs_backup	revision_exec/prep/#gate_topol_Protein_chain_B.itp.1#
+# emacs_backup	revision_exec/rep1/prod/#md_200ns.edr.1#
+# emacs_backup	revision_exec/rep1/prod/#md_200ns.gro.1#
+# emacs_backup	revision_exec/rep1/prod/#md_200ns.log.1#
+# emacs_backup	revision_exec/rep1/prod/#md_200ns.log.2#
+# emacs_backup	revision_exec/rep1/prod/#md_200ns.log.3#
+# emacs_backup	revision_exec/rep1/prod/#md_200ns.tpr.1#
+# emacs_backup	revision_exec/rep1/prod/#md_200ns.xtc.1#
+# emacs_backup	revision_exec/rep2/prod/#md_200ns.gro.1#
+# emacs_backup	revision_exec/rep2/prod/#md_200ns.log.1#
+# emacs_backup	revision_exec/rep2/prod/#md_200ns.tpr.1#
+# emacs_backup	revision_exec/rep3/prod/#md_200ns.gro.1#
+# emacs_backup	revision_exec/rep3/prod/#md_200ns.log.1#
+# emacs_backup	revision_exec/rep3/prod/#md_200ns.tpr.1#

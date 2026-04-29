@@ -1,0 +1,55 @@
+ERROR conda.cli.main_run:execute(127): `conda run tleap -f tleap_phos_gate2.in` failed. (See above for error)
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/prep to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd to search path.
+-f: Source tleap_phos_gate2.in.
+
+Welcome to LEaP!
+(no leaprc in search path)
+Sourcing: ./tleap_phos_gate2.in
+----- Source: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.protein.ff14SB
+----- Source of ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.protein.ff14SB done
+Log file: ./leap.log
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/parm10.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ff14SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff14SB protein backbone and sidechain parameters
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/amino12.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/aminoct12.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/aminont12.lib
+----- Source: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.water.tip3p
+----- Source of ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.water.tip3p done
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/atomic_ions.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/solvents.lib
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+This is the additional/replacement parameter set for TIP3P water
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ions1lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of monovalent ions for TIP3P water model (12-6 normal usage set)
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ionsjc_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Monovalent ion parameters for Ewald and TIP3P water from Joung & Cheatham JPCB (2008)
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ions234lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 normal usage set)
+Loading parameters: ../input/cofactors_params/frcmod.phos
+Reading force field modification type file (frcmod)
+Reading title:
+#  Modifications to the AMBER94 force field for polyphosphates
+Loading Prep file: ../input/cofactors_params/GTP.prep
+Loading Prep file: ../input/cofactors_params/GDP.prep
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Fatal Error!
+sequence: Illegal UNIT at position #1.
+
+Exiting LEaP: Errors = 1; Warnings = 0; Notes = 0.
+

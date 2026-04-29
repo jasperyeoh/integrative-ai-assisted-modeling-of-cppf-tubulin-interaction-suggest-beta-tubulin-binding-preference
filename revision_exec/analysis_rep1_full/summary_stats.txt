@@ -1,0 +1,11 @@
+rmsd_backbone.xvg: mean=1.5395, std=1.9595, last=0.2641, last50ns_mean=0.5810, last50ns_std=1.0540
+rmsd_ligand.xvg: mean=4.1025, std=5.0413, last=0.3265, last50ns_mean=6.6226, last50ns_std=6.4169
+rg_protein.xvg: mean=3.8404, std=1.2883, last=3.0173, last50ns_mean=3.8410, last50ns_std=1.2886
+mindist_protein_ligand.xvg: mean=0.2029, std=0.0139, last=0.2100, last50ns_mean=0.2006, last50ns_std=0.0122
+contacts_protein_ligand.xvg: mean=151.8902, std=13.7979, last=159.0000, last50ns_mean=155.8258, last50ns_std=11.9913
+sasa_protein.xvg: mean=355.0684, std=5.0451, last=338.9170, last50ns_mean=355.0672, last50ns_std=5.0460
+rmsf_ca_top10: res438:4.288, res439:4.284, res443:4.265, res440:4.186, res442:4.130, res444:4.103, res447:4.081, res446:4.072, res450:4.052, res437:4.045
+energies_kinetic: mean=439822.0869, std=1153.6839, last=438843.6562
+energies_total_energy: mean=-1985041.3971, std=2213.1577, last=-1985963.3750
+energies_conserved: mean=-14570675.5920, std=7275281.8689, last=-27187020.0000
+energies_pres_dc: mean=-79.7774, std=0.2305, last=-79.7830

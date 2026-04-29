@@ -1,0 +1,12 @@
+ERROR conda.cli.main_run:execute(127): `conda run tleap -f tleap_gtp_gdp.in` failed. (See above for error)
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/prep to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd to search path.
+-f: Source tleap_gtp_gdp.in.
+
+Welcome to LEaP!
+(no leaprc in search path)
+
+Error: Could not open file tleap_gtp_gdp.in: not found
+

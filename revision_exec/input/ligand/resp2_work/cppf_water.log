@@ -1,0 +1,3 @@
+2026-04-17:15:26:33,6 INFO     [psi4.driver.task_planner:259] PLANNING Atomic:  keywords={'PCM': 1, 'PCM__PCMSOLVER_PARSED_FNAME': '${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/input/ligand/resp2_work/@pcmsolver.1034141.a1b6b3ed', 'PCM_SCF_TYPE': 'TOTAL', 'REFERENCE': 'RHF', 'SCF_TYPE': 'DF', 'function_kwargs': {}}
+2026-04-17:15:26:33,9 INFO     [psi4.driver.driver:525] Compute energy(): method=hf, basis=6-31g*, molecule=cppf, nre=1581.1042745536076
+2026-04-17:15:27:24,264 INFO     [psi4.driver.driver:528] Return energy(): -1330.4029273368017

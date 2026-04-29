@@ -1,0 +1,71 @@
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/prep to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd to search path.
+-f: Source tleap_bryce_gate2.in.
+
+Welcome to LEaP!
+(no leaprc in search path)
+Sourcing: ./tleap_bryce_gate2.in
+----- Source: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.protein.ff14SB
+----- Source of ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.protein.ff14SB done
+Log file: ./leap.log
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/parm10.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ff14SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff14SB protein backbone and sidechain parameters
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/amino12.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/aminoct12.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/aminont12.lib
+----- Source: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.water.tip3p
+----- Source of ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.water.tip3p done
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/atomic_ions.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/solvents.lib
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+This is the additional/replacement parameter set for TIP3P water
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ions1lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of monovalent ions for TIP3P water model (12-6 normal usage set)
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ionsjc_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Monovalent ion parameters for Ewald and TIP3P water from Joung & Cheatham JPCB (2008)
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ions234lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 normal usage set)
+Loading parameters: ../input/cofactors_params/frcmod.phos
+Reading force field modification type file (frcmod)
+Reading title:
+#  Modifications to the AMBER94 force field for polyphosphates
+Loading Prep file: ../input/cofactors_params/GTP.prep
+Loading Prep file: ../input/cofactors_params/GDP.prep
+Loading PDB file: ./cofactors_gtp_gdp_mg_bryce2.pdb
+ (starting new molecule for chain B)
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+One sided connection. Residue (MG) missing connect0 atom.
+  total atoms in file: 61
+  Leap added 24 missing atoms according to residue templates:
+       24 H / lone pairs
+Checking 'cof'....
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+The unperturbed charge of the unit (-5.000000) is not zero.
+Checking parameters for unit 'cof'.
+Checking for bond parameters.
+Checking for angle parameters.
+check:  Warnings: 1
+Unit is OK.
+Total unperturbed charge:  -5.000000
+Total perturbed charge:    -5.000000
+	Quit
+
+Exiting LEaP: Errors = 0; Warnings = 2; Notes = 0.
+

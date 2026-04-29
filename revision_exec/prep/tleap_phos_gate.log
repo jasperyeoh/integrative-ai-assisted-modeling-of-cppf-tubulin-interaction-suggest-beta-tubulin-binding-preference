@@ -1,0 +1,346 @@
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/prep to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm to search path.
+-I: Adding ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd to search path.
+-f: Source tleap_phos_gate.in.
+
+Welcome to LEaP!
+(no leaprc in search path)
+Sourcing: ./tleap_phos_gate.in
+----- Source: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.protein.ff14SB
+----- Source of ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.protein.ff14SB done
+Log file: ./leap.log
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/parm10.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ff14SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff14SB protein backbone and sidechain parameters
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/amino12.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/aminoct12.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/aminont12.lib
+----- Source: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.water.tip3p
+----- Source of ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/cmd/leaprc.water.tip3p done
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/atomic_ions.lib
+Loading library: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/lib/solvents.lib
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+This is the additional/replacement parameter set for TIP3P water
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ions1lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of monovalent ions for TIP3P water model (12-6 normal usage set)
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ionsjc_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Monovalent ion parameters for Ewald and TIP3P water from Joung & Cheatham JPCB (2008)
+Loading parameters: ${HPC_WORKSPACE}/miniconda3/envs/mdprep/dat/leap/parm/frcmod.ions234lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 normal usage set)
+Loading parameters: ../input/cofactors_params/frcmod.phos
+Reading force field modification type file (frcmod)
+Reading title:
+#  Modifications to the AMBER94 force field for polyphosphates
+Loading Prep file: ../input/cofactors_params/GTP.prep
+Loading Prep file: ../input/cofactors_params/GDP.prep
+Loading PDB file: ./cofactors_gtp_gdp_mg_ambernames.pdb
+ (starting new molecule for chain B)
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Unknown residue: GTP   number: 0   type: Terminal/beginning
+..relaxing end constraints to try for a dbase match
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+  -no luck
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Unknown residue: GDP   number: 2   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+  -no luck
+Creating new UNIT for residue: GTP sequence: 501
+Created a new atom named: PG within residue: .R<GTP 501>
+Created a new atom named: O1G within residue: .R<GTP 501>
+Created a new atom named: O2G within residue: .R<GTP 501>
+Created a new atom named: O3G within residue: .R<GTP 501>
+Created a new atom named: O3B within residue: .R<GTP 501>
+Created a new atom named: PB within residue: .R<GTP 501>
+Created a new atom named: O1B within residue: .R<GTP 501>
+Created a new atom named: O2B within residue: .R<GTP 501>
+Created a new atom named: O3A within residue: .R<GTP 501>
+Created a new atom named: PA within residue: .R<GTP 501>
+Created a new atom named: O1A within residue: .R<GTP 501>
+Created a new atom named: O2A within residue: .R<GTP 501>
+Created a new atom named: O5* within residue: .R<GTP 501>
+Created a new atom named: C5* within residue: .R<GTP 501>
+Created a new atom named: C4* within residue: .R<GTP 501>
+Created a new atom named: O4* within residue: .R<GTP 501>
+Created a new atom named: C3* within residue: .R<GTP 501>
+Created a new atom named: O3* within residue: .R<GTP 501>
+Created a new atom named: C2* within residue: .R<GTP 501>
+Created a new atom named: O2* within residue: .R<GTP 501>
+Created a new atom named: C1* within residue: .R<GTP 501>
+Created a new atom named: N9 within residue: .R<GTP 501>
+Created a new atom named: C8 within residue: .R<GTP 501>
+Created a new atom named: N7 within residue: .R<GTP 501>
+Created a new atom named: C5 within residue: .R<GTP 501>
+Created a new atom named: C6 within residue: .R<GTP 501>
+Created a new atom named: O6 within residue: .R<GTP 501>
+Created a new atom named: N1 within residue: .R<GTP 501>
+Created a new atom named: C2 within residue: .R<GTP 501>
+Created a new atom named: N2 within residue: .R<GTP 501>
+Created a new atom named: N3 within residue: .R<GTP 501>
+Created a new atom named: C4 within residue: .R<GTP 501>
+Creating new UNIT for residue: GDP sequence: 503
+Created a new atom named: PB within residue: .R<GDP 503>
+Created a new atom named: O1B within residue: .R<GDP 503>
+Created a new atom named: O2B within residue: .R<GDP 503>
+Created a new atom named: O3B within residue: .R<GDP 503>
+Created a new atom named: O3A within residue: .R<GDP 503>
+Created a new atom named: PA within residue: .R<GDP 503>
+Created a new atom named: O1A within residue: .R<GDP 503>
+Created a new atom named: O2A within residue: .R<GDP 503>
+Created a new atom named: O5* within residue: .R<GDP 503>
+Created a new atom named: C5* within residue: .R<GDP 503>
+Created a new atom named: C4* within residue: .R<GDP 503>
+Created a new atom named: O4* within residue: .R<GDP 503>
+Created a new atom named: C3* within residue: .R<GDP 503>
+Created a new atom named: O3* within residue: .R<GDP 503>
+Created a new atom named: C2* within residue: .R<GDP 503>
+Created a new atom named: O2* within residue: .R<GDP 503>
+Created a new atom named: C1* within residue: .R<GDP 503>
+Created a new atom named: N9 within residue: .R<GDP 503>
+Created a new atom named: C8 within residue: .R<GDP 503>
+Created a new atom named: N7 within residue: .R<GDP 503>
+Created a new atom named: C5 within residue: .R<GDP 503>
+Created a new atom named: C6 within residue: .R<GDP 503>
+Created a new atom named: O6 within residue: .R<GDP 503>
+Created a new atom named: N1 within residue: .R<GDP 503>
+Created a new atom named: C2 within residue: .R<GDP 503>
+Created a new atom named: N2 within residue: .R<GDP 503>
+Created a new atom named: N3 within residue: .R<GDP 503>
+Created a new atom named: C4 within residue: .R<GDP 503>
+  total atoms in file: 61
+  The file contained 60 atoms not in residue templates
+Checking 'cof'....
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+The unperturbed charge of the unit (2.000000) is not zero.
+FATAL:  Atom .R<GTP 501>.A<PG 1> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O1G 2> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O2G 3> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O3G 4> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O3B 5> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<PB 6> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O1B 7> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O2B 8> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O3A 9> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<PA 10> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O1A 11> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O2A 12> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O5* 13> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<C5* 14> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<C4* 15> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O4* 16> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<C3* 17> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O3* 18> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<C2* 19> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O2* 20> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<C1* 21> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<N9 22> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<C8 23> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<N7 24> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<C5 25> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<C6 26> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<O6 27> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<N1 28> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<C2 29> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<N2 30> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<N3 31> does not have a type.
+FATAL:  Atom .R<GTP 501>.A<C4 32> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<PB 1> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O1B 2> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O2B 3> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O3B 4> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O3A 5> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<PA 6> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O1A 7> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O2A 8> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O5* 9> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<C5* 10> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<C4* 11> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O4* 12> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<C3* 13> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O3* 14> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<C2* 15> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O2* 16> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<C1* 17> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<N9 18> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<C8 19> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<N7 20> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<C5 21> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<C6 22> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<O6 23> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<N1 24> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<C2 25> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<N2 26> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<N3 27> does not have a type.
+FATAL:  Atom .R<GDP 503>.A<C4 28> does not have a type.
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.412 angstroms between nonbonded atoms O5* and C5*
+-------  .R<GTP 501>.A<O5* 13> and .R<GTP 501>.A<C5* 14>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.411 angstroms between nonbonded atoms C4* and O4*
+-------  .R<GTP 501>.A<C4* 15> and .R<GTP 501>.A<O4* 16>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.412 angstroms between nonbonded atoms O4* and C1*
+-------  .R<GTP 501>.A<O4* 16> and .R<GTP 501>.A<C1* 21>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.408 angstroms between nonbonded atoms C3* and O3*
+-------  .R<GTP 501>.A<C3* 17> and .R<GTP 501>.A<O3* 18>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.408 angstroms between nonbonded atoms C2* and O2*
+-------  .R<GTP 501>.A<C2* 19> and .R<GTP 501>.A<O2* 20>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.474 angstroms between nonbonded atoms C1* and N9
+-------  .R<GTP 501>.A<C1* 21> and .R<GTP 501>.A<N9 22>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.370 angstroms between nonbonded atoms N9 and C8
+-------  .R<GTP 501>.A<N9 22> and .R<GTP 501>.A<C8 23>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.372 angstroms between nonbonded atoms N9 and C4
+-------  .R<GTP 501>.A<N9 22> and .R<GTP 501>.A<C4 32>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.352 angstroms between nonbonded atoms C8 and N7
+-------  .R<GTP 501>.A<C8 23> and .R<GTP 501>.A<N7 24>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.351 angstroms between nonbonded atoms N7 and C5
+-------  .R<GTP 501>.A<N7 24> and .R<GTP 501>.A<C5 25>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.388 angstroms between nonbonded atoms C5 and C6
+-------  .R<GTP 501>.A<C5 25> and .R<GTP 501>.A<C6 26>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.387 angstroms between nonbonded atoms C5 and C4
+-------  .R<GTP 501>.A<C5 25> and .R<GTP 501>.A<C4 32>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.229 angstroms between nonbonded atoms C6 and O6
+-------  .R<GTP 501>.A<C6 26> and .R<GTP 501>.A<O6 27>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.380 angstroms between nonbonded atoms C6 and N1
+-------  .R<GTP 501>.A<C6 26> and .R<GTP 501>.A<N1 28>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.381 angstroms between nonbonded atoms N1 and C2
+-------  .R<GTP 501>.A<N1 28> and .R<GTP 501>.A<C2 29>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.331 angstroms between nonbonded atoms C2 and N2
+-------  .R<GTP 501>.A<C2 29> and .R<GTP 501>.A<N2 30>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.381 angstroms between nonbonded atoms C2 and N3
+-------  .R<GTP 501>.A<C2 29> and .R<GTP 501>.A<N3 31>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.355 angstroms between nonbonded atoms N3 and C4
+-------  .R<GTP 501>.A<N3 31> and .R<GTP 501>.A<C4 32>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.425 angstroms between nonbonded atoms O5* and C5*
+-------  .R<GDP 503>.A<O5* 9> and .R<GDP 503>.A<C5* 10>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.428 angstroms between nonbonded atoms C4* and O4*
+-------  .R<GDP 503>.A<C4* 11> and .R<GDP 503>.A<O4* 12>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.429 angstroms between nonbonded atoms O4* and C1*
+-------  .R<GDP 503>.A<O4* 12> and .R<GDP 503>.A<C1* 17>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.430 angstroms between nonbonded atoms C3* and O3*
+-------  .R<GDP 503>.A<C3* 13> and .R<GDP 503>.A<O3* 14>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.430 angstroms between nonbonded atoms C2* and O2*
+-------  .R<GDP 503>.A<C2* 15> and .R<GDP 503>.A<O2* 16>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.485 angstroms between nonbonded atoms C1* and N9
+-------  .R<GDP 503>.A<C1* 17> and .R<GDP 503>.A<N9 18>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.347 angstroms between nonbonded atoms N9 and C8
+-------  .R<GDP 503>.A<N9 18> and .R<GDP 503>.A<C8 19>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.334 angstroms between nonbonded atoms N9 and C4
+-------  .R<GDP 503>.A<N9 18> and .R<GDP 503>.A<C4 28>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.357 angstroms between nonbonded atoms C8 and N7
+-------  .R<GDP 503>.A<C8 19> and .R<GDP 503>.A<N7 20>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.347 angstroms between nonbonded atoms N7 and C5
+-------  .R<GDP 503>.A<N7 20> and .R<GDP 503>.A<C5 21>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.482 angstroms between nonbonded atoms C5 and C6
+-------  .R<GDP 503>.A<C5 21> and .R<GDP 503>.A<C6 22>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.470 angstroms between nonbonded atoms C5 and C4
+-------  .R<GDP 503>.A<C5 21> and .R<GDP 503>.A<C4 28>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.249 angstroms between nonbonded atoms C6 and O6
+-------  .R<GDP 503>.A<C6 22> and .R<GDP 503>.A<O6 23>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.339 angstroms between nonbonded atoms C6 and N1
+-------  .R<GDP 503>.A<C6 22> and .R<GDP 503>.A<N1 24>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.347 angstroms between nonbonded atoms N1 and C2
+-------  .R<GDP 503>.A<N1 24> and .R<GDP 503>.A<C2 25>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.355 angstroms between nonbonded atoms C2 and N2
+-------  .R<GDP 503>.A<C2 25> and .R<GDP 503>.A<N2 26>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.357 angstroms between nonbonded atoms C2 and N3
+-------  .R<GDP 503>.A<C2 25> and .R<GDP 503>.A<N3 27>
+
+${HPC_WORKSPACE}/miniconda3/envs/mdprep/bin/teLeap: Warning!
+Close contact of 1.354 angstroms between nonbonded atoms N3 and C4
+-------  .R<GDP 503>.A<N3 27> and .R<GDP 503>.A<C4 28>
+Checking parameters for unit 'cof'.
+Checking for bond parameters.
+Checking for angle parameters.
+check:  Errors:  60   Warnings: 37
+Total unperturbed charge:   2.000000
+Total perturbed charge:     2.000000
+	Quit
+
+Exiting LEaP: Errors = 0; Warnings = 41; Notes = 0.
+
