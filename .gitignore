@@ -4,8 +4,9 @@ __pycache__/
 *.so
 .DS_Store
 
-# Secrets (Zenodo, etc.)
+# Secrets (Zenodo, Hugging Face, etc.)
 .zenodo_token
+.huggingface_token
 
 # Environment and local IDE
 .env

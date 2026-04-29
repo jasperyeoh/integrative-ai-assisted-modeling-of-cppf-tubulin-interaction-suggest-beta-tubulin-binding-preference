@@ -55,7 +55,8 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 - The execution history, parameter changes, and troubleshooting decisions are tracked in `docs/pregress.md`.
 - Current production workflow supports replicate-based runs and checkpoint continuation.
 - Large trajectories (multi-GB `xtc`) are listed in `revision_exec/LARGE_FILES_NOT_IN_GIT.txt` if not in git; see also `docs/git_binary_data.md`.
-- **Zenodo / large data:** `docs/ZENODO_UPLOAD_SERVER.md` (`--bundle monomer|dimer|all`) and `docs/HUGGINGFACE_DATASET.md`; script `revision_exec/scripts/zenodo_upload_trajectories.sh` — token in `~/.zenodo_token` (never commit).
+- **Trajectory archive (primary):** `docs/HUGGINGFACE_DATASET.md` — `revision_exec/scripts/huggingface_upload_trajectories.sh` (`HF_DATASET_REPO=...`, token via `huggingface-cli login` or `~/.huggingface_token`).  
+- **Zenodo (optional DOI / subset):** `docs/ZENODO_UPLOAD_SERVER.md` — `revision_exec/scripts/zenodo_upload_trajectories.sh`.
 
 ## Data and Large Files
 
