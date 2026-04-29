@@ -85,3 +85,64 @@
   - 首次并行启动失败原因为 `rep2/rep3` 的旧 `md_200ns.tpr` 仍含 `energygrps`，触发 `Nonbonded interactions on the GPU were required, but not supported`。
   - 已用当前 `md_prod_200ns.mdp`（去除 `energygrps`）重新 `grompp` 生成 `rep2/rep3` 的生产 `tpr`，随后后台重启成功。
   - 结论：当前 `rep2/rep3` **可直接并行 GPU 跑，无需再改配置**；若后续重建 `tpr`，请继续使用同一份无 `energygrps` 的生产 mdp。
+
+## 2026-04-22
+- **任务状态巡检（新增日期记录）**：
+  - `rep1`：已完成（`Finished mdrun` 已在 `revision_exec/rep1/prod/md_200ns.log` 记录）。
+  - `rep2`：运行中，最新约 `95.184 ns / 200 ns`（`Step 47592000`）。
+  - `rep3`：运行中，最新约 `90.366 ns / 200 ns`（`Step 45183000`）。
+  - `monomer_beta_rep1`：运行中，最新约 `33.692 ns / 200 ns`（`Step 16846000`）。
+  - `monomer_alpha_rep1`：运行中，最新约 `0.356 ns / 200 ns`（`Step 178000`，新启动）。
+- **monomer 新任务（fresh reruns, 非 legacy 证据）**：
+  - 新建并启动 `revision_exec/monomer_beta_rep1`（`prod/md_200ns.tpr` 已生成并后台运行）。
+  - 新建并启动 `revision_exec/monomer_alpha_rep1`（`prod/md_200ns.tpr` 已生成并后台运行）。
+  - 对应日志：
+    - `revision_exec/logs/monomer_beta_gpu1_200ns.nohup.log`
+    - `revision_exec/logs/monomer_alpha_gpu0_200ns.nohup.log`
+- **GPU 与进程状态（30秒窗口均值）**：
+  - GPU0：`util_avg ~55.5%`（min `45%`, max `63%`），`mem ~1027 MiB`。
+  - GPU1：`util_avg ~55.7%`（min `48%`, max `62%`），`mem ~1011 MiB`。
+  - 活跃 `mdrun` 进程共 4 条（`rep2`、`rep3`、`monomer_beta_rep1`、`monomer_alpha_rep1`），当前均在运行。
+
+## 2026-04-25
+- **调度调整：单体 production 全部安全暂停（为 dimer 让路）**：
+  - 动机：多任务同卡争用后整体 `ns/day` 明显下降；优先把 `rep2/rep3` 尽快推到 200 ns。
+  - 操作：对 `monomer_alpha_rep1`、`monomer_beta_rep1` 发送 `SIGTERM`，由 GROMACS 在约 100 step 内优雅停机并写 checkpoint（与此前已暂停的 `monomer_alpha_rep2` 一致）。
+  - Checkpoint 落盘（续跑入口）：
+    - `revision_exec/monomer_alpha_rep1/prod/md_200ns.cpt`
+    - `revision_exec/monomer_beta_rep1/prod/md_200ns.cpt`
+    - `revision_exec/monomer_alpha_rep2/prod/md_200ns.cpt`（此前已停）
+  - **当前仅 dimer 在跑**：`rep2`（GPU0）、`rep3`（GPU1）；`nvidia-smi` 显存占用回落至约单任务量级（每卡 ~529 MiB 快照，随运行波动）。
+  - **后续安全重启模板**（与启动时一致，仅追加 `-cpi` / `-append`；按需设 `CUDA_VISIBLE_DEVICES` 与 `-ntomp`）：
+    - `gmx mdrun -deffnm .../prod/md_200ns -cpi .../prod/md_200ns.cpt -append -v -nb gpu -pme gpu -bonded gpu -ntmpi 1 -ntomp <N>`
+
+## 2026-04-24
+- **Dimer 由 200 ns 延长至 300 ns（rep1 + rep2，一卡一条）**：
+  - 与 `rep1` 分析结论一致，对 **rep1、rep2** 各延长 **100 ns**（`gmx convert-tpr ... -extend 100000`，即 +100000 ps）。
+  - 产物：`rep{1,2}/prod/md_200ns_ext100ns.tpr`；原 `md_200ns.tpr` 备份为 `md_200ns.tpr.before_300ns_extend`。
+  - **启动方式**：
+    - `rep2`：`CUDA_VISIBLE_DEVICES=1`，`deffnm` 使用 **绝对路径** 至 `rep2/prod/md_200ns`；nohup：`revision_exec/logs/rep2_gpu1_extend100ns.nohup.log`，PID：`rep2_gpu1_extend100ns.pid`。
+    - `rep1`：`CUDA_VISIBLE_DEVICES=0`；因 checkpoint 中记录的是相对路径 `rep1/prod/md_200ns.*`，必须在 **`tubulin-cppf-md/revision_exec` 为当前目录** 下启动：`deffnm rep1/prod/md_200ns`（首次从仓库根目录用绝对 `deffnm` 会因找不到 `rep1/prod/md_200ns.log` 等而被 GROMACS 拒绝续跑）。nohup：`revision_exec/logs/rep1_gpu0_extend100ns.nohup.log`，PID：`rep1_gpu0_extend100ns.pid`。
+  - **验证**：两任务日志均出现 `150000000 steps, 300000.0 ps (continuing from step 100000000, 200000.0 ps)`。
+  - **rep3**：本次未与 rep1/rep2 并行延长；后续单独 `convert-tpr` + 占一空卡或排队即可。
+
+## 2026-04-27
+- **rep3 dimer 300 ns production 完成**：`revision_exec/rep3/prod/md_200ns.log` 记录 `Finished mdrun on rank 0`，checkpoint 写在 `step 150000000`（300 ns）。至此 **rep1 / rep2 / rep3** 均在 **300 ns** 停点。
+- **三条 dimer 200-300 ns 定量分析已落盘**（同一套指标：backbone/ligand RMSD、Rg、SASA、mindist、contacts、Cα RMSF）：
+  - 报告：`revision_exec/analysis_dimer_rep123_300ns/dimer_monomer_analysis_2026-04-27.md`
+  - 可复现脚本：`revision_exec/analysis_dimer_rep123_300ns/run_rep_analysis.sh`、`summarize_xvgs.py`
+- **方法学共识（平行试验）**：extension 策略从「单条优先」调整为 **三条 dimer 同步延长**，先做 **350 ns** 统一里程碑，再视指标决定是否继续。
+
+## 2026-04-28
+- **rep1：300 ns → 350 ns 延长已启动**：在 `revision_exec/rep1/prod/` 使用 `md_350ns.tpr`（`gmx dump` 可见 `nsteps=175000000`, `dt=0.002`，总时长 350 ns），自 `md_200ns.cpt` 续跑；`mdrun` 使用 `-noappend`，并指定 `-gpu_id 1`（见该目录 `md_350ns.log`）。
+- **monomer 恢复生产**：`monomer_alpha_rep1`、`monomer_beta_rep1` 自 checkpoint 续跑并完成至 **200 ns**；`monomer_alpha_rep2` 继续在 GPU 上推进 production。
+
+## 2026-04-29（进度快照，提交 git 当日巡检）
+- **GPU / 任务**：
+  - **GPU0**：`monomer_alpha_rep2/prod/md_200ns` 约 **193.6 ns / 200 ns**（收尾）。
+  - **GPU1**：`rep1/prod/md_350ns` 约 **335.6 ns / 350 ns**（350 ns 延长约 **96%**）。
+- **已完成**：`monomer_alpha_rep1`、`monomer_beta_rep1` **200 ns**；dimer **rep1–rep3** 各 **300 ns**。
+- **待排队（与「每体系 ≥3 平行」一致）**：
+  - Dimer：`rep2`、`rep3` 的 **300→350 ns**（与 rep1 对齐）。
+  - Monomer：新增 **α rep3**、**β rep2**、**β rep3**（目录与 `tpr` 需按 rep1/rep2 流程准备）。
+- **说明**：大轨迹（`.xtc`）、checkpoint（`.cpt`）等仍保留在计算节点工作区；**本仓库仅跟踪 Markdown 报告与脚本**，避免将巨型二进制纳入 git。

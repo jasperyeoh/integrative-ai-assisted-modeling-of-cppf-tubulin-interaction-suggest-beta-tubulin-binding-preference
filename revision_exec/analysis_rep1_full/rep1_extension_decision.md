@@ -1,0 +1,30 @@
+# rep1 extension decision (quick, evidence-based)
+
+## Recommendation
+- Continue to 300 ns: **YES** (high priority).
+- Continue to 500 ns: **CONDITIONAL** (only if 200-300 ns still shows drift or state transitions).
+
+## Why
+- Protein-ligand proximity and contact metrics are consistently strong in late trajectory.
+- PCA indicates dominant low-dimensional motion, suggesting a few major metastable regions rather than random noise.
+- RMSD-related metrics still show large-amplitude transitions, so 100 ns extra sampling is justified to confirm convergence.
+
+## Practical next criterion
+- Promote 300->500 ns only if, in 200-300 ns window, at least one criterion fails:
+  1) rolling 20 ns mean of backbone RMSD not plateaued;
+  2) contact count distribution shifts >10%;
+  3) PCA occupancy still expanding (new basins).
+
+## Raw stats snapshot
+```
+Backbone RMSD (nm): mean=1.5395, std=1.9595, last=0.2641, last50ns_mean=0.5810, last50ns_std=1.0540
+Ligand RMSD (nm): mean=4.1025, std=5.0413, last=0.3265, last50ns_mean=6.6226, last50ns_std=6.4169
+Protein Rg (nm): mean=3.8404, std=1.2883, last=3.0173, last50ns_mean=3.8410, last50ns_std=1.2886
+Protein SASA (nm^2): mean=354.4446, std=5.3306, last=357.2710, last50ns_mean=354.4427, last50ns_std=5.3316
+Protein-ligand min distance (nm): mean=0.2029, std=0.0139, last=0.2100, last50ns_mean=0.2006, last50ns_std=0.0122
+Protein-ligand contacts (<0.35 nm): mean=151.8902, std=13.7979, last=159.0000, last50ns_mean=155.8258, last50ns_std=11.9913
+Top10 C-alpha RMSF residues (nm): 438:4.288, 439:4.284, 443:4.265, 440:4.186, 442:4.130, 444:4.103, 447:4.081, 446:4.072, 450:4.052, 437:4.045
+PCA variance explained: PC1=85.01%, PC2=7.35%, PC1+PC2=92.36% (from reduced 100-200 ns trajectory)
+Not computed: gmx hbond reports UNL has no donor and no acceptor under current topology/atom typing.
+Cleaned backbone RMSD (100-200 ns, sampled): mean=2.4254, std=2.0021, last=4.5926
+```

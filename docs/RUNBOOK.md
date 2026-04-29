@@ -250,10 +250,19 @@ Critical cofactor topology note:
   - Rationale: `pdb2gmx` commonly fails on nucleotides/metal cofactors with “missing residue topology”.
   - This keeps the protein force field unchanged while making cofactor handling deterministic/reproducible.
 
-### 5.1) Cofactor main route (tleap → acpype)
-This produces GROMACS-ready `GDP/GTP/MG` includes that you can add to the GROMACS `topol.top`.
+### 5.1) Cofactor main route (locked and reviewer-proof)
+This workflow is locked to the validated nucleotide parameter route and must be
+kept consistent with the 2026-04-16 gate decision.
 
-1) Extract cofactors from the merged complex PDB:
+Main route (only):
+- Use AMBER Parameter Database polyphosphate parameters (Meagher/Redman/Carlson, JCC 2003):
+  - `revision_exec/input/cofactors_params/GTP.prep`
+  - `revision_exec/input/cofactors_params/GDP.prep`
+  - `revision_exec/input/cofactors_params/frcmod.phos`
+- `MG2+` remains a standard ion in GROMACS (`amber99sb-ildn.ff/ions.itp`).
+
+Preparation steps:
+1) Extract cofactors from merged complex:
 
 ```bash
 conda run -n mdprep python "revision_exec/scripts/extract_cofactors_pdb.py" \
@@ -262,21 +271,7 @@ conda run -n mdprep python "revision_exec/scripts/extract_cofactors_pdb.py" \
   --resnames GTP GDP MG
 ```
 
-2) Run `tleap` on the cofactor-only PDB.
-
-Important reality check:
-- For PLOS Comp Biol review, **do not “improvise” nucleotide parameters** if you can avoid it.
-- Use an established, peer-reviewed polyphosphate/nucleotide parameter set.
-- `MG2+` is handled as a standard ion in GROMACS (`MG` in `amber99sb-ildn.ff/ions.itp`) and does not need `tleap`.
-
-#### Recommended (reviewer-proof) nucleotide parameters
-Use the AMBER Parameter Database polyphosphate parameters (Meagher/Redman/Carlson, JCC 2003):
-- `revision_exec/input/cofactors_params/ADP.prep`
-- `revision_exec/input/cofactors_params/ATP.prep`
-- `revision_exec/input/cofactors_params/frcmod.phos`
-
-These libraries use `*` in sugar atom names (e.g. `O5*`) while PDBs often use prime (e.g. `O5'`).
-Convert atom names before LEaP:
+2) Normalize atom naming for LEaP (`prime` -> `star` where needed):
 
 ```bash
 conda run -n mdprep python "revision_exec/scripts/rename_nucleotide_prime_to_star.py" \
@@ -285,64 +280,17 @@ conda run -n mdprep python "revision_exec/scripts/rename_nucleotide_prime_to_sta
   --resnames GTP GDP
 ```
 
-2) Split and parameterize `GTP` and `GDP` via GAFF2 (AmberTools).
+3) Run LEaP using `GTP.prep/GDP.prep + frcmod.phos` and verify no missing types.
+4) Convert outputs to GROMACS includes as needed and integrate into topology.
 
-Split the cofactor PDB into separate residue-instance PDBs:
+Status:
+- This route was already gate-validated in this project (tleap no-type issue resolved).
+- Treat this as the production default for reviewer-facing revision runs.
 
-```bash
-conda run -n mdprep python "revision_exec/scripts/split_pdb_by_residue.py" \
-  --in "revision_exec/prep/cofactors_gtp_gdp_mg.pdb" \
-  --outdir "revision_exec/prep/cofactors_split" \
-  --resnames GTP GDP MG
-```
-
-Then, in a clean working directory (example: `revision_exec/prep/cofactor_params/`):
-- `GTP`: net charge typically `-4`
-- `GDP`: net charge typically `-3`
-
-If you cannot obtain/validate a dedicated nucleotide parameter set in time, GAFF2 is a last-resort fallback:
-**Attempt AM1-BCC first** (may fail to converge for highly-charged polyphosphates):
-
-```bash
-antechamber -i GTP.pdb -fi pdb -o GTP_gaff2_bcc.mol2 -fo mol2 -at gaff2 -c bcc -nc -4 -rn GTP
-parmchk2    -i GTP_gaff2_bcc.mol2 -f mol2 -o GTP.frcmod -s gaff2
-
-antechamber -i GDP.pdb -fi pdb -o GDP_gaff2_bcc.mol2 -fo mol2 -at gaff2 -c bcc -nc -3 -rn GDP
-parmchk2    -i GDP_gaff2_bcc.mol2 -f mol2 -o GDP.frcmod -s gaff2
-```
-
-If AM1-BCC fails (SQM SCF non-convergence), **fall back to gas charges** just to unblock MD (document this and later replace charges with RESP2):
-
-```bash
-antechamber -i GTP.pdb -fi pdb -o GTP_gaff2_gas.mol2 -fo mol2 -at gaff2 -c gas -nc -4 -rn GTP
-parmchk2    -i GTP_gaff2_gas.mol2 -f mol2 -o GTP.frcmod -s gaff2
-
-antechamber -i GDP.pdb -fi pdb -o GDP_gaff2_gas.mol2 -fo mol2 -at gaff2 -c gas -nc -3 -rn GDP
-parmchk2    -i GDP_gaff2_gas.mol2 -f mol2 -o GDP.frcmod -s gaff2
-```
-
-3) Build Amber prmtop/inpcrd for each nucleotide in `tleap`, then convert via `acpype`:
-
-```bash
-source leaprc.gaff2
-source leaprc.water.tip3p
-
-GTP = loadmol2 GTP_gaff2_*.mol2
-loadamberparams GTP.frcmod
-saveamberparm GTP GTP.prmtop GTP.inpcrd
-
-GDP = loadmol2 GDP_gaff2_*.mol2
-loadamberparams GDP.frcmod
-saveamberparm GDP GDP.prmtop GDP.inpcrd
-quit
-```
-
-Convert:
-
-```bash
-acpype -p GTP.prmtop -x GTP.inpcrd -b GTP -o gmx -f
-acpype -p GDP.prmtop -x GDP.inpcrd -b GDP -o gmx -f
-```
+Emergency fallback (not default, not parallel route):
+- GAFF2 parameterization of nucleotides is allowed only when the above files are unavailable.
+- If fallback is used, document justification in `revision_exec/logs/method_changes.md`
+  and do not present it as equivalent to the locked main route.
 
 ## 6) Solvate and Ionize
 Define box:
@@ -576,7 +524,12 @@ Output paths:
 - `revision_exec/analysis/figures/`
 
 ## 12) MM-PBSA Stage (After Environment Confirmation)
-When MM-PBSA environment is confirmed:
+Current status:
+- `gmx_MMPBSA` is not yet available in existing environments.
+- `conda create -n mmpbsa -c conda-forge -c bioconda gmx_mmpbsa mpi4py ambertools --dry-run`
+  is solvable on this machine (dry-run succeeded on 2026-04-21).
+
+When MM-PBSA environment is confirmed/created:
 1. select consistent analysis windows across replicates
 2. run MM-PBSA per replicate
 3. aggregate mean/spread
@@ -601,4 +554,75 @@ This runbook execution is complete when:
 2. all core metrics and figures pass QC
 3. MM-PBSA summary and per-residue decomposition are available
 4. manuscript text can be updated with one-to-one method/data traceability
+
+## 14) Supplemental Monomer Runbook (alpha/beta, fresh 200 ns)
+This section is for reviewer-facing supplementary monomer MD only. Do not use
+legacy trajectories from `yfeng494_data` as evidence.
+
+### 14.1 Scope and principle
+- Monomer is supplementary evidence; heterodimer remains primary.
+- Build monomer systems from current revision assets, not historical runs.
+- Keep physics parameters aligned with heterodimer `rep1/rep2/rep3`.
+
+### 14.2 Parameter lock (must match current production)
+Use the same settings as `revision_exec/input/mdp/md_prod_200ns.mdp`:
+- `dt = 0.002`
+- `nsteps = 100000000` (200 ns)
+- Same thermostat/barostat/cutoff/PME/LINCS policy
+- No `energygrps` in production `.mdp` (GPU compatibility)
+- Ligand/topology consistency: `CPPF_RESP2` route only
+
+Allowed differences (system-size dependent only):
+- box size and solvent count
+- ion count after neutralization/salt setup
+- thread count (`-ntomp`) for scheduling
+
+### 14.3 Directory convention
+Create clean monomer workspaces under `revision_exec`:
+- `revision_exec/monomer_beta_rep1/{em,nvt,npt,prod}`
+- `revision_exec/monomer_alpha_rep1/{em,nvt,npt,prod}`
+- `revision_exec/logs/` for nohup logs and pid files
+
+### 14.4 Build/check checklist before launch
+For each monomer (`beta` and `alpha`):
+1. Validate starting structure and ligand naming
+2. Generate `tpr` for EM/NVT/NPT/prod with same mdp policy
+3. Confirm no structural warning is bypassed by `-maxwarn`
+4. Confirm production `.tpr` is built from the same 200 ns production mdp
+5. Confirm GPU-safe settings (no `energygrps`)
+
+### 14.5 Safe background launch template
+Use fixed GPU and nohup to survive SSH disconnects:
+
+```bash
+nohup bash -lc '
+CUDA_VISIBLE_DEVICES=<GPU_ID> \
+${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx mdrun \
+  -deffnm "revision_exec/monomer_<alpha_or_beta>_rep1/prod/md_200ns" \
+  -v -nb gpu -pme gpu -bonded gpu -ntmpi 1 -ntomp 6
+' > "revision_exec/logs/monomer_<alpha_or_beta>_gpu<GPU_ID>_200ns.nohup.log" 2>&1 &
+echo $! > "revision_exec/logs/monomer_<alpha_or_beta>_gpu<GPU_ID>_200ns.pid"
+```
+
+Resume template:
+
+```bash
+CUDA_VISIBLE_DEVICES=<GPU_ID> \
+${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx mdrun \
+  -deffnm "revision_exec/monomer_<alpha_or_beta>_rep1/prod/md_200ns" \
+  -cpi "revision_exec/monomer_<alpha_or_beta>_rep1/prod/md_200ns.cpt" \
+  -append -v -nb gpu -pme gpu -bonded gpu -ntmpi 1 -ntomp 6
+```
+
+### 14.6 Runtime monitoring requirements
+- Verify process exists via `ps`
+- Verify GPU load is healthy (`nvidia-smi`)
+- Ensure progress in `md_200ns.log` (`Step/Time` increases)
+- Log status snapshots in `docs/pregress.md`
+
+### 14.7 Reviewer-facing reporting guardrail
+When reporting monomer results:
+- Clearly label as supplementary validation
+- Explicitly state fresh reruns were performed in revision workspace
+- Explicitly state parameter consistency with heterodimer production workflow
 
