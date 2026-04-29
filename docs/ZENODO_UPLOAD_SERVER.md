@@ -20,15 +20,23 @@ Or for a single session: `export ZENODO_TOKEN='...'`
 
 Script: `revision_exec/scripts/zenodo_upload_trajectories.sh`
 
+Each replicate keeps **one main production** `.xtc` (plus optional extension segments). On Zenodo they are stored under **unique names** (e.g. `monomer_alpha_rep1_md_200ns.xtc`, `dimer_rep2_md_200ns.xtc`) so files are **not** overwritten.
+
 Default files (paths relative to repo root `tubulin-cppf-md/`):
 
 - `revision_exec/monomer_{alpha_rep1,alpha_rep2,beta_rep1}/prod/md_200ns.xtc`
 - `revision_exec/rep{1,2,3}/prod/md_200ns.xtc`
 - `revision_exec/rep1/prod/md_350ns.part0004.xtc`
 
-Also uploads **`revision_exec/ZENODO_UPLOAD_SHA256SUMS.txt`** (checksums for those files).
+When you finish **6 monomer** + **3 dimer** replicates, add the three new monomer paths to `DEFAULT_RELS` and re-run (or make a **second Zenodo record**) — expect **9** production trajectories **+** any `md_350ns` / extension parts.
+
+Also uploads **`revision_exec/ZENODO_UPLOAD_SHA256SUMS.txt`** (checksums; names match Zenodo keys).
 
 To change the file list, edit the `DEFAULT_RELS` array in the script.
+
+### Quota (50 GB / record)
+
+If the total size of one upload **exceeds** the Zenodo quota for that record, split into **two deposits** (e.g. dimers in one, monomers in another) or contact Zenodo. **Hugging Face Hub** (Dataset repo + `git lfs`) is a workable alternative for very large static files; cite the HF URL in the paper if the journal allows URLs without DOI (many accept both; check author guidelines).
 
 ## 3. Dry run
 

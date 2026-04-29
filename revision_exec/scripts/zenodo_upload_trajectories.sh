@@ -29,6 +29,20 @@ load_token() {
   return 1
 }
 
+# Zenodo object key must be unique — never use bare basename (many reps share md_200ns.xtc).
+zenodo_remote_name() {
+  local f="$1"
+  if [[ "$f" =~ /(monomer_[^/]+)/prod/([^/]+)$ ]]; then
+    echo "${BASH_REMATCH[1]}_${BASH_REMATCH[2]}"
+    return
+  fi
+  if [[ "$f" =~ /rep([0-9]+)/prod/([^/]+)$ ]]; then
+    echo "dimer_rep${BASH_REMATCH[1]}_${BASH_REMATCH[2]}"
+    return
+  fi
+  basename "$f"
+}
+
 # Default: production trajectories + rep1 extension chunk (same as LARGE_FILES_NOT_IN_GIT core set).
 DEFAULT_RELS=(
   revision_exec/monomer_alpha_rep1/prod/md_200ns.xtc
@@ -63,7 +77,8 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
     fi
     sz=$(stat -c%s "$f")
     total=$((total + sz))
-    echo "  $(basename "$f")  $sz bytes"
+    key="$(zenodo_remote_name "$f")"
+    echo "  $key  <=  $(basename "$f")  ($sz bytes)"
   done
   echo "Total ~ $(( total / 1024 / 1024 / 1024 )) GiB (approx)"
   echo "Token: $([[ -n "${ZENODO_TOKEN:-}" ]] && echo set || ([[ -f "$TOKEN_FILE" ]] && echo "file $TOKEN_FILE" || echo NOT SET))"
@@ -121,9 +136,9 @@ fi
 SUMS="$ROOT/revision_exec/ZENODO_UPLOAD_SHA256SUMS.txt"
 : >"$SUMS"
 for f in "${FILES[@]}"; do
-  bn="$(basename "$f")"
-  echo "sha256sum $bn ..."
-  sha256sum "$f" | awk '{print $1"  '"$bn"'"}' >>"$SUMS"
+  key="$(zenodo_remote_name "$f")"
+  echo "sha256sum $key ..."
+  sha256sum "$f" | awk -v k="$key" '{print $1"  "k}' >>"$SUMS"
 done
 
 echo "Uploading checksum manifest..."
@@ -132,11 +147,11 @@ curl -fS --upload-file "$SUMS" \
   "${BUCKET}/ZENODO_UPLOAD_SHA256SUMS.txt"
 
 for f in "${FILES[@]}"; do
-  bn="$(basename "$f")"
-  echo "=== Uploading $bn ($(du -h "$f" | cut -f1)) ==="
+  key="$(zenodo_remote_name "$f")"
+  echo "=== Uploading $key <= $f ($(du -h "$f" | cut -f1)) ==="
   curl -fS --upload-file "$f" \
     -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-    "${BUCKET}/${bn}"
+    "${BUCKET}/${key}"
 done
 
 if [[ "$DO_PUBLISH" -eq 1 ]]; then
