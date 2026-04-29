@@ -4,6 +4,9 @@ __pycache__/
 *.so
 .DS_Store
 
+# Secrets (Zenodo, etc.)
+.zenodo_token
+
 # Environment and local IDE
 .env
 .venv/

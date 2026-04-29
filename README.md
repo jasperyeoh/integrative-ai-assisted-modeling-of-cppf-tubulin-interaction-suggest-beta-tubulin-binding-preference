@@ -55,6 +55,7 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 - The execution history, parameter changes, and troubleshooting decisions are tracked in `docs/pregress.md`.
 - Current production workflow supports replicate-based runs and checkpoint continuation.
 - Large trajectories (multi-GB `xtc`) are listed in `revision_exec/LARGE_FILES_NOT_IN_GIT.txt` if not in git; see also `docs/git_binary_data.md`.
+- **Zenodo (server upload):** `docs/ZENODO_UPLOAD_SERVER.md` and `revision_exec/scripts/zenodo_upload_trajectories.sh` — use a token in `~/.zenodo_token` (never commit it).
 
 ## Data and Large Files
 
