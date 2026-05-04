@@ -101,3 +101,21 @@ All upload and polling transcripts intended for **provenance and debugging** liv
 When you run a new upload, prefer a **descriptive filename** and add a row to that index so reviewers (and your future self) can tie Hub commits to local logs.
 
 **Figure format for the paper:** revision plotting defaults to **TIFF LZW @ 300 dpi**; see [`docs/PLOS_COMPBIOL_FIGURES.md`](PLOS_COMPBIOL_FIGURES.md).
+
+## 7. Mirror the rest of `revision_exec/` (no duplicate prod `.xtc`)
+
+Trajectory segments in each `*/prod/*.xtc` are already uploaded by `revision_exec/scripts/huggingface_upload_trajectories.sh` (flat filenames at the dataset root). To push **everything else** under `revision_exec/` with the **same folder layout** on the Hub (tpr, gro, edr, logs, `input/`, `prep/`, analysis outputs, `analysis_revision/work/*.xtc`, etc.) **without** re-uploading those production trajectories:
+
+```bash
+cd /path/to/tubulin-cppf-md
+export HF_DATASET_REPO='HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers'
+
+bash revision_exec/scripts/huggingface_upload_revision_exec_mirror.sh --dry-run
+bash revision_exec/scripts/huggingface_upload_revision_exec_mirror.sh --upload
+# optional: one top-level folder only
+bash revision_exec/scripts/huggingface_upload_revision_exec_mirror.sh --upload --only input
+```
+
+The script passes `--exclude '**/prod/**/*.xtc'` to `hf upload`. Remote paths default to `revision_exec/<relative path>` (`HF_REVISION_MIRROR_PREFIX` overrides the `revision_exec` segment).
+
+**Logs:** `revision_exec/analysis_revision/work/` is gitignored. Copy `export_all_9sys.log` into `revision_exec/logs/analysis_revision_export_all_9sys_SNAPSHOT_<timestamp>.log` for GitHub (see `revision_exec/logs/HF_AND_PIPELINE_LOG_INDEX.md` § Revision export); the mirror script will also upload `analysis_revision/work/` to the Hub if you run a full mirror.

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Upload MD trajectories to Hugging Face Hub (Dataset repo, large files via Hub LFS).
 #
+# For the rest of revision_exec/ (tpr, topology, logs, analysis, etc.) without re-uploading
+# these same */prod/*.xtc files, use huggingface_upload_revision_exec_mirror.sh.
+#
 # Prereq: pip install -U "huggingface_hub[cli]"  (provides both `hf` and `huggingface-cli`)
 #
 # Auth (pick one) — do NOT paste tokens into chat; run on the server only:
