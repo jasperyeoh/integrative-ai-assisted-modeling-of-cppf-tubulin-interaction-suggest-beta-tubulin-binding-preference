@@ -1,0 +1,4 @@
+alpha3:
+Last frame         -1 time 185185.406   
+beta3:
+Last frame         -1 time 41482.801   

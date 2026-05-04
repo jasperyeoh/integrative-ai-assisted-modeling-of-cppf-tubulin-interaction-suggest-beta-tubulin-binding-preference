@@ -1,0 +1,57 @@
+# Step 1: gmx check on checkpoint (.cpt) — authoritative T_end for analysis windows
+# Generated from cluster run; units: time in ps from "Last frame" line of `gmx check -f *.cpt`
+# Date: 2026-05-04
+
+defaults:
+  length_unit_ps_to_ns: 1000
+
+systems:
+  dimer_rep1:
+    prod_dir: revision_exec/rep1/prod
+    checkpoint: md_400ns.cpt
+    T_end_ps: 400000.0
+    T_end_ns: 400.0
+  dimer_rep2:
+    prod_dir: revision_exec/rep2/prod
+    checkpoint: md_400ns.cpt
+    T_end_ps: 400000.0
+    T_end_ns: 400.0
+  dimer_rep3:
+    prod_dir: revision_exec/rep3/prod
+    checkpoint: md_400ns.cpt
+    T_end_ps: 400000.0
+    T_end_ns: 400.0
+  monomer_alpha_rep1:
+    prod_dir: revision_exec/monomer_alpha_rep1/prod
+    checkpoint: md_200ns.cpt
+    T_end_ps: 200000.0
+    T_end_ns: 200.0
+  monomer_alpha_rep2:
+    prod_dir: revision_exec/monomer_alpha_rep2/prod
+    checkpoint: md_200ns.cpt
+    T_end_ps: 200000.0
+    T_end_ns: 200.0
+  monomer_alpha_rep3:
+    prod_dir: revision_exec/monomer_alpha_rep3/prod
+    checkpoint: md_200ns.cpt
+    T_end_ps: 200000.0
+    T_end_ns: 200.0
+  monomer_beta_rep1:
+    prod_dir: revision_exec/monomer_beta_rep1/prod
+    checkpoint: md_200ns.cpt
+    T_end_ps: 200000.0
+    T_end_ns: 200.0
+  monomer_beta_rep2:
+    prod_dir: revision_exec/monomer_beta_rep2/prod
+    checkpoint: md_200ns.cpt
+    T_end_ps: 200000.0
+    T_end_ns: 200.0
+  monomer_beta_rep3:
+    prod_dir: revision_exec/monomer_beta_rep3/prod
+    checkpoint: md_200ns.cpt
+    T_end_ps: 200000.0
+    T_end_ns: 200.0
+
+notes:
+  - "Prefer md_400ns.cpt / md_200ns.cpt for T_end; faster than gmx check on multi-GB xtc."
+  - "Dimer trajectories may exist as multiple md_*ns.partXXXX.xtc; trjcat after per-segment gmx check (see REVISION_data_analysis_plan.md §1.2)."

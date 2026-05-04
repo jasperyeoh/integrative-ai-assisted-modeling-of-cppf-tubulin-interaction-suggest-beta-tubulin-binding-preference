@@ -1,0 +1,677 @@
+=== monomer_alpha_rep1 ===
+                 :-) GROMACS - gmx rms, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx rms -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_alpha_rep1/rmsd_bb_150_200ns.xvg -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Select group for least squares fit
+Group     0 (         System) has 120442 elements
+Group     1 (        Protein) has  6934 elements
+Group     2 (      Protein-H) has  3525 elements
+Group     3 (        C-alpha) has   451 elements
+Group     4 (       Backbone) has  1353 elements
+Group     5 (      MainChain) has  1805 elements
+Group     6 (   MainChain+Cb) has  2220 elements
+Group     7 (    MainChain+H) has  2238 elements
+Group     8 (      SideChain) has  4696 elements
+Group     9 (    SideChain-H) has  1720 elements
+Group    10 (    Prot-Masses) has  6934 elements
+Group    11 (    non-Protein) has 113508 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 113448 elements
+Group    16 (            SOL) has 113448 elements
+Group    17 (      non-Water) has  6994 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 113472 elements
+Select a group: Select group for RMSD calculation
+Group     0 (         System) has 120442 elements
+Group     1 (        Protein) has  6934 elements
+Group     2 (      Protein-H) has  3525 elements
+Group     3 (        C-alpha) has   451 elements
+Group     4 (       Backbone) has  1353 elements
+Group     5 (      MainChain) has  1805 elements
+Group     6 (   MainChain+Cb) has  2220 elements
+Group     7 (    MainChain+H) has  2238 elements
+Group     8 (      SideChain) has  4696 elements
+Group     9 (    SideChain-H) has  1720 elements
+Group    10 (    Prot-Masses) has  6934 elements
+Group    11 (    non-Protein) has 113508 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 113448 elements
+Group    16 (            SOL) has 113448 elements
+Group    17 (      non-Water) has  6994 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 113472 elements
+Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "If your experiment needs a statistician, you need a better experiment." (Ernest Rutherford)
+
+Selected 4: 'Backbone'
+Selected 4: 'Backbone'
+                 :-) GROMACS - gmx rms, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx rms -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_alpha_rep1/rmsd_lig_150_200ns.xvg -fit rot+trans -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Select group for least squares fit
+Group     0 (         System) has 120442 elements
+Group     1 (        Protein) has  6934 elements
+Group     2 (      Protein-H) has  3525 elements
+Group     3 (        C-alpha) has   451 elements
+Group     4 (       Backbone) has  1353 elements
+Group     5 (      MainChain) has  1805 elements
+Group     6 (   MainChain+Cb) has  2220 elements
+Group     7 (    MainChain+H) has  2238 elements
+Group     8 (      SideChain) has  4696 elements
+Group     9 (    SideChain-H) has  1720 elements
+Group    10 (    Prot-Masses) has  6934 elements
+Group    11 (    non-Protein) has 113508 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 113448 elements
+Group    16 (            SOL) has 113448 elements
+Group    17 (      non-Water) has  6994 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 113472 elements
+Select a group: Select group for RMSD calculation
+Group     0 (         System) has 120442 elements
+Group     1 (        Protein) has  6934 elements
+Group     2 (      Protein-H) has  3525 elements
+Group     3 (        C-alpha) has   451 elements
+Group     4 (       Backbone) has  1353 elements
+Group     5 (      MainChain) has  1805 elements
+Group     6 (   MainChain+Cb) has  2220 elements
+Group     7 (    MainChain+H) has  2238 elements
+Group     8 (      SideChain) has  4696 elements
+Group     9 (    SideChain-H) has  1720 elements
+Group    10 (    Prot-Masses) has  6934 elements
+Group    11 (    non-Protein) has 113508 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 113448 elements
+Group    16 (            SOL) has 113448 elements
+Group    17 (      non-Water) has  6994 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 113472 elements
+Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "We All Get the Flu, We All Get Aids" (LIVE)
+
+Selected 4: 'Backbone'
+Selected 13: 'MOL'
+                :-) GROMACS - gmx gyrate, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx gyrate -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_alpha_rep1/rg_prot_150_200ns.xvg -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+Analyzed 5001 frames, last time 200000.000
+
+GROMACS reminds you: "Jesus Can't Save You, Though It's Nice to Think He Tried" (Black Crowes)
+
+               :-) GROMACS - gmx mindist, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx mindist -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.xtc -od ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_alpha_rep1/mindist_150_200ns.xvg -on ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_alpha_rep1/contacts_150_200ns.xvg -d 0.35 -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Group     0 (         System) has 120442 elements
+Group     1 (        Protein) has  6934 elements
+Group     2 (      Protein-H) has  3525 elements
+Group     3 (        C-alpha) has   451 elements
+Group     4 (       Backbone) has  1353 elements
+Group     5 (      MainChain) has  1805 elements
+Group     6 (   MainChain+Cb) has  2220 elements
+Group     7 (    MainChain+H) has  2238 elements
+Group     8 (      SideChain) has  4696 elements
+Group     9 (    SideChain-H) has  1720 elements
+Group    10 (    Prot-Masses) has  6934 elements
+Group    11 (    non-Protein) has 113508 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 113448 elements
+Group    16 (            SOL) has 113448 elements
+Group    17 (      non-Water) has  6994 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 113472 elements
+Select a group: Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "I try to identify myself with the atoms... I ask what I would do If I were a carbon atom or a sodium atom." (Linus Pauling)
+
+Selected 1: 'Protein'
+Selected 13: 'MOL'
+done monomer_alpha_rep1
+=== monomer_alpha_rep2 ===
+                 :-) GROMACS - gmx rms, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx rms -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_alpha_rep2/rmsd_bb_150_200ns.xvg -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Select group for least squares fit
+Group     0 (         System) has 120442 elements
+Group     1 (        Protein) has  6934 elements
+Group     2 (      Protein-H) has  3525 elements
+Group     3 (        C-alpha) has   451 elements
+Group     4 (       Backbone) has  1353 elements
+Group     5 (      MainChain) has  1805 elements
+Group     6 (   MainChain+Cb) has  2220 elements
+Group     7 (    MainChain+H) has  2238 elements
+Group     8 (      SideChain) has  4696 elements
+Group     9 (    SideChain-H) has  1720 elements
+Group    10 (    Prot-Masses) has  6934 elements
+Group    11 (    non-Protein) has 113508 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 113448 elements
+Group    16 (            SOL) has 113448 elements
+Group    17 (      non-Water) has  6994 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 113472 elements
+Select a group: Select group for RMSD calculation
+Group     0 (         System) has 120442 elements
+Group     1 (        Protein) has  6934 elements
+Group     2 (      Protein-H) has  3525 elements
+Group     3 (        C-alpha) has   451 elements
+Group     4 (       Backbone) has  1353 elements
+Group     5 (      MainChain) has  1805 elements
+Group     6 (   MainChain+Cb) has  2220 elements
+Group     7 (    MainChain+H) has  2238 elements
+Group     8 (      SideChain) has  4696 elements
+Group     9 (    SideChain-H) has  1720 elements
+Group    10 (    Prot-Masses) has  6934 elements
+Group    11 (    non-Protein) has 113508 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 113448 elements
+Group    16 (            SOL) has 113448 elements
+Group    17 (      non-Water) has  6994 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 113472 elements
+Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "Shaken, not Stirred" (J. Bond)
+
+Selected 4: 'Backbone'
+Selected 4: 'Backbone'
+                 :-) GROMACS - gmx rms, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx rms -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_alpha_rep2/rmsd_lig_150_200ns.xvg -fit rot+trans -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Select group for least squares fit
+Group     0 (         System) has 120442 elements
+Group     1 (        Protein) has  6934 elements
+Group     2 (      Protein-H) has  3525 elements
+Group     3 (        C-alpha) has   451 elements
+Group     4 (       Backbone) has  1353 elements
+Group     5 (      MainChain) has  1805 elements
+Group     6 (   MainChain+Cb) has  2220 elements
+Group     7 (    MainChain+H) has  2238 elements
+Group     8 (      SideChain) has  4696 elements
+Group     9 (    SideChain-H) has  1720 elements
+Group    10 (    Prot-Masses) has  6934 elements
+Group    11 (    non-Protein) has 113508 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 113448 elements
+Group    16 (            SOL) has 113448 elements
+Group    17 (      non-Water) has  6994 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 113472 elements
+Select a group: Select group for RMSD calculation
+Group     0 (         System) has 120442 elements
+Group     1 (        Protein) has  6934 elements
+Group     2 (      Protein-H) has  3525 elements
+Group     3 (        C-alpha) has   451 elements
+Group     4 (       Backbone) has  1353 elements
+Group     5 (      MainChain) has  1805 elements
+Group     6 (   MainChain+Cb) has  2220 elements
+Group     7 (    MainChain+H) has  2238 elements
+Group     8 (      SideChain) has  4696 elements
+Group     9 (    SideChain-H) has  1720 elements
+Group    10 (    Prot-Masses) has  6934 elements
+Group    11 (    non-Protein) has 113508 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 113448 elements
+Group    16 (            SOL) has 113448 elements
+Group    17 (      non-Water) has  6994 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 113472 elements
+Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "Discovery: A couple of months in the laboratory can frequently save a couple of hours in the library." (Anonymous)
+
+Selected 4: 'Backbone'
+Selected 13: 'MOL'
+                :-) GROMACS - gmx gyrate, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx gyrate -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_alpha_rep2/rg_prot_150_200ns.xvg -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+Analyzed 5001 frames, last time 200000.000
+
+GROMACS reminds you: "If Life Seems Jolly Rotten, There's Something You've Forgotten !" (Monty Python)
+
+               :-) GROMACS - gmx mindist, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx mindist -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.xtc -od ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_alpha_rep2/mindist_150_200ns.xvg -on ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_alpha_rep2/contacts_150_200ns.xvg -d 0.35 -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_alpha_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Group     0 (         System) has 120442 elements
+Group     1 (        Protein) has  6934 elements
+Group     2 (      Protein-H) has  3525 elements
+Group     3 (        C-alpha) has   451 elements
+Group     4 (       Backbone) has  1353 elements
+Group     5 (      MainChain) has  1805 elements
+Group     6 (   MainChain+Cb) has  2220 elements
+Group     7 (    MainChain+H) has  2238 elements
+Group     8 (      SideChain) has  4696 elements
+Group     9 (    SideChain-H) has  1720 elements
+Group    10 (    Prot-Masses) has  6934 elements
+Group    11 (    non-Protein) has 113508 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 113448 elements
+Group    16 (            SOL) has 113448 elements
+Group    17 (      non-Water) has  6994 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 113472 elements
+Select a group: Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "I Live the Life They Wish They Did" (Tricky)
+
+Selected 1: 'Protein'
+Selected 13: 'MOL'
+done monomer_alpha_rep2
+=== monomer_beta_rep1 ===
+                 :-) GROMACS - gmx rms, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx rms -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_beta_rep1/rmsd_bb_150_200ns.xvg -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Select group for least squares fit
+Group     0 (         System) has 76825 elements
+Group     1 (        Protein) has  6925 elements
+Group     2 (      Protein-H) has  3537 elements
+Group     3 (        C-alpha) has   450 elements
+Group     4 (       Backbone) has  1350 elements
+Group     5 (      MainChain) has  1801 elements
+Group     6 (   MainChain+Cb) has  2217 elements
+Group     7 (    MainChain+H) has  2233 elements
+Group     8 (      SideChain) has  4692 elements
+Group     9 (    SideChain-H) has  1736 elements
+Group    10 (    Prot-Masses) has  6925 elements
+Group    11 (    non-Protein) has 69900 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 69840 elements
+Group    16 (            SOL) has 69840 elements
+Group    17 (      non-Water) has  6985 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 69864 elements
+Select a group: Select group for RMSD calculation
+Group     0 (         System) has 76825 elements
+Group     1 (        Protein) has  6925 elements
+Group     2 (      Protein-H) has  3537 elements
+Group     3 (        C-alpha) has   450 elements
+Group     4 (       Backbone) has  1350 elements
+Group     5 (      MainChain) has  1801 elements
+Group     6 (   MainChain+Cb) has  2217 elements
+Group     7 (    MainChain+H) has  2233 elements
+Group     8 (      SideChain) has  4692 elements
+Group     9 (    SideChain-H) has  1736 elements
+Group    10 (    Prot-Masses) has  6925 elements
+Group    11 (    non-Protein) has 69900 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 69840 elements
+Group    16 (            SOL) has 69840 elements
+Group    17 (      non-Water) has  6985 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 69864 elements
+Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "It has been discovered that C++ provides a remarkable facility for concealing the trivial details of a program - such as where its bugs are." (David Keppel)
+
+Selected 4: 'Backbone'
+Selected 4: 'Backbone'
+                 :-) GROMACS - gmx rms, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx rms -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_beta_rep1/rmsd_lig_150_200ns.xvg -fit rot+trans -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Select group for least squares fit
+Group     0 (         System) has 76825 elements
+Group     1 (        Protein) has  6925 elements
+Group     2 (      Protein-H) has  3537 elements
+Group     3 (        C-alpha) has   450 elements
+Group     4 (       Backbone) has  1350 elements
+Group     5 (      MainChain) has  1801 elements
+Group     6 (   MainChain+Cb) has  2217 elements
+Group     7 (    MainChain+H) has  2233 elements
+Group     8 (      SideChain) has  4692 elements
+Group     9 (    SideChain-H) has  1736 elements
+Group    10 (    Prot-Masses) has  6925 elements
+Group    11 (    non-Protein) has 69900 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 69840 elements
+Group    16 (            SOL) has 69840 elements
+Group    17 (      non-Water) has  6985 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 69864 elements
+Select a group: Select group for RMSD calculation
+Group     0 (         System) has 76825 elements
+Group     1 (        Protein) has  6925 elements
+Group     2 (      Protein-H) has  3537 elements
+Group     3 (        C-alpha) has   450 elements
+Group     4 (       Backbone) has  1350 elements
+Group     5 (      MainChain) has  1801 elements
+Group     6 (   MainChain+Cb) has  2217 elements
+Group     7 (    MainChain+H) has  2233 elements
+Group     8 (      SideChain) has  4692 elements
+Group     9 (    SideChain-H) has  1736 elements
+Group    10 (    Prot-Masses) has  6925 elements
+Group    11 (    non-Protein) has 69900 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 69840 elements
+Group    16 (            SOL) has 69840 elements
+Group    17 (      non-Water) has  6985 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 69864 elements
+Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "Prior to 1965 there were none, and after 1965 there was a nun." (Sister Mary Kenneth Keller regarding women with PhDs in computer science)
+
+Selected 4: 'Backbone'
+Selected 13: 'MOL'
+                :-) GROMACS - gmx gyrate, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx gyrate -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_beta_rep1/rg_prot_150_200ns.xvg -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+Analyzed 5001 frames, last time 200000.000
+
+GROMACS reminds you: "Why would the backup server database get corrupted anyway?" (Stefan Fleischmann -- system administrator, physicist, optimist.)
+
+               :-) GROMACS - gmx mindist, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx mindist -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.xtc -od ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_beta_rep1/mindist_150_200ns.xvg -on ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_beta_rep1/contacts_150_200ns.xvg -d 0.35 -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep1/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Group     0 (         System) has 76825 elements
+Group     1 (        Protein) has  6925 elements
+Group     2 (      Protein-H) has  3537 elements
+Group     3 (        C-alpha) has   450 elements
+Group     4 (       Backbone) has  1350 elements
+Group     5 (      MainChain) has  1801 elements
+Group     6 (   MainChain+Cb) has  2217 elements
+Group     7 (    MainChain+H) has  2233 elements
+Group     8 (      SideChain) has  4692 elements
+Group     9 (    SideChain-H) has  1736 elements
+Group    10 (    Prot-Masses) has  6925 elements
+Group    11 (    non-Protein) has 69900 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 69840 elements
+Group    16 (            SOL) has 69840 elements
+Group    17 (      non-Water) has  6985 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 69864 elements
+Select a group: Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "It's Not Dark Yet, But It's Getting There" (Bob Dylan)
+
+Selected 1: 'Protein'
+Selected 13: 'MOL'
+done monomer_beta_rep1
+=== monomer_beta_rep2 ===
+                 :-) GROMACS - gmx rms, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx rms -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_beta_rep2/rmsd_bb_150_200ns.xvg -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Select group for least squares fit
+Group     0 (         System) has 76825 elements
+Group     1 (        Protein) has  6925 elements
+Group     2 (      Protein-H) has  3537 elements
+Group     3 (        C-alpha) has   450 elements
+Group     4 (       Backbone) has  1350 elements
+Group     5 (      MainChain) has  1801 elements
+Group     6 (   MainChain+Cb) has  2217 elements
+Group     7 (    MainChain+H) has  2233 elements
+Group     8 (      SideChain) has  4692 elements
+Group     9 (    SideChain-H) has  1736 elements
+Group    10 (    Prot-Masses) has  6925 elements
+Group    11 (    non-Protein) has 69900 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 69840 elements
+Group    16 (            SOL) has 69840 elements
+Group    17 (      non-Water) has  6985 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 69864 elements
+Select a group: Select group for RMSD calculation
+Group     0 (         System) has 76825 elements
+Group     1 (        Protein) has  6925 elements
+Group     2 (      Protein-H) has  3537 elements
+Group     3 (        C-alpha) has   450 elements
+Group     4 (       Backbone) has  1350 elements
+Group     5 (      MainChain) has  1801 elements
+Group     6 (   MainChain+Cb) has  2217 elements
+Group     7 (    MainChain+H) has  2233 elements
+Group     8 (      SideChain) has  4692 elements
+Group     9 (    SideChain-H) has  1736 elements
+Group    10 (    Prot-Masses) has  6925 elements
+Group    11 (    non-Protein) has 69900 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 69840 elements
+Group    16 (            SOL) has 69840 elements
+Group    17 (      non-Water) has  6985 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 69864 elements
+Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "Two chemists walk into a bar. The first one says, 'I'll have some H2O.'. The second one says, 'I'll have some H2O, too'. He dies." (Anonymous)
+
+Selected 4: 'Backbone'
+Selected 4: 'Backbone'
+                 :-) GROMACS - gmx rms, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx rms -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_beta_rep2/rmsd_lig_150_200ns.xvg -fit rot+trans -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Select group for least squares fit
+Group     0 (         System) has 76825 elements
+Group     1 (        Protein) has  6925 elements
+Group     2 (      Protein-H) has  3537 elements
+Group     3 (        C-alpha) has   450 elements
+Group     4 (       Backbone) has  1350 elements
+Group     5 (      MainChain) has  1801 elements
+Group     6 (   MainChain+Cb) has  2217 elements
+Group     7 (    MainChain+H) has  2233 elements
+Group     8 (      SideChain) has  4692 elements
+Group     9 (    SideChain-H) has  1736 elements
+Group    10 (    Prot-Masses) has  6925 elements
+Group    11 (    non-Protein) has 69900 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 69840 elements
+Group    16 (            SOL) has 69840 elements
+Group    17 (      non-Water) has  6985 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 69864 elements
+Select a group: Select group for RMSD calculation
+Group     0 (         System) has 76825 elements
+Group     1 (        Protein) has  6925 elements
+Group     2 (      Protein-H) has  3537 elements
+Group     3 (        C-alpha) has   450 elements
+Group     4 (       Backbone) has  1350 elements
+Group     5 (      MainChain) has  1801 elements
+Group     6 (   MainChain+Cb) has  2217 elements
+Group     7 (    MainChain+H) has  2233 elements
+Group     8 (      SideChain) has  4692 elements
+Group     9 (    SideChain-H) has  1736 elements
+Group    10 (    Prot-Masses) has  6925 elements
+Group    11 (    non-Protein) has 69900 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 69840 elements
+Group    16 (            SOL) has 69840 elements
+Group    17 (      non-Water) has  6985 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 69864 elements
+Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "Right Now My Job is Eating These Doughnuts" (Bodycount)
+
+Selected 4: 'Backbone'
+Selected 13: 'MOL'
+                :-) GROMACS - gmx gyrate, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx gyrate -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.xtc -o ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_beta_rep2/rg_prot_150_200ns.xvg -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+Analyzed 5001 frames, last time 200000.000
+
+GROMACS reminds you: "Take Your Medications and Preparations and Ram It Up Your Snout" (F. Zappa)
+
+               :-) GROMACS - gmx mindist, 2024.5-conda_forge (-:
+
+Executable:   ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx
+Data prefix:  ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite
+Working dir:  ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep3/prep
+Command line:
+  gmx mindist -s ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr -f ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.xtc -od ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_beta_rep2/mindist_150_200ns.xvg -on ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/analysis_monomer_extend_decision/monomer_beta_rep2/contacts_150_200ns.xvg -d 0.35 -tu ns -b 150 -e 200
+
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Reading file ${HPC_WORKSPACE}/GITHUB_NAMESPACE/TUB-CPPF/tubulin-cppf-md/revision_exec/monomer_beta_rep2/prod/md_200ns.tpr, VERSION 2024.5-conda_forge (single precision)
+Group     0 (         System) has 76825 elements
+Group     1 (        Protein) has  6925 elements
+Group     2 (      Protein-H) has  3537 elements
+Group     3 (        C-alpha) has   450 elements
+Group     4 (       Backbone) has  1350 elements
+Group     5 (      MainChain) has  1801 elements
+Group     6 (   MainChain+Cb) has  2217 elements
+Group     7 (    MainChain+H) has  2233 elements
+Group     8 (      SideChain) has  4692 elements
+Group     9 (    SideChain-H) has  1736 elements
+Group    10 (    Prot-Masses) has  6925 elements
+Group    11 (    non-Protein) has 69900 elements
+Group    12 (          Other) has    36 elements
+Group    13 (            MOL) has    36 elements
+Group    14 (             NA) has    24 elements
+Group    15 (          Water) has 69840 elements
+Group    16 (            SOL) has 69840 elements
+Group    17 (      non-Water) has  6985 elements
+Group    18 (            Ion) has    24 elements
+Group    19 ( Water_and_ions) has 69864 elements
+Select a group: Select a group: Reading frame       0 time    0.000   Reading frame       0 time  150.000   Reading frame       1 time  150.010   Reading frame       2 time  150.020   Reading frame       3 time  150.030   Reading frame       4 time  150.040   Reading frame       5 time  150.050   Reading frame       6 time  150.060   Reading frame       7 time  150.070   Reading frame       8 time  150.080   Reading frame       9 time  150.090   Reading frame      10 time  150.100   Reading frame      11 time  150.110   Reading frame      12 time  150.120   Reading frame      13 time  150.130   Reading frame      14 time  150.140   Reading frame      15 time  150.150   Reading frame      16 time  150.160   Reading frame      17 time  150.170   Reading frame      18 time  150.180   Reading frame      19 time  150.190   Reading frame      20 time  150.200   Reading frame      30 time  150.300   Reading frame      40 time  150.400   Reading frame      50 time  150.500   Reading frame      60 time  150.600   Reading frame      70 time  150.700   Reading frame      80 time  150.800   Reading frame      90 time  150.900   Reading frame     100 time  151.000   Reading frame     110 time  151.100   Reading frame     120 time  151.200   Reading frame     130 time  151.300   Reading frame     140 time  151.400   Reading frame     150 time  151.500   Reading frame     160 time  151.600   Reading frame     170 time  151.700   Reading frame     180 time  151.800   Reading frame     190 time  151.900   Reading frame     200 time  152.000   Reading frame     300 time  153.000   Reading frame     400 time  154.000   Reading frame     500 time  155.000   Reading frame     600 time  156.000   Reading frame     700 time  157.000   Reading frame     800 time  158.000   Reading frame     900 time  159.000   Reading frame    1000 time  160.000   Reading frame    1100 time  161.000   Reading frame    1200 time  162.000   Reading frame    1300 time  163.000   Reading frame    1400 time  164.000   Reading frame    1500 time  165.000   Reading frame    1600 time  166.000   Reading frame    1700 time  167.000   Reading frame    1800 time  168.000   Reading frame    1900 time  169.000   Reading frame    2000 time  170.000   Reading frame    3000 time  180.000   Reading frame    4000 time  190.000   Reading frame    5000 time  200.000   Last frame       5000 time  200.000   
+
+GROMACS reminds you: "There is no such thing as free energy. Anyone who advocates it does not know what he is talking about." (Alireza Haghighat)
+
+Selected 1: 'Protein'
+Selected 13: 'MOL'
+done monomer_beta_rep2
+ALL_DONE

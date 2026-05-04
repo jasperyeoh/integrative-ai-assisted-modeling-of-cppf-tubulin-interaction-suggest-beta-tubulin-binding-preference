@@ -87,3 +87,17 @@ If the journal **requires a DOI**, you can still deposit a **small Zenodo record
 | **Citation** | Dataset URL (+ DOI optional elsewhere) | **DOI** by default |
 
 See `docs/ZENODO_UPLOAD_SERVER.md` if you use Zenodo for a subset or second copy.
+
+## 6. Operational logs (what was uploaded, when, from which host)
+
+All upload and polling transcripts intended for **provenance and debugging** live under `revision_exec/logs/`. They are safe to commit at typical sizes (individual files are usually well below GitHub’s hard limits; the largest HF nohup log may be ~10–15 MB—still acceptable if you need a paper trail in git).
+
+**Start here:** [`revision_exec/logs/HF_AND_PIPELINE_LOG_INDEX.md`](../revision_exec/logs/HF_AND_PIPELINE_LOG_INDEX.md) — tables for:
+
+- `hf_upload*.log`, `hf_poll*.log` — Hub CLI sessions  
+- `zenodo_upload_nohup.log` — Zenodo  
+- `rep*` / `monomer_*` / `auto_*` — MD production and chained extensions  
+
+When you run a new upload, prefer a **descriptive filename** and add a row to that index so reviewers (and your future self) can tie Hub commits to local logs.
+
+**Figure format for the paper:** revision plotting defaults to **TIFF LZW @ 300 dpi**; see [`docs/PLOS_COMPBIOL_FIGURES.md`](PLOS_COMPBIOL_FIGURES.md).

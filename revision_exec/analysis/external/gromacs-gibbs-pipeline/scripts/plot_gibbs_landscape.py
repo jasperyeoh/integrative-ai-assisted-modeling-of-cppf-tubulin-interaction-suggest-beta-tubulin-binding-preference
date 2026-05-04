@@ -56,9 +56,21 @@ def find_global_minimum(xi_grid, yi_grid, zi_smooth):
     return min_x, min_y, min_z
 
 
-def create_visualization(xi_grid, yi_grid, zi_smooth, min_x, min_y, min_z, 
-                        title="Gibbs Free Energy Surface", output_file=None, 
-                        format='svg', dpi=300):
+def create_visualization(
+    xi_grid,
+    yi_grid,
+    zi_smooth,
+    min_x,
+    min_y,
+    min_z,
+    title="Gibbs Free Energy Surface",
+    output_file=None,
+    format="svg",
+    dpi=300,
+    xlabel="PC1 (nm)",
+    ylabel="PC2 (nm)",
+    z_energy_label="G (kJ/mol)",
+):
     """Create the final visualization with 3D surface and 2D contour plots."""
     
     # Set up the figure
@@ -70,9 +82,9 @@ def create_visualization(xi_grid, yi_grid, zi_smooth, min_x, min_y, min_z,
     surf = ax1.plot_surface(xi_grid, yi_grid, zi_smooth, 
                            cmap=cmap, edgecolor='none', antialiased=True)
     ax1.scatter(min_x, min_y, min_z, color='black', s=60, label="Global Minimum")
-    ax1.set_xlabel("PC1 (nm)")
-    ax1.set_ylabel("PC2 (nm)")
-    ax1.set_zlabel("G (kJ/mol)")
+    ax1.set_xlabel(xlabel)
+    ax1.set_ylabel(ylabel)
+    ax1.set_zlabel(z_energy_label)
     ax1.set_title(title, fontsize=14)
     ax1.view_init(elev=20, azim=-30)
     ax1.legend()
@@ -84,19 +96,19 @@ def create_visualization(xi_grid, yi_grid, zi_smooth, min_x, min_y, min_z,
     ax1.set_zticks(z_ticks)
     
     # Add colorbar for 3D plot
-    fig.colorbar(surf, ax=ax1, shrink=0.6, label="G (kJ/mol)")
+    fig.colorbar(surf, ax=ax1, shrink=0.6, label=z_energy_label)
     
     # 2D Contour plot
     ax2 = fig.add_subplot(1, 2, 2)
     contour = ax2.contourf(xi_grid, yi_grid, zi_smooth, levels=50, cmap=cmap)
     ax2.scatter(min_x, min_y, color='black', s=40, label="Global Minimum")
-    ax2.set_xlabel("PC1 (nm)")
-    ax2.set_ylabel("PC2 (nm)")
+    ax2.set_xlabel(xlabel)
+    ax2.set_ylabel(ylabel)
     ax2.set_title(title, fontsize=14)
     ax2.legend()
     
     # Add colorbar for contour plot
-    fig.colorbar(contour, ax=ax2, label="G (kJ/mol)")
+    fig.colorbar(contour, ax=ax2, label=z_energy_label)
     
     # Adjust layout and save
     plt.tight_layout()
@@ -105,8 +117,12 @@ def create_visualization(xi_grid, yi_grid, zi_smooth, min_x, min_y, min_z,
         # Determine format from file extension if not specified
         if format == 'auto':
             format = output_file.split('.')[-1].lower()
-        
-        plt.savefig(output_file, format=format, dpi=dpi, bbox_inches='tight')
+        if format == 'tiff':
+            format = 'tif'
+        save_kw = dict(format=format, dpi=dpi, bbox_inches='tight')
+        if format == 'tif':
+            save_kw['pil_kwargs'] = {'compression': 'tiff_lzw'}
+        plt.savefig(output_file, **save_kw)
         print(f"Plot saved as: {output_file}")
     else:
         plt.show()
@@ -133,8 +149,8 @@ Examples:
     parser.add_argument('--title', '-t', default="Gibbs Free Energy Surface",
                        help='Plot title (default: "Gibbs Free Energy Surface")')
     parser.add_argument('--format', '-f', default='auto',
-                       choices=['auto', 'svg', 'png', 'pdf', 'eps'],
-                       help='Output format (default: auto-detect from filename)')
+                       choices=['auto', 'svg', 'png', 'pdf', 'eps', 'tif', 'tiff'],
+                       help='Output format (default: auto from extension; TIFF uses LZW)')
     parser.add_argument('--dpi', type=int, default=300,
                        help='Output resolution in DPI (default: 300)')
     parser.add_argument('--smoothing', '-s', type=float, default=1.5,
@@ -144,7 +160,24 @@ Examples:
     parser.add_argument('--interpolation', default='cubic',
                        choices=['linear', 'nearest', 'cubic'],
                        help='Interpolation method (default: cubic)')
-    
+    parser.add_argument(
+        '--xlabel',
+        default='PC1 (nm)',
+        help='Axis label for first CV / abscissa (default: PC1 (nm))',
+    )
+    parser.add_argument(
+        '--ylabel',
+        default='PC2 (nm)',
+        help='Axis label for second CV / ordinate (default: PC2 (nm))',
+    )
+    parser.add_argument(
+        '--energy-unit',
+        dest='energy_unit',
+        default='kJ_mol',
+        choices=['kJ_mol', 'kcal_mol'],
+        help='Vertical axis: input z is assumed kJ/mol from gmx sham; use kcal_mol to plot z/4.184',
+    )
+
     args = parser.parse_args()
     
     # Check if input file exists
@@ -154,8 +187,13 @@ Examples:
     
     print(f"Loading data from: {args.input}")
     
-    # Load and process data
+    # Load and process data (z assumed kJ/mol from GROMACS SHAM / xpm2txt pipeline)
     x, y, z = load_energy_data(args.input)
+    if args.energy_unit == 'kcal_mol':
+        z = z / 4.184
+        z_energy_label = 'G (kcal/mol)'
+    else:
+        z_energy_label = 'G (kJ/mol)'
     print(f"Loaded {len(x)} data points")
     
     # Interpolate data
@@ -168,13 +206,25 @@ Examples:
     
     # Find global minimum
     min_x, min_y, min_z = find_global_minimum(xi_grid, yi_grid, zi_smooth)
-    print(f"Global minimum found at: PC1={min_x:.3f}, PC2={min_y:.3f}, G={min_z:.3f} kJ/mol")
+    print(f"Global minimum found at: x={min_x:.3f}, y={min_y:.3f}, G={min_z:.3f} ({z_energy_label})")
     
     # Create visualization
     print("Generating visualization...")
-    fig = create_visualization(xi_grid, yi_grid, zi_smooth, min_x, min_y, min_z,
-                              title=args.title, output_file=args.output, 
-                              format=args.format, dpi=args.dpi)
+    fig = create_visualization(
+        xi_grid,
+        yi_grid,
+        zi_smooth,
+        min_x,
+        min_y,
+        min_z,
+        title=args.title,
+        output_file=args.output,
+        format=args.format,
+        dpi=args.dpi,
+        xlabel=args.xlabel,
+        ylabel=args.ylabel,
+        z_energy_label=z_energy_label,
+    )
     
     print("Visualization completed successfully!")
 

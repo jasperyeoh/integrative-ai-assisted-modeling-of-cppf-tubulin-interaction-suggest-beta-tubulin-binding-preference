@@ -39,6 +39,13 @@ nohup.out
 *.xpm
 *.pdbqt
 
+# Revision Step 2/3: full raw xvg trees and local work dirs (can be GB-scale)
+revision_exec/analysis_revision/raw_xvg/
+revision_exec/analysis_revision/work/
+revision_exec/analysis_revision/_smoke/
+revision_exec/analysis_revision/figures/
+revision_exec/analysis_revision/tables/
+
 # Keep primary docs/scripts/config under version control.
 
 # Allow selected GROMACS text/binary outputs under revision_exec (still < GitHub 100 MiB/file in practice).

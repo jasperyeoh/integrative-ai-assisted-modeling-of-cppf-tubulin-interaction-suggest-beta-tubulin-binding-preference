@@ -14,7 +14,9 @@
 # Usage:
 #   HF_DATASET_REPO=YourUser/cppf-tubulin-md bash .../huggingface_upload_trajectories.sh --dry-run
 #   HF_DATASET_REPO=... bash .../huggingface_upload_trajectories.sh --bundle monomer
+#   HF_DATASET_REPO=... bash .../huggingface_upload_trajectories.sh --bundle monomer-incremental
 #   HF_DATASET_REPO=... bash .../huggingface_upload_trajectories.sh --bundle dimer
+#   HF_DATASET_REPO=... bash .../huggingface_upload_trajectories.sh --bundle dimer-extensions   # rep3 350 + 350–400 ns parts only
 #   HF_DATASET_REPO=... bash .../huggingface_upload_trajectories.sh --bundle all
 #   HF_DATASET_REPO=... bash .../huggingface_upload_trajectories.sh --create-repo   # create empty dataset repo first
 #
@@ -76,16 +78,65 @@ remote_name() {
   basename "$f"
 }
 
+# Used to avoid uploading partially-written monomer XTC before md_200ns.cpt reaches 200 ns.
+resolve_gmx() {
+  if [[ -n "${GMX:-}" && -x "${GMX}" ]]; then
+    printf '%s' "${GMX}"
+    return 0
+  fi
+  if command -v gmx >/dev/null 2>&1; then
+    command -v gmx
+    return 0
+  fi
+  local c
+  for c in \
+    "${CONDA_PREFIX:-}/bin.AVX2_256/gmx" \
+    "${CONDA_PREFIX:-}/bin/gmx" \
+    "${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx"; do
+    if [[ -x "${c}" ]]; then
+      printf '%s' "${c}"
+      return 0
+    fi
+  done
+  return 1
+}
+
+monomer_md_200ns_complete() {
+  local prod_dir="$1"
+  local gmx_bin
+  gmx_bin="$(resolve_gmx)" || return 1
+  [[ -f "${prod_dir}/md_200ns.cpt" ]] || return 1
+  "${gmx_bin}" check -f "${prod_dir}/md_200ns.cpt" 2>&1 | grep -qE 'time 200000(\.[0-9]+)?[[:space:]]'
+}
+
 MONOMER_RELS=(
   revision_exec/monomer_alpha_rep1/prod/md_200ns.xtc
   revision_exec/monomer_alpha_rep2/prod/md_200ns.xtc
+  revision_exec/monomer_alpha_rep3/prod/md_200ns.xtc
   revision_exec/monomer_beta_rep1/prod/md_200ns.xtc
+  revision_exec/monomer_beta_rep2/prod/md_200ns.xtc
+  revision_exec/monomer_beta_rep3/prod/md_200ns.xtc
 )
+
+# Remaining new replicates (upload when each reaches 200 ns). Completed older reps stay in `monomer` / `all`.
+MONOMER_INCREMENTAL_RELS=(
+  revision_exec/monomer_alpha_rep3/prod/md_200ns.xtc
+  revision_exec/monomer_beta_rep3/prod/md_200ns.xtc
+)
+# Core dimer trajectories (already deposited historically).
 DIMER_RELS=(
   revision_exec/rep1/prod/md_200ns.xtc
   revision_exec/rep2/prod/md_200ns.xtc
   revision_exec/rep3/prod/md_200ns.xtc
   revision_exec/rep1/prod/md_350ns.part0004.xtc
+  revision_exec/rep2/prod/md_350ns.part0003.xtc
+)
+# New extension segments (rep3 300–350; all reps 350–400). Use --bundle dimer-extensions to upload only these.
+DIMER_EXTENSION_RELS=(
+  revision_exec/rep3/prod/md_350ns.part0003.xtc
+  revision_exec/rep1/prod/md_400ns.part0005.xtc
+  revision_exec/rep2/prod/md_400ns.part0004.xtc
+  revision_exec/rep3/prod/md_400ns.part0004.xtc
 )
 
 while [[ $# -gt 0 ]]; do
@@ -101,8 +152,8 @@ while [[ $# -gt 0 ]]; do
 done
 
 case "$BUNDLE" in
-  all|monomer|dimer) ;;
-  *) echo "ERROR: --bundle must be all, monomer, or dimer" >&2; exit 2 ;;
+  all|monomer|monomer-incremental|dimer|dimer-extensions) ;;
+  *) echo "ERROR: --bundle must be all, monomer, monomer-incremental, dimer, or dimer-extensions" >&2; exit 2 ;;
 esac
 
 if ! command -v hf >/dev/null 2>&1 && ! command -v huggingface-cli >/dev/null 2>&1; then
@@ -117,10 +168,52 @@ fi
 
 FILES=()
 if [[ "$BUNDLE" == "all" || "$BUNDLE" == "monomer" ]]; then
-  for rel in "${MONOMER_RELS[@]}"; do FILES+=("$ROOT/$rel"); done
+  for rel in "${MONOMER_RELS[@]}"; do
+    f="$ROOT/$rel"
+    if [[ ! -f "$f" ]]; then
+      echo "NOTE: skip missing monomer xtc: $rel" >&2
+      continue
+    fi
+    prod="$(dirname "$f")"
+    if monomer_md_200ns_complete "$prod"; then
+      FILES+=("$f")
+    else
+      echo "NOTE: skip monomer not completed to 200 ns yet: $rel" >&2
+    fi
+  done
+fi
+if [[ "$BUNDLE" == "monomer-incremental" ]]; then
+  for rel in "${MONOMER_INCREMENTAL_RELS[@]}"; do
+    f="$ROOT/$rel"
+    if [[ ! -f "$f" ]]; then
+      echo "NOTE: skip missing monomer xtc: $rel" >&2
+      continue
+    fi
+    prod="$(dirname "$f")"
+    if monomer_md_200ns_complete "$prod"; then
+      FILES+=("$f")
+    else
+      echo "NOTE: skip monomer not completed to 200 ns yet: $rel" >&2
+    fi
+  done
 fi
 if [[ "$BUNDLE" == "all" || "$BUNDLE" == "dimer" ]]; then
   for rel in "${DIMER_RELS[@]}"; do FILES+=("$ROOT/$rel"); done
+  for rel in "${DIMER_EXTENSION_RELS[@]}"; do FILES+=("$ROOT/$rel"); done
+fi
+if [[ "$BUNDLE" == "dimer-extensions" ]]; then
+  for rel in "${DIMER_EXTENSION_RELS[@]}"; do FILES+=("$ROOT/$rel"); done
+fi
+
+if [[ "$DRY_RUN" -eq 1 && "$BUNDLE" == "monomer-incremental" && ${#FILES[@]} -eq 0 ]]; then
+  echo "=== Hugging Face upload dry-run (bundle=$BUNDLE, repo=$HF_REPO) ==="
+  echo "  (no files yet: incremental list has no 200 ns-complete trajectories)"
+  exit 0
+fi
+
+if [[ "$BUNDLE" == "monomer" && ${#FILES[@]} -eq 0 ]]; then
+  echo "ERROR: no completed monomer trajectories to upload (need md_200ns.cpt at 200 ns + md_200ns.xtc)" >&2
+  exit 1
 fi
 
 if [[ "$DRY_RUN" -eq 1 ]]; then
@@ -136,6 +229,11 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
   exit 0
 fi
 
+if [[ "$BUNDLE" == "monomer-incremental" && ${#FILES[@]} -eq 0 ]]; then
+  echo "NOTE: monomer-incremental: nothing ready to upload yet." >&2
+  exit 0
+fi
+
 load_hf_token
 
 if [[ "$CREATE_REPO" -eq 1 ]]; then
@@ -147,7 +245,7 @@ if [[ "$CREATE_REPO" -eq 1 ]]; then
   fi
 fi
 
-SUMS="$ROOT/revision_exec/HF_UPLOAD_SHA256SUMS_${BUNDLE}.txt"
+SUMS="$ROOT/revision_exec/HF_UPLOAD_SHA256SUMS_${BUNDLE//-/_}.txt"
 : >"$SUMS"
 for f in "${FILES[@]}"; do
   key="$(remote_name "$f")"
@@ -155,7 +253,7 @@ for f in "${FILES[@]}"; do
   sha256sum "$f" | awk -v k="$key" '{print $1"  "k}' >>"$SUMS"
 done
 
-SUM_KEY="HF_UPLOAD_SHA256SUMS_${BUNDLE}.txt"
+SUM_KEY="HF_UPLOAD_SHA256SUMS_${BUNDLE//-/_}.txt"
 echo "Uploading $SUM_KEY ..."
 hf_upload "$SUMS" "$SUM_KEY" "Add SHA256 checksums (bundle=$BUNDLE)"
 
