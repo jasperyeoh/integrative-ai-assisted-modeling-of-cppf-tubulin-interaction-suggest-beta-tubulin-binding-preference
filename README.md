@@ -66,6 +66,13 @@ Recommended practice:
 - keep scripts, configs, logs, and analysis code in Git;
 - manage large simulation binaries via external storage and document paths/checksums in `docs/`.
 
+### Dimer trajectories: the “200–300 ns” window is **not** missing
+
+On the **Heterodimer (dimer) replicates**, the first production segment is still **named** `md_200ns.xtc` on disk (historical GROMACS `deffnm` / continuation). **That file can cover ~0–300 ns** of simulation time; the **200–300 ns** range is **inside** it, not absent. Continuation segments are the `md_350ns.part*.xtc` and `md_400ns.part*.xtc` files. **Monomer** `md_200ns.xtc` files are **~200 ns** production only.
+
+- Full segment table, symlink aliases, and Hub naming notes: **[`docs/DIMER_TRAJECTORY_NAMING.md`](docs/DIMER_TRAJECTORY_NAMING.md)**  
+- **Copy-paste text** for the Hugging Face dataset card: **[`revision_exec/HF_DATASET_CARD_README.md`](revision_exec/HF_DATASET_CARD_README.md)**
+
 ## Citation
 
 If you use this repository, please cite the associated manuscript when available.

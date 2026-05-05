@@ -66,7 +66,9 @@ Files appear under **unique names** (e.g. `dimer_rep1_md_200ns.xtc`, `monomer_al
 
 ## 3. Dataset card (`README.md` on the Hub)
 
-On the dataset page → **Files** → edit **README.md**. Include:
+**Recommended:** copy the canonical card from **[`revision_exec/HF_DATASET_CARD_README.md`](../revision_exec/HF_DATASET_CARD_README.md)** into the Hub dataset README (Dataset card editor). It explicitly states that **dimer `*_md_200ns.xtc` spans ~0–300 ns** so users do **not** assume the **200–300 ns** window is missing.
+
+You can still add:
 
 - Short description of CPPF + tubulin systems  
 - Table: filename → replicate, length (ns), GROMACS version  
