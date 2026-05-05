@@ -26,6 +26,10 @@ nohup.out
 
 # GROMACS / MD large or generated binaries
 *.xtc
+# Tiny symlink aliases for dimer segments (docs/DIMER_TRAJECTORY_NAMING.md)
+!revision_exec/rep1/prod/segment_*.xtc
+!revision_exec/rep2/prod/segment_*.xtc
+!revision_exec/rep3/prod/segment_*.xtc
 *.trr
 *.tng
 *.edr

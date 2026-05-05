@@ -62,6 +62,8 @@ bash revision_exec/scripts/huggingface_upload_trajectories.sh --bundle dimer
 
 Files appear under **unique names** (e.g. `dimer_rep1_md_200ns.xtc`, `monomer_alpha_rep2_md_200ns.xtc`). Each upload is a separate Hub commit.
 
+**Dimer first segment:** the Hub object `*_md_200ns.xtc` follows historic **`md_200ns.xtc`** basenames on disk; that file can span **0–300 ns** before the `md_350ns.part*` segments (see [`docs/DIMER_TRAJECTORY_NAMING.md`](DIMER_TRAJECTORY_NAMING.md)). Renaming on-disk production files would break `mdrun`/scripts; optional symlinks: `revision_exec/scripts/create_dimer_trajectory_symlinks.sh`.
+
 ## 3. Dataset card (`README.md` on the Hub)
 
 On the dataset page → **Files** → edit **README.md**. Include:
