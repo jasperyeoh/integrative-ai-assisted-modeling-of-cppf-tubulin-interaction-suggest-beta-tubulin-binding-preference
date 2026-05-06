@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 
@@ -34,12 +34,12 @@ for arg in sys.argv[1:]:
         elif arg == "-s":
             sort = True
         else:
-            print USAGE
+            print(USAGE)
             sys.stderr.write('ERROR: Option not recognized: %s\n' %arg)
             sys.exit(1)
 
 if not xpm_file:
-    print USAGE
+    print(USAGE)
     sys.stderr.write('ERROR: You forgot to provide an input file.\n')
     sys.exit(1)
 if not out_file:
@@ -52,10 +52,10 @@ x_axis, y_axis = [], []
 letter_to_value = {}
 for line in xpm_handle:
     if line.startswith("/* x-axis"):
-        x_axis = map(float, line.split()[2:-2]) # We trim the last value
+        x_axis = list(map(float, line.split()[2:-2])) # We trim the last value
 
     if line.startswith("/* y-axis"):
-        y_axis = map(float, line.split()[2:-2]) # We trim the last value
+        y_axis = list(map(float, line.split()[2:-2])) # We trim the last value
 
     if line.startswith('"') and x_axis and y_axis: # Read data
         xpm_data.insert(0, line.strip().strip(',')[1:-1])
@@ -78,7 +78,7 @@ if column_sort:
     try:
         txt_values.sort(key=lambda x: x[column_sort-1])
     except IndexError:
-        print USAGE
+        print(USAGE)
         sys.stderr.write('ERROR: Column not found (%s)\n' %(column_sort))
         sys.exit(1)
 

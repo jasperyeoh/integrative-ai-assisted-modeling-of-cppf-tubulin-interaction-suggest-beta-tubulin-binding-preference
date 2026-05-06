@@ -48,6 +48,17 @@ prod_for_id() {
 
 is_dimer() { [[ "$1" == dimer_rep* ]]; }
 
+ndx_for_id() {
+  local sid="$1"
+  if is_dimer "$sid"; then
+    # Dimer analyses use the shared index prepared under revision_exec/input.
+    echo "$NDX"
+  else
+    # Monomer systems need their own atom-number-consistent index.
+    echo "$REV/$sid/prep/index.ndx"
+  fi
+}
+
 merge_dimer_xtc() {
   local sid="$1" prod="$2" work="$3"
   local out="$work/merged_cat.xtc"
@@ -68,7 +79,7 @@ merge_dimer_xtc() {
 }
 
 prep_trajectory() {
-  local sid="$1" prod="$2" work="$3"
+  local sid="$1" prod="$2" work="$3" ndx="$4"
   mkdir -p "$work"
   local raw merged cleaned tpr
 
@@ -90,48 +101,54 @@ prep_trajectory() {
       tpr="$prod/md_200ns.tpr"
     fi
     # trjconv prompts must not enter $(prep_trajectory) capture
-    printf '21\n0\n' | "$GMX" trjconv -s "$tpr" -f "$raw" -n "$NDX" -pbc mol -center -o "$cleaned" &>"$work/trjconv.log"
+    if is_dimer "$sid"; then
+      printf '21\n0\n' | "$GMX" trjconv -s "$tpr" -f "$raw" -n "$ndx" -pbc mol -center -o "$cleaned" &>"$work/trjconv.log"
+    else
+      printf '1\n0\n' | "$GMX" trjconv -s "$tpr" -f "$raw" -n "$ndx" -pbc mol -center -o "$cleaned" &>"$work/trjconv.log"
+    fi
   fi
   echo "$cleaned|$tpr"
 }
 
 run_one() {
   local sid="$1"
-  local prod tpr xtc outdir work info
+  local prod tpr xtc outdir work info ndx
 
   prod="$(prod_for_id "$sid")" || return 1
+  ndx="$(ndx_for_id "$sid")"
+  [[ -f "$ndx" ]] || { echo "ERROR: missing index file for $sid: $ndx" >&2; return 1; }
   outdir="$OUT_ROOT/$sid"
   work="$WORK_ROOT/$sid"
   mkdir -p "$outdir" "$work"
 
   echo "=== [$sid] ==="
-  info="$(prep_trajectory "$sid" "$prod" "$work")"
+  info="$(prep_trajectory "$sid" "$prod" "$work" "$ndx")"
   xtc="${info%%|*}"
   tpr="${info##*|}"
 
   cd "$outdir"
 
   # 1) RMSD backbone (ref=4, sel=4)
-  printf '4\n4\n' | "$GMX" rms -s "$tpr" -f "$xtc" -n "$NDX" -o rmsd_backbone.xvg -tu ns
+  printf '4\n4\n' | "$GMX" rms -s "$tpr" -f "$xtc" -n "$ndx" -o rmsd_backbone.xvg -tu ns
 
   # 2) RMSD ligand: fit backbone, RMSD CPP
-  printf '4\n13\n' | "$GMX" rms -s "$tpr" -f "$xtc" -n "$NDX" -o rmsd_ligand.xvg -tu ns
+  printf '4\n13\n' | "$GMX" rms -s "$tpr" -f "$xtc" -n "$ndx" -o rmsd_ligand.xvg -tu ns
 
   # 3) Minimum distance Protein–CPP
-  printf '1\n13\n' | "$GMX" mindist -s "$tpr" -f "$xtc" -n "$NDX" -od mindist_pl.xvg -tu ns
+  printf '1\n13\n' | "$GMX" mindist -s "$tpr" -f "$xtc" -n "$ndx" -od mindist_pl.xvg -tu ns
 
   # 4) H-bonds (Protein vs CPP). Use hbond-legacy: new gmx hbond (2024+) rejects donor/acceptor
   # typing for many CGenFF ligands ("CPP has no acceptors"); legacy uses geometric OH/NH–O/N rules.
-  printf '1\n13\n' | "$GMX" hbond-legacy -f "$xtc" -s "$tpr" -n "$NDX" -num hbond_num.xvg -tu ns
+  printf '1\n13\n' | "$GMX" hbond-legacy -f "$xtc" -s "$tpr" -n "$ndx" -num hbond_num.xvg -tu ns
 
   # 5) Rg (Protein)
-  printf '1\n' | "$GMX" gyrate -f "$xtc" -s "$tpr" -n "$NDX" -o rg.xvg -tu ns
+  printf '1\n' | "$GMX" gyrate -f "$xtc" -s "$tpr" -n "$ndx" -o rg.xvg -tu ns
 
   # 6) SASA + volume
-  printf '1\n' | "$GMX" sasa -s "$tpr" -f "$xtc" -n "$NDX" -o sasa.xvg -tv sasa_volume.xvg -tu ns
+  printf '1\n' | "$GMX" sasa -s "$tpr" -f "$xtc" -n "$ndx" -o sasa.xvg -tv sasa_volume.xvg -tu ns
 
   # 7) RMSF per residue (x-axis is residue index, not time — no -tu)
-  printf '1\n' | "$GMX" rmsf -f "$xtc" -s "$tpr" -n "$NDX" -o rmsf_residue.xvg -res
+  printf '1\n' | "$GMX" rmsf -f "$xtc" -s "$tpr" -n "$ndx" -o rmsf_residue.xvg -res
 
   # rg + backbone RMSD for later gmx sham (inner join if lengths/times differ)
   python3 "$MERGE_PY" "$outdir/rg.xvg" "$outdir/rmsd_backbone.xvg" \
