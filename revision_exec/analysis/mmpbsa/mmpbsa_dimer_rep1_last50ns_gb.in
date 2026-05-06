@@ -1,0 +1,27 @@
+# Production-style GB run on 350–400 ns segment (md_400ns.part0005.xtc).
+# ~5000 frames at 10 ps → interval=250 ≈ 20 snapshots (edit as needed).
+
+&general
+  sys_name             = "dimer_rep1_last50ns_gb"
+  startframe           = 1
+  endframe             = 9999999
+  # 350–400 ns segment saved every 10 ps → ~5000 frames. interval=100 ≈ 50 snapshots (~1 ns spacing).
+  interval             = 100
+  forcefields          = "oldff/leaprc.ff99SB,leaprc.gaff"
+  ions_parameters      = 1
+  PBRadii              = 3
+  temperature          = 298.15
+  # IMPORTANT: leave empty so gmx_MMPBSA uses $PATH for ALL external programs
+  # (cpptraj/tleap/parmchk2/sander/gmx). If set, it must be a PATH-like string.
+  gmx_path             = ""
+  keep_files           = 2
+  solvated_trajectory  = 1
+  verbose              = 1
+/
+
+&gb
+  igb                  = 5
+  intdiel              = 1.0
+  extdiel              = 78.5
+  saltcon              = 0.0
+/

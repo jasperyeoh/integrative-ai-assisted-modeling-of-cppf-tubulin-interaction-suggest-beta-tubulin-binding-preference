@@ -526,9 +526,9 @@ Output paths:
 
 ## 12) MM-PBSA Stage (After Environment Confirmation)
 Current status:
-- `gmx_MMPBSA` is not yet available in existing environments.
-- `conda create -n mmpbsa -c conda-forge -c bioconda gmx_mmpbsa mpi4py ambertools --dry-run`
-  is solvable on this machine (dry-run succeeded on 2026-04-21).
+- Conda env **`mmpbsa`** is installed on this machine; after `conda activate mmpbsa`, `gmx_MMPBSA -h` runs (verified **gmx_MMPBSA v1.5.0.3**, 2026-05-06).
+- If `conda` prints a **libmamba / GLIBCXX** warning on this OS image, installs still work; use `CONDA_SOLVER=classic` on the command line when creating/updating envs if solver errors appear.
+- If `sander` prints bond energy terms as fixed-width overflow (e.g. `BOND = *************`), exclude those bond terms from per-frame reporting; **ΔTOTAL is unaffected** because bond contributions cancel upon subtraction (Complex − Receptor − Ligand).
 
 When MM-PBSA environment is confirmed/created:
 1. select consistent analysis windows across replicates

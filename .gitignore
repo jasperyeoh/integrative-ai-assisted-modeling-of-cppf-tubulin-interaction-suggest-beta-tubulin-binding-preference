@@ -49,6 +49,10 @@ revision_exec/analysis_revision/work/
 revision_exec/analysis_revision/_smoke/
 revision_exec/analysis_revision/figures/
 revision_exec/analysis_revision/tables/
+revision_exec/analysis_revision/fel/
+
+# MM-PBSA work directories can be very large; keep inputs/scripts + summary only
+revision_exec/analysis/mmpbsa/work_*/
 
 # Keep primary docs/scripts/config under version control.
 
@@ -59,3 +63,17 @@ revision_exec/analysis_revision/tables/
 !revision_exec/**/*.gro
 !revision_exec/**/*.xvg
 !revision_exec/**/*.log
+
+# But do NOT add full production outputs under revision_exec/**/prod (prefer HF / external archive).
+revision_exec/**/prod/*.tpr
+revision_exec/**/prod/*.cpt
+revision_exec/**/prod/*.edr
+revision_exec/**/prod/*.gro
+revision_exec/**/prod/*.log
+
+# Also ignore the monomer replicate trees in this repo clone (they contain large `prod/*` outputs).
+# Preparation inputs are already captured in tracked scripts/docs; full production artifacts live on HF.
+revision_exec/monomer_alpha_rep2/
+revision_exec/monomer_alpha_rep3/
+revision_exec/monomer_beta_rep2/
+revision_exec/monomer_beta_rep3/

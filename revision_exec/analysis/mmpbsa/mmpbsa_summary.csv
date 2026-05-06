@@ -1,0 +1,7 @@
+replicate,n_frames,delta_vdw_avg_kcal_mol,delta_vdw_sd_kcal_mol,delta_eel_avg_kcal_mol,delta_eel_sd_kcal_mol,delta_egb_avg_kcal_mol,delta_egb_sd_kcal_mol,delta_esurf_avg_kcal_mol,delta_esurf_sd_kcal_mol,delta_total_avg_kcal_mol,delta_total_sd_kcal_mol
+rep1,51,-40.57,3.07,-4.95,3.52,23.01,3.26,-5.4,0.18,-27.92,3.33
+rep2,51,-42.07,1.99,-4.34,3.53,22.04,3.09,-5.57,0.14,-29.94,2.4
+rep3,51,-43.23,2.87,-8.45,28.33,21.83,25.9,-5.86,0.14,-35.71,4.58
+
+aggregate_across_reps,,mean_of_rep_avgs,sd_of_rep_avgs
+ΔTOTAL,,-31.19,4.042635279121775

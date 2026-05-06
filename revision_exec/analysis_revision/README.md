@@ -69,3 +69,4 @@ See repo root `.gitignore`: `raw_xvg/`, `work/`, `figures/`, `tables/`, `_smoke/
 - `docs/PLOS_COMPBIOL_FIGURES.md` — journal-oriented figure format notes.
 - `docs/HUGGINGFACE_DATASET.md` — Hub uploads and checksum manifests.
 - `revision_exec/logs/HF_AND_PIPELINE_LOG_INDEX.md` — index of upload and MD run logs.
+- `docs/REVIEWER_EVIDENCE_CHECKLIST.md` — reviewer→evidence mapping for this revision.
