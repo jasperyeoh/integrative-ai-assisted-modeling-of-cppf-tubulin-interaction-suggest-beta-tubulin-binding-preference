@@ -70,6 +70,7 @@ def create_visualization(
     xlabel="PC1 (nm)",
     ylabel="PC2 (nm)",
     z_energy_label="G (kJ/mol)",
+    z_max=None,
 ):
     """Create the final visualization with 3D surface and 2D contour plots."""
     
@@ -79,8 +80,21 @@ def create_visualization(
     
     # 3D Surface plot
     ax1 = fig.add_subplot(1, 2, 1, projection='3d')
-    surf = ax1.plot_surface(xi_grid, yi_grid, zi_smooth, 
-                           cmap=cmap, edgecolor='none', antialiased=True)
+    z_auto_max = float(np.nanmax(zi_smooth))
+    if z_max is None:
+        z_max = z_auto_max
+    else:
+        z_max = float(z_max)
+    surf = ax1.plot_surface(
+        xi_grid,
+        yi_grid,
+        zi_smooth,
+        cmap=cmap,
+        edgecolor='none',
+        antialiased=True,
+        vmin=0.0,
+        vmax=z_max,
+    )
     ax1.scatter(min_x, min_y, min_z, color='black', s=60, label="Global Minimum")
     ax1.set_xlabel(xlabel)
     ax1.set_ylabel(ylabel)
@@ -91,7 +105,6 @@ def create_visualization(
     ax1.grid(False)
     
     # Set z-axis ticks
-    z_max = np.nanmax(zi_smooth)
     z_ticks = np.arange(0, z_max + 2, 2)
     ax1.set_zticks(z_ticks)
     
@@ -100,7 +113,15 @@ def create_visualization(
     
     # 2D Contour plot
     ax2 = fig.add_subplot(1, 2, 2)
-    contour = ax2.contourf(xi_grid, yi_grid, zi_smooth, levels=50, cmap=cmap)
+    contour = ax2.contourf(
+        xi_grid,
+        yi_grid,
+        zi_smooth,
+        levels=np.linspace(0.0, z_max, 50),
+        cmap=cmap,
+        vmin=0.0,
+        vmax=z_max,
+    )
     ax2.scatter(min_x, min_y, color='black', s=40, label="Global Minimum")
     ax2.set_xlabel(xlabel)
     ax2.set_ylabel(ylabel)
@@ -177,6 +198,12 @@ Examples:
         choices=['kJ_mol', 'kcal_mol'],
         help='Vertical axis: input z is assumed kJ/mol from gmx sham; use kcal_mol to plot z/4.184',
     )
+    parser.add_argument(
+        '--z-max',
+        type=float,
+        default=None,
+        help='Optional upper limit for free energy scale (same units as plotted z)',
+    )
 
     args = parser.parse_args()
     
@@ -224,6 +251,7 @@ Examples:
         xlabel=args.xlabel,
         ylabel=args.ylabel,
         z_energy_label=z_energy_label,
+        z_max=args.z_max,
     )
     
     print("Visualization completed successfully!")
