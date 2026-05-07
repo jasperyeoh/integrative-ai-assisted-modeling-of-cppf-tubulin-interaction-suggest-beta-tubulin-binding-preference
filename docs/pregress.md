@@ -146,3 +146,150 @@
   - Dimer：`rep2`、`rep3` 的 **300→350 ns**（与 rep1 对齐）。
   - Monomer：新增 **α rep3**、**β rep2**、**β rep3**（目录与 `tpr` 需按 rep1/rep2 流程准备）。
 - **说明**：大轨迹（`.xtc`）、checkpoint（`.cpt`）等仍保留在计算节点工作区；**本仓库仅跟踪 Markdown 报告与脚本**，避免将巨型二进制纳入 git。
+
+## 2026-05-04 ~ 2026-05-07（Revision 数据分析/可视化落盘 + 复现/归档）
+
+### 0）与本段相关的「权威时间窗」（写 Methods / Results 时可直接照抄）
+- **权威末端时间**：`revision_exec/analysis_revision/T_end_registry.yaml`
+  - **Dimer** `dimer_rep{1,2,3}`：**`T_end_ns: 400.0`**（checkpoint：`revision_exec/rep{1,2,3}/prod/md_400ns.cpt`）。
+  - **Monomer** `monomer_{alpha,beta}_rep{1,2,3}`：**`T_end_ns: 200.0`**（`.../prod/md_200ns.cpt`）。
+- **`summary_by_window.csv` 汇总窗口**（与 `revision_plot_summary_table.py` 默认一致）：
+  - Dimer 各行：**`[350, 400] ns`**（`window_kind=time_tail`）。
+  - Monomer 各行：**`[150, 200] ns`**（即 **last 50 ns**，与 monomer boxplot 一致）。
+- **图 `dimer_rep123_panels_0-400ns` 的横轴**：**0–400 ns**（全时长曲线）；与上表 **350–400 ns** 汇总窗 **不是同一表述**，写正文时注意区分。
+
+### 1）Pipeline 入口（Step 2 导出 `.xvg`，Step 3 出图/表）
+| 用途 | 路径 |
+|------|------|
+| 九体系批量导出 | `revision_exec/analysis_revision/run_export_all.sh` |
+| `.xvg` 合并供 SHAM（时间戳 inner join） | `revision_exec/analysis_revision/merge_xvg_for_sham.py`、`prepare_fel_gsham_input.sh` |
+| 统一 TIFF（LZW）/ DPI | `revision_exec/analysis_revision/revision_figure_export.py` |
+| 说明文档 | `revision_exec/analysis_revision/README.md` |
+| **原始 `.xvg` 树（体积大，默认不进 git）** | `revision_exec/analysis_revision/raw_xvg/<system_id>/`（生成于 Step 2） |
+
+### 2）主文插图：路径 + 子图 **A–D** 对照 + 复现命令
+
+#### 2.1 Dimer 三复现 time series（2×2，已标 **A–D**）
+| 输出文件 | 说明 |
+|----------|------|
+| `revision_exec/analysis_revision/figures/dimer_rep123_panels_0-400ns.tif` | 投稿/preflight |
+| `revision_exec/analysis_revision/figures/dimer_rep123_panels_0-400ns.png` | 本地预览 |
+
+**子图映射**（与 `revision_plot_dimer_timeseries.py` 内 `PANEL_METRICS` **行优先**一致）：
+
+| 标注 | 面板内容（文件名关键字） | Y 轴 / 含义 |
+|------|---------------------------|-------------|
+| **A** | `rmsd_backbone` | Backbone RMSD (nm)，rep1–3 彩线 + rep 间 min–max 带 |
+| **B** | `rg` | Rg protein (nm) |
+| **C** | `mindist_pl` | Min distance protein–ligand (nm) |
+| **D** | `hbond_num` | H-bonds (#)，来自 `gmx hbond-legacy` |
+
+**复现（在 `tubulin-cppf-md/revision_exec/analysis_revision/`）**：
+```bash
+python revision_plot_dimer_timeseries.py --mode panels --raw-root raw_xvg \
+  --t-end-ns 400 --window-ns 50 \
+  --out-fig figures/dimer_rep123_panels_0-400ns.tif
+```
+
+#### 2.2 Monomer α vs β（last **50 ns**，2×2 boxplot，已标 **A–D**）
+| 输出文件 |
+|----------|
+| `revision_exec/analysis_revision/figures/monomer_alpha_vs_beta_last50ns_boxplots.tif` |
+| `revision_exec/analysis_revision/figures/monomer_alpha_vs_beta_last50ns_boxplots.png` |
+
+**数据窗口**：`T_end=200 ns`，`--window-ns 50` → **`[150, 200] ns`**（图题中会打印）。
+
+**子图映射**（`revision_plot_monomer_boxplot.py` 内 `PANELS` 顺序）：
+
+| 标注 | metric | Y 轴 |
+|------|--------|------|
+| **A** | `mindist_pl` | Min distance protein–ligand (nm) |
+| **B** | `hbond_num` | H-bonds (#) |
+| **C** | `rmsd_ligand` | RMSD ligand (nm) |
+| **D** | `rg` | Rg protein (nm) |
+
+**复现**：
+```bash
+python revision_plot_monomer_boxplot.py --raw-root raw_xvg --window-ns 50 \
+  --out-fig figures/monomer_alpha_vs_beta_last50ns_boxplots.tif
+```
+
+#### 2.3 FEL：combined α \| combined β（一行 **四**面板 **A–D**）
+| 输出文件 |
+|----------|
+| `revision_exec/analysis_revision/figures/fel_combined_alpha_beta_zcap5.tif` |
+| `revision_exec/analysis_revision/figures/fel_combined_alpha_beta_zcap5.png` |
+
+**从左到右**：**A** = combined α **3D**；**B** = combined α **2D contour**；**C** = combined β **3D**；**D** = combined β **2D contour**。CV：**Rg (nm)** × **Backbone RMSD (nm)**；能量：**G (kcal/mol)**（由 SHAM 的 kJ/mol ÷ 4.184）；色标 **上限 cap = 5 kcal/mol**。
+
+**分拆单张（备用）**：
+- `revision_exec/analysis_revision/figures/fel_combined_alpha_zcap5.tif`（及 `.png`）
+- `revision_exec/analysis_revision/figures/fel_combined_beta_zcap5.tif`（及 `.png`）
+
+**SHAM 输入（combined）**：
+- `revision_exec/analysis_revision/fel/combined/alpha/gsham_input_rg_rmsdBB_plain.xvg`
+- `revision_exec/analysis_revision/fel/combined/beta/gsham_input_rg_rmsdBB_plain.xvg`
+
+**一键重生成（含 main + supp）**：
+```bash
+cd revision_exec/analysis_revision
+ZMAX=5 ENERGY_UNIT=kcal_mol DPI=300 bash make_fel_supp_and_main.sh
+```
+
+#### 2.4 FEL：补充材料（单 rep，文件名已含 rep id；每张图为 **3D|2D** 拼接的一张 TIFF）
+
+**Alpha**
+- `revision_exec/analysis_revision/fel/monomer_alpha_rep1/gibbs_rg_rmsd_monomer_alpha_rep1_zcap5.tif` + `.png`
+- `revision_exec/analysis_revision/fel/monomer_alpha_rep2/gibbs_rg_rmsd_monomer_alpha_rep2_zcap5.tif` + `.png`
+- `revision_exec/analysis_revision/fel/monomer_alpha_rep3/gibbs_rg_rmsd_monomer_alpha_rep3_zcap5.tif` + `.png`
+
+**Beta**
+- `revision_exec/analysis_revision/fel/monomer_beta_rep1/gibbs_rg_rmsd_monomer_beta_rep1_zcap5.tif` + `.png`
+- `revision_exec/analysis_revision/fel/monomer_beta_rep2/gibbs_rg_rmsd_monomer_beta_rep2_zcap5.tif` + `.png`
+- `revision_exec/analysis_revision/fel/monomer_beta_rep3/gibbs_rg_rmsd_monomer_beta_rep3_zcap5.tif` + `.png`
+
+**绘图依赖**：`revision_exec/analysis/external/gromacs-gibbs-pipeline/scripts/plot_gibbs_landscape.py`、`xpm2txt.py`。
+
+### 3）数值表（论文逐句引用）
+
+#### 3.1 `summary_by_window.csv`
+- **路径**：`revision_exec/analysis_revision/tables/summary_by_window.csv`
+- **生成**：`revision_exec/analysis_revision/revision_plot_summary_table.py`（见 `--help`）
+- **列**：`system_id`, `metric`, `xvg_file`, `window_t_start_ns`, `window_t_end_ns`, `window_kind`, `n_points`, `mean`, `std`
+- **注意**：`rmsf_residue` 行 `window_*` 为 `NA`（横轴为残基，不是时间）。
+
+#### 3.2 MM-PBSA（GB，轨迹末段 **350–400 ns**，**51** 帧，`interval=100`，≈1 ns）
+- **汇总**：`revision_exec/analysis/mmpbsa/mmpbsa_summary.csv`
+- **输入**：`revision_exec/analysis/mmpbsa/mmpbsa_dimer_rep1_last50ns_gb.in`（`&gb` 中 **`igb=5`** 等）
+- **摘自当前 CSV 的数值（kcal/mol，mean ± SD）**：
+  - **rep1**：ΔVDW −40.57±3.07；ΔEEL −4.95±3.52；ΔEGB +23.01±3.26；ΔESURF −5.40±0.18；**ΔTOTAL −27.92±3.33**
+  - **rep2**：ΔVDW −42.07±1.99；ΔEEL −4.34±3.53；ΔEGB +22.04±3.09；ΔESURF −5.57±0.14；**ΔTOTAL −29.94±2.40**
+  - **rep3**：ΔVDW −43.23±2.87；ΔEEL −8.45±28.33；ΔEGB +21.83±25.90；ΔESURF −5.86±0.14；**ΔTOTAL −35.71±4.58**
+  - **三 rep ΔTOTAL（对三条 rep 的均值再汇总）**：**−31.19 ± 4.04**
+- **运行**：`revision_exec/analysis/mmpbsa/run_dimer_rep1_last50ns_mmpbsa.sh`，例：`MMPBSA_MODE=full REP=rep2 bash ...`
+- **汇总脚本**：`revision_exec/analysis/mmpbsa/summarize_mmpbsa_gb_last50ns.py`
+- **BOND overflow 文案**：`docs/RUNBOOK.md` MM-PBSA 小节、`revision_exec/analysis/mmpbsa/README.md`
+
+### 4）与 `@Manu_v4_plos` 旧稿的对照（改哪张图 / 哪段字）
+
+| 旧稿资产 | 旧稿含义 | Revision 替换素材 |
+|----------|----------|-------------------|
+| `Manu_v4_plos/Fig4.png` | ~50 ns 单体 RMSD/Rg/mindist/SASA | **`dimer_rep123_panels_0-400ns`**（二聚体三 rep）及/或 **`monomer_*_boxplots`**；**时间尺度与旧稿不同**，正文必须重写 |
+| `Manu_v4_plos/Fig5.png` | 旧 FEL（PC 等，50 ns 语境） | **`fel_combined_alpha_beta_zcap5`**；SI 用 **`fel/monomer_*_rep{1,2,3}`** 六张 |
+| `Results.tex` + Table 2（PISA ΔG） | 静态界面能 | 与 **MM-PBSA ΔTOTAL** 分工表述，避免混为一谈 |
+| `Materials and methods.tex` MD 段 | 50 ns、旧分析 | 更新为 **400 ns dimer / 200 ns monomer**、**hbond-legacy**、FEL、MM-PBSA 窗口与帧数 |
+
+### 5）索引与归档路径
+- **Reviewer → 证据**：`docs/REVIEWER_EVIDENCE_CHECKLIST.md`
+- **GitHub**：`https://github.com/GITHUB_NAMESPACE/integrative-ai-assisted-modeling-of-cppf-tubulin-interaction-suggest-beta-tubulin-binding-preference`
+- **Hugging Face Dataset（示例）**：`HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers`（见 `docs/HUGGINGFACE_DATASET.md`）
+- **HF 小镜像上传记录**：`revision_exec/logs/hf_mirror_small_20260507_020247.log`；索引：`revision_exec/logs/HF_AND_PIPELINE_LOG_INDEX.md`
+
+### 6）论文改写 checklist（逐项打钩）
+- [ ] Methods：MD 时长、三 rep、`hbond-legacy`、轨迹分段命名 `docs/DIMER_TRAJECTORY_NAMING.md`
+- [ ] Methods：FEL（CV、合并 rep、kcal/mol、cap=5、`gmx sham`）
+- [ ] Methods：MM-PBSA（350–400 ns、51 帧、GB `igb=5`、BOND overflow）
+- [ ] Results / Fig：替换 Fig4 逻辑 → `dimer_rep123_panels_0-400ns` +（可选）monomer boxplots
+- [ ] Results / Fig：替换 Fig5 → `fel_combined_alpha_beta_zcap5`；SI → 六张 `fel/monomer_*`
+- [ ] Results：Table 2（PISA）与 MM-PBSA 并列时的措辞
+- [ ] Response letter：逐条链接 `REVIEWER_EVIDENCE_CHECKLIST.md` + 上图路径 + `mmpbsa_summary.csv`
