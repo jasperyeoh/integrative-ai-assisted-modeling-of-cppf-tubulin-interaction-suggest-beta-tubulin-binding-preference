@@ -58,6 +58,24 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 - **Trajectory archive (primary):** `docs/HUGGINGFACE_DATASET.md` — `revision_exec/scripts/huggingface_upload_trajectories.sh` (`HF_DATASET_REPO=...`, token via `huggingface-cli login` or `~/.huggingface_token`).  
 - **Zenodo (optional DOI / subset):** `docs/ZENODO_UPLOAD_SERVER.md` — `revision_exec/scripts/zenodo_upload_trajectories.sh`.
 
+## Reproducible Pipeline (Nextflow)
+
+A complete end-to-end Nextflow pipeline is available under `workflows/`:
+
+```bash
+# Install Nextflow
+CONDA_SOLVER=classic conda create -y -n nextflow -c conda-forge -c bioconda nextflow openjdk
+export PATH=${HPC_WORKSPACE}/miniconda3/envs/nextflow/bin:$PATH
+
+# Run full pipeline
+nextflow run workflows/main.nf -profile hpc -c workflows/nextflow.config -resume
+
+# Smoke test (quick validation)
+nextflow run workflows/main.nf -profile local -c workflows/nextflow.config -c workflows/smoke_test.config --stage full -resume
+```
+
+See `workflows/README_NEXTFLOW.md` for full documentation.
+
 ## Data and Large Files
 
 MD trajectories and related binary outputs can be large (for example, multi-GB `xtc` files).  

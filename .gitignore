@@ -24,6 +24,13 @@ nohup.out
 *.tmp
 *.bak
 
+# Nextflow runtime/cache outputs
+.nextflow/
+.nextflow.log*
+workflows/work/
+work/[0-9a-f][0-9a-f]/
+revision_exec/nf_output*/
+
 # GROMACS / MD large or generated binaries
 *.xtc
 # Tiny symlink aliases for dimer segments (docs/DIMER_TRAJECTORY_NAMING.md)
