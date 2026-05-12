@@ -1,6 +1,6 @@
 # CPPF–Tubulin Phase 1 Nextflow Pipeline
 
-This directory contains a Phase 1 Nextflow implementation for the reviewer-facing CPPF–tubulin MD workflow. It wraps the reproducible parts used in the revision:
+This directory contains a Phase 1 Nextflow implementation for the CPPF-tubulin MD workflow. It wraps the reproducible parts of the analysis:
 
 1. prepared topology handoff from validated assets,
 2. EM/NVT/NPT,
@@ -191,14 +191,14 @@ Common parameters:
 
 ## Known Scope Boundaries
 
-- `RESP2_CHARGES` is a documented stub in Phase 1. The manuscript revision already uses locked RESP2/GAFF2 ligand assets and gate-validated cofactor topology handling.
+- `RESP2_CHARGES` is a documented stub in Phase 1. The current workflow uses locked RESP2/GAFF2 ligand assets and gate-validated cofactor topology handling.
 - ProteinsPlus and PDBePISA are web-only and are not included as local Nextflow processes.
 - Monomer analysis can be added by extending the same process patterns with monomer-specific topology/index paths. The current Phase 1 implementation focuses on the heterodimer workflow that supports the main revised MD/MM-PBSA evidence.
-- Overleaf/PLOS manuscript packaging is separate from this computational workflow.
+- Document packaging is separate from this computational workflow.
 
-## Response Letter Wording
+## Workflow Summary
 
-After smoke testing and committing the workflow, the response letter can accurately state:
+After smoke testing, the workflow can be summarized as:
 
 > We have implemented a reproducible Phase 1 Nextflow workflow that wraps the validated structure-preparation handoff, molecular dynamics, PBC-corrected trajectory export, MM-PBSA binding free-energy calculation, free-energy landscape construction, and automated figure/table generation. The workflow, configuration files, smoke-test settings, and run documentation are available in the GitHub repository.
 

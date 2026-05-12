@@ -23,6 +23,15 @@ nohup.out
 \#*#
 *.tmp
 *.bak
+Untitled
+
+# Local drafting/submission materials are maintained outside the public reproducibility repo.
+Manu*/
+Manu*.zip
+docs/*revision*plan*.md
+docs/*gress.md
+docs/*EVIDENCE_CHECKLIST.md
+docs/*COMPBIOL_FIGURES.md
 
 # Nextflow runtime/cache outputs
 .nextflow/

@@ -1,4 +1,4 @@
-"""Publication-friendly figure export (PLOS Comp Biol: TIFF/EPS, 300 dpi, LZW)."""
+"""Publication-friendly figure export helpers."""
 from __future__ import annotations
 
 from pathlib import Path

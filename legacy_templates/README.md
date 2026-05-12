@@ -1,9 +1,9 @@
 # Curated Legacy Reference from yfeng494_data
 
 ## Purpose
-This folder contains selected files copied from legacy work so we can reuse useful setup templates without inheriting old assumptions that conflict with current reviewer-driven revision goals.
+This folder contains selected files copied from legacy work so we can reuse useful setup templates without inheriting old assumptions that conflict with the current reproducibility goals.
 
-Current revision priority is:
+Current workflow priority is:
 - heterodimer-focused evidence,
 - replicate MD (3 independent seeds),
 - longer production runs (target >= 200 ns per replicate),
@@ -39,10 +39,10 @@ Current revision priority is:
 - `posre_CPPF.itp`
 
 ## Critical Limitations (Do Not Directly Reuse as Final Protocol)
-1. Legacy systems are monomer-centric (`CPPF+alpha`, `CPPF+tubb3`) and are not the final physiological target for revision.
+1. Legacy systems are monomer-centric (`CPPF+alpha`, `CPPF+tubb3`) and are not the final physiological target for the current workflow.
 2. Legacy production `md.mdp` is configured for 50 ns, not the current >= 200 ns objective.
 3. Legacy topology/style may contain standalone large `topol.top` patterns that are hard to maintain for replicate workflows.
-4. Historical workflows used specific force-field/water choices that must be re-justified and locked for the revised manuscript.
+4. Historical workflows used specific force-field/water choices that must be re-justified and locked for reproducible analysis.
 
 ## Recommended Use
 - Use these files as templates for parameter blocks, index group conventions, and ligand includes.

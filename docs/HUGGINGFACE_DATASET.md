@@ -102,9 +102,7 @@ All upload and polling transcripts intended for **provenance and debugging** liv
 - `zenodo_upload_nohup.log` — Zenodo  
 - `rep*` / `monomer_*` / `auto_*` — MD production and chained extensions  
 
-When you run a new upload, prefer a **descriptive filename** and add a row to that index so reviewers (and your future self) can tie Hub commits to local logs.
-
-**Figure format for the paper:** revision plotting defaults to **TIFF LZW @ 300 dpi**; see [`docs/PLOS_COMPBIOL_FIGURES.md`](PLOS_COMPBIOL_FIGURES.md).
+When you run a new upload, prefer a **descriptive filename** and add a row to that index so users can tie Hub commits to local logs.
 
 ## 7. Mirror the rest of `revision_exec/` (no duplicate prod `.xtc`)
 

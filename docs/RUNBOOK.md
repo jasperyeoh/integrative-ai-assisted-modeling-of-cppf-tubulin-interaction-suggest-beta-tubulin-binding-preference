@@ -251,7 +251,7 @@ Critical cofactor topology note:
   - Rationale: `pdb2gmx` commonly fails on nucleotides/metal cofactors with “missing residue topology”.
   - This keeps the protein force field unchanged while making cofactor handling deterministic/reproducible.
 
-### 5.1) Cofactor main route (locked and reviewer-proof)
+### 5.1) Cofactor main route (locked and reproducible)
 This workflow is locked to the validated nucleotide parameter route and must be
 kept consistent with the 2026-04-16 gate decision.
 
@@ -286,7 +286,7 @@ conda run -n mdprep python "revision_exec/scripts/rename_nucleotide_prime_to_sta
 
 Status:
 - This route was already gate-validated in this project (tleap no-type issue resolved).
-- Treat this as the production default for reviewer-facing revision runs.
+- Treat this as the production default for reproducible runs.
 
 Emergency fallback (not default, not parallel route):
 - GAFF2 parameterization of nucleotides is allowed only when the above files are unavailable.
@@ -554,10 +554,10 @@ This runbook execution is complete when:
 1. 3 replicate trajectories are produced (or explicit justified partial with transparency)
 2. all core metrics and figures pass QC
 3. MM-PBSA summary and per-residue decomposition are available
-4. manuscript text can be updated with one-to-one method/data traceability
+4. method/data traceability is complete
 
 ## 14) Supplemental Monomer Runbook (alpha/beta, fresh 200 ns)
-This section is for reviewer-facing supplementary monomer MD only. Do not use
+This section is for supplementary monomer MD only. Do not use
 legacy trajectories from `yfeng494_data` as evidence.
 
 ### 14.1 Scope and principle
@@ -619,7 +619,7 @@ ${HPC_WORKSPACE}/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx mdrun \
 - Verify process exists via `ps`
 - Verify GPU load is healthy (`nvidia-smi`)
 - Ensure progress in `md_200ns.log` (`Step/Time` increases)
-- Log status snapshots in `docs/pregress.md`
+- Record status snapshots in the relevant run log or analysis directory.
 
 ### 14.7 Reviewer-facing reporting guardrail
 When reporting monomer results:

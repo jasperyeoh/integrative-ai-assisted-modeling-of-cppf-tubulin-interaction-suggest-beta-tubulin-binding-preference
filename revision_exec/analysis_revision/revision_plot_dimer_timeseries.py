@@ -244,7 +244,7 @@ def main() -> None:
     ap.add_argument("--raw-root", type=Path, help="(panels) raw_xvg directory")
     ap.add_argument("--out-fig", type=Path, required=True)
     ap.add_argument("--out-csv", type=Path, default=None, help="required for single; optional for panels")
-    ap.add_argument("--dpi", type=int, default=300, help="Raster DPI (PLOS: 300–600; default 300)")
+    ap.add_argument("--dpi", type=int, default=300, help="Raster DPI for exported figures (default 300)")
     ap.add_argument(
         "--fig-format",
         default="tif",

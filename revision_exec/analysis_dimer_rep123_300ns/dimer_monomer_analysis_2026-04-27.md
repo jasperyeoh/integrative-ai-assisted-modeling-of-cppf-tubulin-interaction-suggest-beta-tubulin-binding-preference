@@ -1,6 +1,6 @@
 # Dimer + Monomer Analysis (2026-04-27)
 
-> **Note (2026-04-29):** 最新运行排期与 GPU 快照见仓库根目录 [`docs/pregress.md`](../../docs/pregress.md)。下文「Dimer Extension Decision」中曾建议优先延长 rep3；经平行试验一致性讨论，项目改为 **三条 dimer 同步延长至 350 ns（先行）**。本节 **200–300 ns 数值结论** 仍有效，未改原始分析。
+> **Note (2026-04-29):** 下文「Dimer Extension Decision」中曾建议优先延长 rep3；经平行试验一致性讨论，项目改为 **三条 dimer 同步延长至 350 ns（先行）**。本节 **200–300 ns 数值结论** 仍有效，未改原始分析。
 
 ## Scope
 - Dimer: `rep1`, `rep2`, `rep3` analyzed on the 200-300 ns window with the same metrics used for extension decisions.

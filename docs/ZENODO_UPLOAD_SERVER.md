@@ -83,6 +83,6 @@ After checking the draft in the browser:
 bash revision_exec/scripts/zenodo_upload_trajectories.sh --publish
 ```
 
-## 7. Paper + GitHub
+## 7. Dataset DOI + GitHub
 
-Put the Zenodo **DOI** in the manuscript *Data availability* and in `README.md`. Link to this GitHub repo for code, small inputs, and `docs/CONDA_ENVIRONMENTS.md`.
+Put the Zenodo **DOI** in `README.md` when available. Link to this GitHub repo for code, small inputs, and `docs/CONDA_ENVIRONMENTS.md`.

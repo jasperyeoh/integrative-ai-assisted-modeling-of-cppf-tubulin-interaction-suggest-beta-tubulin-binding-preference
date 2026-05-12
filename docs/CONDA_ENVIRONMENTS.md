@@ -20,7 +20,7 @@ gmx -version   # must report: GPU support: CUDA
 | **`mdprep`** | PDB/topol prep, `tleap`/`antechamber` (via AmberTools), ACPYPE, RDKit/OpenBabel, **Psi4** for electrostatics feeding RESP2; Python tooling. |
 | **`gmx-lite`** | **GROMACS 2024.5** (CUDA build), `gmx mdrun` with `-nb gpu -pme gpu -bonded gpu`; small NumPy/Matplotlib/SciPy stack. |
 
-Do **not** use an OpenCL-only or CPU-only GROMACS build for production on NVIDIA GPUs: `mdrun` will fall back to CPU (see `docs/pregress.md`).
+Do **not** use an OpenCL-only or CPU-only GROMACS build for production on NVIDIA GPUs: `mdrun` will fall back to CPU.
 
 ## Install recipes (minimal)
 

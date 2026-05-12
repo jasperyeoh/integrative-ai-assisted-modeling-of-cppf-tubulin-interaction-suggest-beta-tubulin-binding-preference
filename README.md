@@ -1,8 +1,6 @@
 # Integrative AI-Assisted Modeling of CPPF-Tubulin Interactions
 
-This repository contains the computational workflow and analysis assets for the manuscript:
-
-**"Integrative AI-Assisted Modeling of CPPF-Tubulin Interactions Suggests beta-Tubulin Binding Preference."**
+This repository contains the computational workflow and analysis assets for a CPPF-tubulin molecular modeling study.
 
 The project integrates AI-assisted structure modeling and molecular dynamics (MD) simulation to characterize binding behavior of **5-(3-chlorophenyl)-N-(3-pyridinyl)-2-furamide (CPPF)** with human tubulin systems (PDB template: `5IJ0`).
 
@@ -27,8 +25,6 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 - `docs/RUNBOOK.md`: operational runbook for execution
 - `docs/CONDA_ENVIRONMENTS.md`: **two conda envs** (`mdprep`, `gmx-lite`) and how to recreate them
 - `conda/environment-mdprep.yml` / `conda/environment-gmx-lite.yml`: minimal install recipes (+ `conda/exports/*-full.yml` snapshots)
-- `docs/MD_revision_plan.md`: reviewer-oriented revision plan
-- `docs/pregress.md`: chronological experiment and execution log
 
 ### Core Workspace
 
@@ -52,7 +48,7 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 ## Reproducibility Notes
 
 - **Conda:** see `docs/CONDA_ENVIRONMENTS.md` and the YAML files under `conda/`.
-- The execution history, parameter changes, and troubleshooting decisions are tracked in `docs/pregress.md`.
+- Execution provenance is captured in run logs, checksum manifests, and dataset-upload documentation under `revision_exec/` and `docs/`.
 - Current production workflow supports replicate-based runs and checkpoint continuation.
 - Large trajectories (multi-GB `xtc`) are listed in `revision_exec/LARGE_FILES_NOT_IN_GIT.txt` if not in git; see also `docs/git_binary_data.md`.
 - **Trajectory archive (primary):** `docs/HUGGINGFACE_DATASET.md` — `revision_exec/scripts/huggingface_upload_trajectories.sh` (`HF_DATASET_REPO=...`, token via `huggingface-cli login` or `~/.huggingface_token`).  
@@ -93,11 +89,5 @@ On the **Heterodimer (dimer) replicates**, the first production segment is still
 
 ## Citation
 
-If you use this repository, please cite the associated manuscript when available.
-
-Suggested citation placeholder:
-
-Yang J, Liang L, Zhu D, Yin X, Feng Y, Tang S, Li M.  
-Integrative AI-Assisted Modeling of CPPF-Tubulin Interactions Suggests beta-Tubulin Binding Preference.  
-(Manuscript in preparation/submission.)
+If you use this repository, please cite the associated publication when it becomes available. Until then, cite this repository and the public trajectory dataset URL in any derivative work.
 
