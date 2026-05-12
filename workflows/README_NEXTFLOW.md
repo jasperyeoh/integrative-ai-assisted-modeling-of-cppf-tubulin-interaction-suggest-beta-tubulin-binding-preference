@@ -201,3 +201,232 @@ Common parameters:
 After smoke testing and committing the workflow, the response letter can accurately state:
 
 > We have implemented a reproducible Phase 1 Nextflow workflow that wraps the validated structure-preparation handoff, molecular dynamics, PBC-corrected trajectory export, MM-PBSA binding free-energy calculation, free-energy landscape construction, and automated figure/table generation. The workflow, configuration files, smoke-test settings, and run documentation are available in the GitHub repository.
+
+## Phase 2: Docking Stage Installation Reference
+
+Phase 2 will add Stage 1 docking processes upstream of `workflows/main.nf`, turning the pipeline into a full SMILES + PDB/sequence → pose → MD workflow.
+
+The planned local docking tools are:
+
+- Protenix: primary AI-based protein-ligand structure prediction tool.
+- RoseTTAFold All-Atom (RFAA): secondary protein-ligand complex prediction tool.
+- Umol: additional sequence-based protein-ligand prediction tool.
+- Protenix-Dock: optional classical docking comparator.
+
+Install each tool in a separate conda environment. Recommended order: Protenix → RFAA → Umol → optional Protenix-Dock. Test one small case per tool before connecting it to Nextflow.
+
+### 1. Protenix
+
+Purpose: predict protein-ligand complex structures from amino-acid sequence(s) and ligand SMILES.
+
+- GitHub: https://github.com/bytedance/Protenix
+- PyPI: https://pypi.org/project/protenix/
+- License: Apache 2.0
+- Reference: Zhang et al., bioRxiv 2026. doi:10.64898/2026.04.10.717613
+
+```bash
+# Create isolated environment
+conda create -n protenix python=3.10 -y
+conda activate protenix
+
+# Install Protenix CLI
+pip install protenix
+
+# Optional MSA dependencies
+conda install -c bioconda hmmer kalign2 -y
+
+# Verify installation
+protenix pred --help
+
+# Small test case; see:
+# https://github.com/bytedance/Protenix/blob/main/examples/input.json
+protenix pred \
+  -i examples/input.json \
+  -o ./test_output \
+  -n protenix_base_default_v1.0.0
+```
+
+CPPF-tubulin input template:
+
+```json
+{
+  "sequences": [
+    {"proteinChain": {"sequence": "<TUBA1B_sequence>", "count": 1}},
+    {"proteinChain": {"sequence": "<TUBB3_sequence>", "count": 1}},
+    {"ligand": {"smiles": "O=C(Nc1cccnc1)c1ccc(-c2cccc(Cl)c2)o1", "count": 1}}
+  ],
+  "modelSeeds": [1, 2, 3, 4, 5]
+}
+```
+
+Notes:
+
+- Use `protenix_base_default_v1.0.0` on A800/A100-class GPUs.
+- Expected runtime is approximately minutes per complex on A100/A800-class hardware, depending on input size and MSA settings.
+
+### 2. RoseTTAFold All-Atom (RFAA)
+
+Purpose: predict protein-small-molecule complex structures as an independent AI-based docking/modeling method.
+
+- GitHub: https://github.com/baker-laboratory/RoseTTAFold-All-Atom
+- License: MIT
+- Reference: Krishna et al., Science 2024. doi:10.1126/science.adl2528
+
+```bash
+git clone https://github.com/baker-laboratory/RoseTTAFold-All-Atom.git
+cd RoseTTAFold-All-Atom
+
+# Create environment
+conda env create -f environment.yaml
+conda activate RFAA
+
+# Download model weights (~1.5 GB)
+wget http://files.ipd.uw.edu/pub/RF-All-Atom/weights/RFAA_paper_weights.pt
+
+# Verify installation
+python -m rf2aa.run_inference --help
+
+# Example protein-ligand inference
+python -m rf2aa.run_inference \
+  --config-name base \
+  protein_inputs.A.fasta_file=examples/protein/7u7w_A.fasta \
+  sm_inputs.B.input=examples/small_molecule/XG4.sdf \
+  sm_inputs.B.input_type=sdf \
+  job_name=cppf_tubulin_test
+```
+
+Generate CPPF SDF from SMILES:
+
+```bash
+python - <<'PY'
+from rdkit import Chem
+from rdkit.Chem import AllChem
+
+mol = Chem.MolFromSmiles("O=C(Nc1cccnc1)c1ccc(-c2cccc(Cl)c2)o1")
+mol = Chem.AddHs(mol)
+AllChem.EmbedMolecule(mol, AllChem.ETKDG())
+Chem.MolToMolFile(mol, "cppf/CPPF.sdf")
+PY
+```
+
+Notes:
+
+- Requires CUDA >= 11.7; A800/CUDA 12 is compatible.
+- Full UniRef30 MSA databases are large. If they are unavailable, test `--use_esm_msa` as a lower-dependency alternative.
+- Large alpha/beta tubulin heterodimer inputs (~900 residues) can take tens of minutes per inference.
+
+### 3. Umol
+
+Purpose: sequence-based protein-ligand complex prediction.
+
+- GitHub: https://github.com/patrickbryant1/Umol
+- License: Apache 2.0
+- Reference: Bryant et al., Nature Communications 2024. doi:10.1038/s41467-024-48837-6
+
+```bash
+git clone https://github.com/patrickbryant1/Umol.git
+cd Umol
+
+conda create -n umol python=3.9 -y
+conda activate umol
+pip install -r requirements.txt
+
+# Download model weights; see upstream README for the current command.
+bash scripts/download_weights.sh
+
+# Test run
+bash predict.sh \
+  --msa examples/test_msa.a3m \
+  --smiles "O=C(Nc1cccnc1)c1ccc(-c2cccc(Cl)c2)o1" \
+  --outdir ./test_output
+```
+
+Known limitations:
+
+- Umol has a sequence-length limit of approximately 400 amino acids.
+- The full alpha/beta heterodimer (~900 residues) is not suitable directly.
+- TUBB3 beta-tubulin monomer is ~445 amino acids, so a pocket-centered truncation strategy may be needed.
+- Umol does not use an input PDB receptor structure directly; it predicts from sequence/MSA.
+
+### 4. Protenix-Dock (Optional)
+
+Purpose: optional classical protein-ligand docking comparator.
+
+- GitHub: https://github.com/bytedance/Protenix-Dock
+- License: GPLv3
+
+```bash
+git clone https://github.com/bytedance/Protenix-Dock.git
+cd Protenix-Dock
+
+conda env create -f environment.yml
+conda activate protenix-dock
+
+python - <<'PY'
+from pxdock import ProtenixDock
+
+dock = ProtenixDock("5IJ0_cleaned.pdb")
+dock.set_box([0.0, 0.0, 0.0], [20.0, 20.0, 20.0])
+results = dock.run_docking("cppf/CPPF.sdf")
+print(results)
+PY
+```
+
+### Phase 2 Nextflow Integration Sketch
+
+After the tools are installed and individually tested, add the following Stage 1-style processes before the Phase 1 MD handoff:
+
+```nextflow
+process PROTENIX_PREDICT {
+    conda 'protenix'
+    input:
+    path input_json
+    output:
+    path "protenix_poses/*.cif"
+    script:
+    """
+    protenix pred -i ${input_json} -o protenix_poses -n protenix_base_default_v1.0.0
+    """
+}
+
+process RFAA_PREDICT {
+    conda 'RFAA'
+    input:
+    tuple path(fasta), path(ligand_sdf)
+    output:
+    path "rfaa_output/*.pdb"
+    script:
+    """
+    python -m rf2aa.run_inference \\
+      --config-name base \\
+      protein_inputs.A.fasta_file=${fasta} \\
+      sm_inputs.B.input=${ligand_sdf} \\
+      sm_inputs.B.input_type=sdf \\
+      job_name=rfaa_cppf_tubulin
+    """
+}
+
+process UMOL_PREDICT {
+    conda 'umol'
+    input:
+    tuple path(msa), val(smiles)
+    output:
+    path "umol_output/*.pdb"
+    script:
+    """
+    bash predict.sh \\
+      --msa ${msa} \\
+      --smiles "${smiles}" \\
+      --outdir umol_output
+    """
+}
+```
+
+### Phase 2 Installation Priority
+
+| Tool | Priority | Reason |
+|------|----------|--------|
+| Protenix | Highest | Primary docking/modeling tool in this study; simplest installation path |
+| RFAA | Medium | Independent AI-based comparator; larger setup and weights |
+| Umol | Medium | Useful additional predictor; sequence-length limit needs handling |
+| Protenix-Dock | Optional | Classical docking comparator, not required for Phase 1 |
