@@ -47,6 +47,34 @@ PANEL_METRICS: list[tuple[str, str, str]] = [
     ("hbond_num", "hbond_num.xvg", "H-bonds (#)"),
 ]
 
+def _apply_plos_style() -> None:
+    plt.rcParams.update(
+        {
+            "font.family": "DejaVu Sans",
+            "font.size": 10,
+            "axes.titlesize": 10,
+            "axes.labelsize": 10,
+            "xtick.labelsize": 9,
+            "ytick.labelsize": 9,
+            "legend.fontsize": 8,
+        }
+    )
+
+
+def _panel_label(ax: "plt.Axes", lab: str) -> None:
+    # Match publication-style large panel labels (A/B/C/D) at top-left of each subplot.
+    ax.text(
+        0.01,
+        0.99,
+        lab,
+        transform=ax.transAxes,
+        fontsize=22,
+        fontweight="bold",
+        ha="left",
+        va="top",
+        color="black",
+    )
+
 
 def align_on_grid(
     series: Iterable[tuple[np.ndarray, np.ndarray]],
@@ -70,6 +98,7 @@ def align_on_grid(
 
 
 def run_single(args: argparse.Namespace) -> None:
+    _apply_plos_style()
     reps: list[tuple[str, Path]] = [(lab, Path(p)) for lab, p in args.xvg]
     data: list[tuple[str, np.ndarray, np.ndarray]] = []
     for lab, p in reps:
@@ -145,6 +174,7 @@ def run_single(args: argparse.Namespace) -> None:
 
 
 def run_panels(args: argparse.Namespace) -> None:
+    _apply_plos_style()
     raw = Path(args.raw_root)
     colors = ("#0072B2", "#D55E00", "#009E73")
     labels = ("rep1", "rep2", "rep3")
@@ -177,6 +207,9 @@ def run_panels(args: argparse.Namespace) -> None:
         ax.set_title(metric)
         ax.grid(True, alpha=0.25)
         ax.legend(loc="best", fontsize=7)
+
+    for ax, lab in zip(axes.ravel(), ("A", "B", "C", "D")):
+        _panel_label(ax, lab)
 
     for ax in axes[1, :]:
         ax.set_xlabel("Time (ns)")

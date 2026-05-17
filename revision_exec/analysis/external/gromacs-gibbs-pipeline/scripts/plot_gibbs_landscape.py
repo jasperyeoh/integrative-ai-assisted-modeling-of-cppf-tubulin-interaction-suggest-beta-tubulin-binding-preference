@@ -32,10 +32,29 @@ def load_energy_data(filename):
         sys.exit(1)
 
 
-def interpolate_data(x, y, z, nbins=100, method='cubic'):
-    """Interpolate scattered data onto regular grid."""
-    xi = np.linspace(x.min(), x.max(), nbins)
-    yi = np.linspace(y.min(), y.max(), nbins)
+def interpolate_data(
+    x,
+    y,
+    z,
+    nbins=100,
+    method="cubic",
+    x_min=None,
+    x_max=None,
+    y_min=None,
+    y_max=None,
+):
+    """Interpolate scattered data onto regular grid (optionally with fixed axis ranges)."""
+    if x_min is None:
+        x_min = float(x.min())
+    if x_max is None:
+        x_max = float(x.max())
+    if y_min is None:
+        y_min = float(y.min())
+    if y_max is None:
+        y_max = float(y.max())
+
+    xi = np.linspace(float(x_min), float(x_max), nbins)
+    yi = np.linspace(float(y_min), float(y_max), nbins)
     xi_grid, yi_grid = np.meshgrid(xi, yi)
     
     zi = griddata((x, y), z, (xi_grid, yi_grid), method=method)
@@ -71,6 +90,8 @@ def create_visualization(
     ylabel="PC2 (nm)",
     z_energy_label="G (kJ/mol)",
     z_max=None,
+    xlim=None,
+    ylim=None,
 ):
     """Create the final visualization with 3D surface and 2D contour plots."""
     
@@ -103,6 +124,10 @@ def create_visualization(
     ax1.view_init(elev=20, azim=-30)
     ax1.legend()
     ax1.grid(False)
+    if xlim is not None:
+        ax1.set_xlim(xlim)
+    if ylim is not None:
+        ax1.set_ylim(ylim)
     
     # Set z-axis ticks
     z_ticks = np.arange(0, z_max + 2, 2)
@@ -127,6 +152,10 @@ def create_visualization(
     ax2.set_ylabel(ylabel)
     ax2.set_title(title, fontsize=14)
     ax2.legend()
+    if xlim is not None:
+        ax2.set_xlim(xlim)
+    if ylim is not None:
+        ax2.set_ylim(ylim)
     
     # Add colorbar for contour plot
     fig.colorbar(contour, ax=ax2, label=z_energy_label)
@@ -204,6 +233,10 @@ Examples:
         default=None,
         help='Optional upper limit for free energy scale (same units as plotted z)',
     )
+    parser.add_argument('--x-min', type=float, default=None, help='Optional fixed x-axis minimum')
+    parser.add_argument('--x-max', type=float, default=None, help='Optional fixed x-axis maximum')
+    parser.add_argument('--y-min', type=float, default=None, help='Optional fixed y-axis minimum')
+    parser.add_argument('--y-max', type=float, default=None, help='Optional fixed y-axis maximum')
 
     args = parser.parse_args()
     
@@ -225,7 +258,17 @@ Examples:
     
     # Interpolate data
     print(f"Interpolating data onto {args.grid_size}x{args.grid_size} grid...")
-    xi_grid, yi_grid, zi, xi, yi = interpolate_data(x, y, z, args.grid_size, args.interpolation)
+    xi_grid, yi_grid, zi, xi, yi = interpolate_data(
+        x,
+        y,
+        z,
+        args.grid_size,
+        args.interpolation,
+        x_min=args.x_min,
+        x_max=args.x_max,
+        y_min=args.y_min,
+        y_max=args.y_max,
+    )
     
     # Apply smoothing
     print(f"Applying Gaussian smoothing (sigma={args.smoothing})...")
@@ -252,6 +295,8 @@ Examples:
         ylabel=args.ylabel,
         z_energy_label=z_energy_label,
         z_max=args.z_max,
+        xlim=(args.x_min, args.x_max) if (args.x_min is not None or args.x_max is not None) else None,
+        ylim=(args.y_min, args.y_max) if (args.y_min is not None or args.y_max is not None) else None,
     )
     
     print("Visualization completed successfully!")

@@ -82,6 +82,7 @@ prep_trajectory() {
   local sid="$1" prod="$2" work="$3" ndx="$4"
   mkdir -p "$work"
   local raw merged cleaned tpr
+  local tmp_nojump
 
   cleaned="$work/clean_pbc.xtc"
   if [[ -f "$cleaned" && "${FORCE_TRJCONV:-0}" != "1" ]]; then
@@ -100,11 +101,40 @@ prep_trajectory() {
       raw="$prod/md_200ns.xtc"
       tpr="$prod/md_200ns.tpr"
     fi
-    # trjconv prompts must not enter $(prep_trajectory) capture
+
+    # IMPORTANT: two-step PBC cleaning to avoid RMSD/Rg jump artefacts:
+    #  1) -pbc nojump (remove frame-to-frame discontinuities)
+    #  2) -pbc mol -ur compact (wrap molecules; keep compact unit cell) + -center
+    #
+    # Keep all stdout/stderr out of function stdout (captured by caller).
+    tmp_nojump="$work/nojump.xtc"
+    {
+      echo "=== trjconv PBC cleanup for $sid ==="
+      echo "raw: $raw"
+      echo "tpr: $tpr"
+      echo "ndx: $ndx"
+      echo
+      echo "[1/2] trjconv -pbc nojump -> $tmp_nojump"
+    } >"$work/trjconv.log"
+
     if is_dimer "$sid"; then
-      printf '21\n0\n' | "$GMX" trjconv -s "$tpr" -f "$raw" -n "$ndx" -pbc mol -center -o "$cleaned" &>"$work/trjconv.log"
+      # center group: Protein_CPP (21), output group: System (0)
+      printf '0\n' | "$GMX" trjconv -s "$tpr" -f "$raw" -n "$ndx" -pbc nojump -o "$tmp_nojump" >>"$work/trjconv.log" 2>&1
+      {
+        echo
+        echo "[2/2] trjconv -pbc cluster -center -> $cleaned"
+      } >>"$work/trjconv.log"
+      # Dimer has multiple protein molecules (chains); use -pbc cluster to keep the complex together.
+      # cluster trjconv prompts: (1) clustering group, (2) centering group, (3) output group
+      printf '21\n21\n0\n' | "$GMX" trjconv -s "$tpr" -f "$tmp_nojump" -n "$ndx" -pbc cluster -center -o "$cleaned" >>"$work/trjconv.log" 2>&1
     else
-      printf '1\n0\n' | "$GMX" trjconv -s "$tpr" -f "$raw" -n "$ndx" -pbc mol -center -o "$cleaned" &>"$work/trjconv.log"
+      # monomer center group: Protein (1), output group: System (0)
+      printf '0\n' | "$GMX" trjconv -s "$tpr" -f "$raw" -n "$ndx" -pbc nojump -o "$tmp_nojump" >>"$work/trjconv.log" 2>&1
+      {
+        echo
+        echo "[2/2] trjconv -pbc mol -ur compact -center -> $cleaned"
+      } >>"$work/trjconv.log"
+      printf '1\n0\n' | "$GMX" trjconv -s "$tpr" -f "$tmp_nojump" -n "$ndx" -pbc mol -ur compact -center -o "$cleaned" >>"$work/trjconv.log" 2>&1
     fi
   fi
   echo "$cleaned|$tpr"
@@ -149,6 +179,67 @@ run_one() {
 
   # 7) RMSF per residue (x-axis is residue index, not time — no -tu)
   printf '1\n' | "$GMX" rmsf -f "$xtc" -s "$tpr" -n "$ndx" -o rmsf_residue.xvg -res
+
+  # 7b) Monomer: RMSF per residue on the last 50 ns only (for binding-pocket summary figure).
+  # T_end_ns=200 for all monomer systems in T_end_registry.yaml → window [150,200] ns.
+  # Note: gmx rmsf (2024.x here) does not accept -tu; use ps for -b/-e.
+  if [[ "$sid" == monomer_* ]]; then
+    printf '1\n' | "$GMX" rmsf -f "$xtc" -s "$tpr" -n "$ndx" -o rmsf_binding_site_last50ns.xvg -res \
+      -b 150000 -e 200000
+  fi
+
+  # 7c) Monomer: contact-defined pocket residues (last 50 ns).
+  # Define pocket as protein residues within 0.45 nm of ligand (CPPF) at ANY time in [150,200] ns.
+  # We (1) write the residue list for sanity checks and (2) compute per-residue RMSF restricted to that pocket.
+  if [[ "$sid" == monomer_* ]]; then
+    # Create an index group "contact_pocket" containing protein atoms within cutoff of CPP (group 13).
+    # Use -oi to get a time-independent mask; threshold 0.5 means "selected at least once".
+    "$GMX" select -s "$tpr" -f "$xtc" -n "$ndx" \
+      -b 150000 -e 200000 \
+      -select 'group "Protein" and within 0.45 of group "CPP"' \
+      -oi contact_pocket_oi.dat \
+      -on contact_pocket.ndx \
+      &>"$work/gmx_select_contact_pocket.log"
+
+    # RMSF per residue for the contact pocket group (index in contact_pocket.ndx).
+    printf '0\n' | "$GMX" rmsf -f "$xtc" -s "$tpr" -n contact_pocket.ndx \
+      -o rmsf_contact_pocket_last50ns.xvg -res -b 150000 -e 200000 \
+      &>"$work/rmsf_contact_pocket_last50ns.log"
+
+    # Dump residue ids selected (from RMSF xvg first column).
+    python3 - <<'PY'
+from pathlib import Path
+
+in_xvg = Path("rmsf_contact_pocket_last50ns.xvg")
+out_txt = Path("contact_pocket_residues_last50ns.txt")
+
+res = []
+for line in in_xvg.read_text(errors="replace").splitlines():
+    s = line.strip()
+    if not s or s[0] in "#@&":
+        continue
+    parts = s.split()
+    if len(parts) < 2:
+        continue
+    try:
+        r = int(float(parts[0]))
+    except ValueError:
+        continue
+    res.append(r)
+
+res_u = sorted(set(res))
+out_txt.write_text(
+    "\n".join(
+        [
+            f"n_residues={len(res_u)}",
+            "residue_ids=" + ",".join(map(str, res_u)),
+            "",
+        ]
+    )
+)
+print(f"Wrote {out_txt} (n={len(res_u)})")
+PY
+  fi
 
   # rg + backbone RMSD for later gmx sham (inner join if lengths/times differ)
   python3 "$MERGE_PY" "$outdir/rg.xvg" "$outdir/rmsd_backbone.xvg" \

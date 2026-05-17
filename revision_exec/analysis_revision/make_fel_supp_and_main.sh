@@ -36,7 +36,10 @@ DPI="${DPI:-300}"
 make_one_from_gsham_input() {
   local sys="$1" in="$2" outdir="$3"
   mkdir -p "$outdir"
-  cp -f "$in" "$outdir/gsham_input_rg_rmsdBB_plain.xvg"
+  local dst="$outdir/gsham_input_rg_rmsdBB_plain.xvg"
+  if [[ "$(dirname "$in")" != "$outdir" ]]; then
+    cp -f "$in" "$dst"
+  fi
   pushd "$outdir" >/dev/null
 
   "$GMX" sham -f gsham_input_rg_rmsdBB_plain.xvg \
@@ -79,7 +82,9 @@ cp -f "$FEL/combined/beta/gibbs_rg_rmsd_combined_beta_zcap${ZMAX}.tif"   "$FIG/f
 echo "== FEL main panel: side-by-side (alpha | beta) =="
 python - <<PY
 from PIL import Image
+from PIL import ImageDraw, ImageFont
 from pathlib import Path
+from matplotlib import font_manager
 
 zmax = "${ZMAX}"
 fig = Path("${FIG}")
@@ -104,6 +109,26 @@ pad = 40
 panel = Image.new("RGB", (a2.size[0] + pad + b2.size[0], h), (255, 255, 255))
 panel.paste(a2, (0, 0))
 panel.paste(b2, (a2.size[0] + pad, 0))
+
+# Add panel labels (A: alpha, B: beta) for publication-style panels.
+draw = ImageDraw.Draw(panel)
+try:
+    font_path = font_manager.findfont("DejaVu Sans", fontext="ttf")
+    font = ImageFont.truetype(font_path, size=48)
+except Exception:
+    font = ImageFont.load_default()
+
+# Each combined landscape image contains 2 panels (3D | 2D contour).
+# After concatenation we have 4 panels:
+#  A: combined alpha (3D), B: combined alpha (contour),
+#  C: combined beta (3D),  D: combined beta (contour).
+half_a = a2.size[0]
+half_b = b2.size[0]
+draw.text((20, 10), "A", fill=(0, 0, 0), font=font)
+draw.text((half_a // 2 + 20, 10), "B", fill=(0, 0, 0), font=font)
+off = half_a + pad
+draw.text((off + 20, 10), "C", fill=(0, 0, 0), font=font)
+draw.text((off + half_b // 2 + 20, 10), "D", fill=(0, 0, 0), font=font)
 
 out = fig / f"fel_combined_alpha_beta_zcap{zmax}.tif"
 panel.save(out, format="TIFF", compression="tiff_lzw", dpi=(int("${DPI}"), int("${DPI}")))
