@@ -23,8 +23,10 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 ### Start Here
 
 - `docs/RUNBOOK.md`: operational runbook for execution
-- `docs/CONDA_ENVIRONMENTS.md`: **two conda envs** (`mdprep`, `gmx-lite`) and how to recreate them
-- `conda/environment-mdprep.yml` / `conda/environment-gmx-lite.yml`: minimal install recipes (+ `conda/exports/*-full.yml` snapshots)
+- `docs/CONDA_ENVIRONMENTS.md`: **conda envs** (`mdprep`, `gmx-lite`, optional `mmpbsa`) and how to recreate them
+- `docs/REPRODUCTION_SNAPSHOT.md`: **frozen HPC stack** (2026-05-18 exports + verification log)
+- `conda/environment-mdprep.yml` / `conda/environment-gmx-lite.yml`: minimal install recipes
+- `conda/exports/environment-*-full-2026-05-18.yml`: **exact envs used on the analysis node** (`--no-builds` exports)
 
 ### Core Workspace
 
@@ -47,7 +49,8 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 
 ## Reproducibility Notes
 
-- **Conda:** see `docs/CONDA_ENVIRONMENTS.md` and the YAML files under `conda/`.
+- **Conda (paper runs):** see `docs/REPRODUCTION_SNAPSHOT.md` and dated files under `conda/exports/` (captured 2026-05-18 on the project HPC node).
+- **Conda (general setup):** see `docs/CONDA_ENVIRONMENTS.md` and minimal YAMLs under `conda/`.
 - Execution provenance is captured in run logs, checksum manifests, and dataset-upload documentation under `revision_exec/` and `docs/`.
 - Current production workflow supports replicate-based runs and checkpoint continuation.
 - Large trajectories (multi-GB `xtc`) are listed in `revision_exec/LARGE_FILES_NOT_IN_GIT.txt` if not in git; see also `docs/git_binary_data.md`.

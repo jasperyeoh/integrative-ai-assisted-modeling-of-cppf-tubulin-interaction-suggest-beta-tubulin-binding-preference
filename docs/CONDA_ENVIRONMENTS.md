@@ -27,12 +27,19 @@ Do **not** use an OpenCL-only or CPU-only GROMACS build for production on NVIDIA
 - `conda/environment-mdprep.yml` — pin **`python=3.11`** and conda-forge/bioconda packages listed in the file.
 - `conda/environment-gmx-lite.yml` — **`gromacs=2024.5=*cuda*`** so conda selects a CUDA-enabled build.
 
-Full dependency snapshots (same machine that wrote them, **no build hashes**) for closer reproduction:
+Full dependency snapshots (**no build hashes**, from the node that ran production MD) for closer reproduction:
 
-- `conda/exports/environment-mdprep-full.yml`
-- `conda/exports/environment-gmx-lite-full.yml`
+| Dated export (2026-05-18) | Canonical alias |
+|---------------------------|-----------------|
+| `conda/exports/environment-gmx-lite-full-2026-05-18.yml` | `environment-gmx-lite-full.yml` |
+| `conda/exports/environment-mdprep-full-2026-05-18.yml` | `environment-mdprep-full.yml` |
+| `conda/exports/environment-mmpbsa-full-2026-05-18.yml` | `environment-mmpbsa-full.yml` |
+| `conda/exports/environment-nextflow-full-2026-05-18.yml` | `environment-nextflow-full.yml` |
 
-Those files list the full transitive closure; they may still differ slightly on another OS or solver version. Prefer the **minimal** YAMLs for new clones, and use the **full** exports when debugging “works on my node” issues.
+Version checks from that export: `conda/exports/verification-2026-05-18.txt`.  
+Overview and refresh instructions: **`docs/REPRODUCTION_SNAPSHOT.md`**.
+
+Those files list the full transitive closure; they may still differ slightly on another OS or solver version. Prefer the **minimal** YAMLs for new clones, and use the **dated full** exports when versions must match the manuscript runs.
 
 ## Verification checklist
 
