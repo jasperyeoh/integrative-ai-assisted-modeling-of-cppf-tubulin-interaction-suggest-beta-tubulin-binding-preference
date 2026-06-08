@@ -1,0 +1,131 @@
+*  ---- 
+* Built RTF for smiles_corr_0.mol2
+*    by user SwissParam     Wed 13 Nov 2024 02:22:10 CEST
+* ---- 
+*
+
+ATOMS
+MASS    -1 CLMM  35.452700
+MASS    -1 CB    12.011000
+MASS    -1 C5A   12.011000
+MASS    -1 C5B   12.011000
+MASS    -1 OFUR  15.999400
+MASS    -1 C=O   12.011000
+MASS    -1 O=C   15.999400
+MASS    -1 NC=O  14.006700
+MASS    -1 NPYD  14.006700
+MASS    -1 HCMM   1.007940
+MASS    -1 HNCO   1.007940
+
+BONDS
+CLMM CB    243.102     1.7210 
+CB   CB    401.068     1.3740 
+CB   C5A   372.641     1.4360 
+C5A  C5B   512.256     1.3770 
+C5B  C5B   310.390     1.4180 
+C5A  OFUR  416.469     1.3600 
+C5A  C=O   393.511     1.4230 
+C=O  O=C   931.963     1.2220 
+C=O  NC=O  419.491     1.3690 
+NC=O CB    394.519     1.3950 
+CB   NPYD  412.870     1.3330 
+CB   HCMM  381.853     1.0840 
+C5B  HCMM  396.246     1.0800 
+NC=O HNCO  479.511     1.0150 
+
+ANGLES
+CLMM CB   CB     68.367    118.4950 
+CB   CB   CB     48.145    119.9770 
+CB   CB   HCMM   40.517    120.5710 
+CB   CB   C5A    64.337    120.1900 
+CB   C5A  C5B    53.399    131.7840 
+CB   C5A  OFUR   87.366    114.2110 
+C5B  C5A  OFUR   74.484    110.1080 
+C5A  C5B  C5B    62.322    108.2390 
+C5A  C5B  HCMM   36.055    126.1700 
+C5B  C5B  HCMM   39.293    127.4050 
+C5B  C5A  C=O    55.126    130.0650 
+OFUR C5A  C=O    83.336    117.2190 
+C5A  OFUR C5A    91.612    106.3130 
+C5A  C=O  O=C    74.556    126.4560 
+C5A  C=O  NC=O   77.363    114.6230 
+O=C  C=O  NC=O   65.273    127.1520 
+C=O  NC=O CB     73.621    118.5960 
+C=O  NC=O HNCO   41.380    120.2770 
+CB   NC=O HNCO   45.194    118.2270 
+NC=O CB   CB     73.765    117.9180 
+CB   CB   NPYD   42.892    126.1390 
+NPYD CB   HCMM   49.872    115.5880 
+CB   NPYD CB     78.083    115.4060 
+
+DIHEDRALS
+CLMM CB   CB   CB       3.500  2   180.00 
+CLMM CB   CB   HCMM     3.500  2   180.00 
+CB   CB   CB   CB       3.500  2   180.00 
+CB   CB   CB   C5A      1.000  2   180.00 
+CB   CB   CB   HCMM     3.500  2   180.00 
+CB   CB   C5A  C5B      0.900  2   180.00 
+CB   CB   C5A  OFUR     0.900  2   180.00 
+CB   C5A  C5B  C5B      0.000  1     0.00 
+CB   C5A  C5B  HCMM     0.000  1     0.00 
+CB   C5A  OFUR C5A      0.000  1     0.00 
+C5A  CB   CB   HCMM     1.000  2   180.00 
+C5A  C5B  C5B  C5A      3.500  2   180.00 
+C5A  C5B  C5B  HCMM     3.500  2   180.00 
+C5A  OFUR C5A  C5B      3.500  2   180.00 
+C5A  OFUR C5A  C=O      0.000  1     0.00 
+C5B  C5B  C5A  OFUR     3.500  2   180.00 
+C5B  C5B  C5A  C=O      0.000  1     0.00 
+C5B  C5A  C=O  O=C      1.250  2   180.00 
+C5B  C5A  C=O  NC=O     1.250  2   180.00 
+C5A  C=O  NC=O CB       3.000  2   180.00 
+C5A  C=O  NC=O HNCO     3.000  2   180.00 
+OFUR C5A  C5B  HCMM     3.500  2   180.00 
+OFUR C5A  C=O  O=C      1.250  2   180.00 
+OFUR C5A  C=O  NC=O     1.250  2   180.00 
+C=O  C5A  C5B  HCMM     0.000  1     0.00 
+C=O  NC=O CB   CB       3.000  2   180.00 
+O=C  C=O  NC=O CB       3.000  2   180.00 
+O=C  C=O  NC=O HNCO     0.718  1     0.00 
+O=C  C=O  NC=O HNCO     2.487  2   180.00 
+O=C  C=O  NC=O HNCO    -0.227  3     0.00 
+NC=O CB   CB   NPYD     3.500  2   180.00 
+NC=O CB   CB   HCMM     3.500  2   180.00 
+NC=O CB   CB   CB       3.500  2   180.00 
+CB   CB   NPYD CB       3.500  2   180.00 
+CB   CB   NC=O HNCO     3.000  2   180.00 
+CB   NPYD CB   HCMM     3.500  2   180.00 
+NPYD CB   CB   CB       3.500  2   180.00 
+NPYD CB   CB   HCMM     3.500  2   180.00 
+HCMM CB   CB   HCMM     3.500  2   180.00 
+HCMM C5B  C5B  HCMM     3.500  2   180.00 
+
+IMPROPER
+CB   CB   CLMM CB       2.519  0     0.00 
+CB   CB   CB   HCMM     1.079  0     0.00 
+CB   C5A  CB   CB       2.519  0     0.00 
+C5A  OFUR CB   C5B      3.598  0     0.00 
+C5B  C5B  C5A  HCMM     0.432  0     0.00 
+C5B  C5A  C5B  HCMM     0.432  0     0.00 
+C5A  OFUR C5B  C=O      3.598  0     0.00 
+C=O  NC=O C5A  O=C      9.356  0     0.00 
+NC=O CB   C=O  HNCO    -1.439  0     0.00 
+CB   CB   NC=O CB       2.519  0     0.00 
+CB   NPYD CB   HCMM     3.310  0     0.00 
+CB   CB   NPYD HCMM     3.310  0     0.00 
+
+NONBONDED nbxmod  5 atom cdiel shift vatom vdistance vswitch - 
+cutnb 14.0 ctofnb 12.0 ctonnb 10.0 eps 1.0 e14fac 1.0 wmin 1.5 
+CLMM    0.000000  -0.230000     1.860000    
+CB      0.000000  -0.070000     1.992400    
+C5A     0.000000  -0.068000     2.090000    
+C5B     0.000000  -0.068000     2.090000    
+OFUR    0.000000  -0.200000     1.850000    
+C=O     0.000000  -0.110000     2.000000    
+O=C     0.000000  -0.120000     1.700000   0.000000  -0.120000     1.400000    
+NC=O    0.000000  -0.200000     1.850000   0.000000  -0.200000     1.550000    
+NPYD    0.000000  -0.200000     1.850000    
+HCMM    0.000000  -0.022000     1.320000    
+HNCO    0.000000  -0.046000     0.224500    
+
+

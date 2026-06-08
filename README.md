@@ -48,7 +48,11 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
     - `nocodazole_ab_tubulin_dimer/` — benchmark (5 CIF + exported PDB)
     - `nocodazole_alpha_tubulin/` — benchmark (5 CIF + exported PDB)
     - `nocodazole_beta_tubulin/` — benchmark (5 CIF + exported PDB)
-  - See `predictions/protenix/README.md` for full details
+  - `rfaa/`: RoseTTAFold All-Atom predictions (CPPF + nocodazole, PDB + aux.pt)
+  - `chai1/`: Chai-1 predictions (CPPF + nocodazole, 5 ranks each × 6 targets)
+  - `swissdock/`: SwissDock docking results (dimer + α/β monomers, dock4 + extracted PDBs)
+  - `umol/`: Umol predictions (β-tubulin primary, α-tubulin, dimer notebooks)
+  - See each platform's `README.md` for details
 - `cppf/`: CPPF provenance assets (for example, source structure files)
 - `inputs/`: downloaded source inputs and provenance records
 - `legacy_templates/`: archived legacy templates (reference only)

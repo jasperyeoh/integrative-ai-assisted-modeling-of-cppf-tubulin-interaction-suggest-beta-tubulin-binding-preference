@@ -1,0 +1,9 @@
+Date: Fri 27 Dec 2024 02:48:56 
+Ligand: ClC1=CC(=CC=C1)C1=CC=C(O1)C(=O)NC1=CN=CC=C1
+Method: AC
+Target: tub_alpha_1b.pdb
+Sampling exhaustivity: 90
+Cavity prioritization: 70
+Random Initial Conditions: 1
+Box size: 61 57 60
+Box center: 1.0 -4.0 1.0

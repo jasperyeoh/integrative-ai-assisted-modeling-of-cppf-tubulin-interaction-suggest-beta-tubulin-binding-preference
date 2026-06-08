@@ -1,0 +1,11 @@
+@article{Chai-1-Technical-Report,
+	title        = {Chai-1: Decoding the molecular interactions of life},
+	author       = {{Chai Discovery}},
+	year         = 2024,
+	journal      = {bioRxiv},
+	publisher    = {Cold Spring Harbor Laboratory},
+	doi          = {10.1101/2024.10.10.615955},
+	url          = {https://www.biorxiv.org/content/early/2024/10/11/2024.10.10.615955},
+	elocation-id = {2024.10.10.615955},
+	eprint       = {https://www.biorxiv.org/content/early/2024/10/11/2024.10.10.615955.full.pdf}
+}

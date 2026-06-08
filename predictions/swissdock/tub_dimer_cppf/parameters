@@ -1,0 +1,9 @@
+Date: Fri 27 Dec 2024 03:43:58 
+Ligand: ClC1=CC(=CC=C1)C1=CC=C(O1)C(=O)NC1=CN=CC=C1
+Method: AC
+Target: 5ij0.pdb
+Sampling exhaustivity: 90
+Cavity prioritization: 70
+Random Initial Conditions: 1
+Box size: 31 31 30
+Box center: 442.0 390.0 379.0
