@@ -35,6 +35,11 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
   - replicate runs (`rep1`, `rep2`, `rep3`)
   - production MD scripts and logs
   - analysis outputs
+- `revision_exec_6e7b/`: **6E7B supplementary MD** (β-GMPCPP microtubule-lattice state)
+  - Protenix predictions (5 samples, all pLDDT > 94, ipTM > 0.93)
+  - Planned: 2 × 200 ns production MD as control for 5IJ0 main-text simulations
+  - Addresses Reviewer Comment 4.2 (β-nucleotide state dependence)
+  - See `revision_exec_6e7b/README.md` for full details
 - `cppf/`: CPPF provenance assets (for example, source structure files)
 - `inputs/`: downloaded source inputs and provenance records
 - `legacy_templates/`: archived legacy templates (reference only)

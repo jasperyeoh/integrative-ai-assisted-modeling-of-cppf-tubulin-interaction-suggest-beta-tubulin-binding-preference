@@ -1,0 +1,57 @@
+{
+  "data": {
+    "useremail": "operator@example.invalid",
+    "task_info": {
+      "name": "protenix_prediction_6E7B_250526",
+      "model_name": "protenix_base_20250630_v1.0.0",
+      "use_template": true,
+      "use_msa": true,
+      "sequences": [
+        {
+          "proteinChain": {
+            "count": 1,
+            "sequence": "MREIVHIQAGQCGNQIGAKFWEVISDEHGIDPSGNYVGDSDLQLERISVYYNEASSHKYVPRAILVDLEPGTMDSVRSGAFGHLFRPDNFIFGQSGAGNNWAKGHYTEGAELVDSVLDVVRKECENCDCLQGFQLTHSLGGGTGSGMGTLLISKVREEYPDRIMNTFSVVPSPKVSDTVVEPYNATLSIHQLVENTDETYCIDNEALYDICFRTLKLATPTYGDLNHLVSATMSGVTTSLRFPGQLNADLRKLAVNMVPFPRLHFFMPGFAPLTARGSQQYRALTVPELTQQMFDAKNMMAACDPRHGRYLTVATVFRGRMSMKEVDEQMLAIQSKNSSYFVEWIPNNVKVAVCDIPPRGLKMSSTFIGNSTAIQELFKRISEQFTAMFRRKAFLHWYTGEGMDEMEFTEAESNMNDLVSEYQQYQ",
+            "modifications": []
+          }
+        },
+        {
+          "proteinChain": {
+            "count": 1,
+            "sequence": "MRECISIHVGQAGVQIGNACWELYCLEHGIQPDGQMPSDKTIGGGDDSFNTFFSETGAGKHVPRAVFVDLEPTVIDEVRTGTYRQLFHPEQLITGKEDAANNYARGHYTIGKEIIDLVLDRIRKLADQCTGLQGFLVFHSFGGGTGSGFTSLLMERLSVDYGKKSKLEFSIYPAPQVSTAVVEPYNSILTTHTTLEHSDCAFMVDNEAIYDICRRNLDIERPTYTNLNRLISQIVSSITASLRFDGALNVDLTEFQTNLVPYPRIHFPLATYAPVISAEKAYHEQLSVAEITNACFEPANQMVKCDPRHGKYMACCLLYRGDVVPKDVNAAIATIKTKRSIQFVDWCPTGFKVGINYQPPTVVPGGDLAKVQRAVCMLSNTTAIAEAWARLDHKFDLMYAKRAFVHWYVGEGMEEGEFSEAREDMAALEKDYEEVGV",
+            "modifications": []
+          }
+        },
+        {
+          "ligand": {
+            "count": 2,
+            "ligand": "CCD_MG"
+          }
+        },
+        {
+          "ligand": {
+            "count": 1,
+            "ligand": "CCD_G2P"
+          }
+        },
+        {
+          "ligand": {
+            "count": 1,
+            "ligand": "CCD_GTP"
+          }
+        },
+        {
+          "ligand": {
+            "count": 1,
+            "ligand": "ClC1=CC(=CC=C1)C1=CC=C(O1)C(=O)NC1=CN=CC=C1"
+          }
+        }
+      ],
+      "covalent_bonds": [],
+      "constraint": {},
+      "N_sample": 5,
+      "N_cycle": 10,
+      "N_step": 200,
+      "model_seeds": [82770]
+    }
+  }
+}
