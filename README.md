@@ -40,6 +40,15 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
   - Planned: 2 × 200 ns production MD as control for 5IJ0 main-text simulations
   - Addresses Reviewer Comment 4.2 (β-nucleotide state dependence)
   - See `revision_exec_6e7b/README.md` for full details
+- `predictions/`: AI-assisted structure prediction outputs
+  - `protenix/`: all Protenix predictions (CPPF + nocodazole benchmark)
+    - `cppf_ab_tubulin_dimer/` — dimer poses (5 CIF samples + 4 curated PDB poses)
+    - `cppf_alpha_tubulin/` — α-monomer poses (5 CIF + 4 PDB)
+    - `cppf_beta_tubulin/` — β-monomer poses (3 CIF + 3 PDB + confidence JSONs)
+    - `nocodazole_ab_tubulin_dimer/` — benchmark (5 CIF + exported PDB)
+    - `nocodazole_alpha_tubulin/` — benchmark (5 CIF + exported PDB)
+    - `nocodazole_beta_tubulin/` — benchmark (5 CIF + exported PDB)
+  - See `predictions/protenix/README.md` for full details
 - `cppf/`: CPPF provenance assets (for example, source structure files)
 - `inputs/`: downloaded source inputs and provenance records
 - `legacy_templates/`: archived legacy templates (reference only)

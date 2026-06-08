@@ -1,0 +1,48 @@
+#clear everything for the section
+delete all
+
+#colour labeling objects
+cmd.color_deep("marine", 'pose1_beta', 0)
+cmd.color_deep("lightmagenta", 'pose0_alpha', 0)
+cmd.color_deep("aquamarine", 'pose1_CPPF', 0)
+cmd.color_deep("brightorange", 'pose0_Nocodazole', 0)
+
+#after colouring, find any polar contacts between CPPF and the protein 
+cmd.dist("pose2_CPPF_polar_conts","(pose2_CPPF)","(byobj (pose2_CPPF)) and (not (pose2_CPPF))",quiet=1,mode=2,label=0,reset=1);cmd.enable("pose2_CPPF_polar_conts")
+	#(OR, click: A>find > polar contact > to another atom in object)
+
+cmd.show("sticks"    ,"pose2_beta")
+zoom /protenix_job_6e06530a_sample_2/A0/A0 & resi 1, animate=1, buffer=2
+cmd.hide("sticks"    ,"pose2_beta")
+cmd.show("sticks"    ,"sele")
+cmd.wizard("renaming","sele")
+set_name sele,pose2_beta_Thr
+	#(or, click on ur protein: S>sticks; then zoom in and select the stick that contacts with the ligand, and rename it
+	#then, click on aa: L>residue; pressing "ctrl" and click on the aa name to move around)
+
+#click on contact: A>labels #to show distance of binding
+#click using atoms to show atom on compound
+#click: L>atom name
+
+
+#
+load protein_structure.pdb
+load pocket_structure.pdb
+set_name AlphaFold3_abTub_CPPF_pose0,pose0_dimer
+select pocket, protein_structure and resi 45-55  # Adjust residues as needed
+align protein_structure, pocket
+
+#rename the pose from AlphaFold3
+PyMOL>cmd.wizard("renaming","AlphaFold3_abTub_CPPF_pose0")
+PyMOL>set_name AlphaFold3_abTub_CPPF_pose0,pose0_dimer
+#rename pocket from ProteinPlus
+PyMOL>cmd.wizard("renaming","5ij0pdb58288222-8b4a-4e85-ba66-f8f701b1ddc6_P_0_res")
+PyMOL>set_name 5ij0pdb58288222-8b4a-4e85-ba66-f8f701b1ddc6_P_0_res,pocket0_res
+#
+select pocket, beta and resi 244-249 #name the residues on both the predicted pocket and protein together
+#resi 244-249=GQLNADL from beta
+select pocket, pose0_dimer and resi 9-13 #resi 9-13 from alpha
+align pocket0_res, pose0_dimer and pocket #align the predicted pocket with the pose
+
+bg_color white #set the background white
+set cartoon_transparency, 0.60 #make alpha helicase and beta sheet of protein transparent
