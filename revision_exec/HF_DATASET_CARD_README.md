@@ -7,8 +7,13 @@ Source of truth in Git: `https://github.com/GITHUB_NAMESPACE/integrative-ai-assi
 
 ## What this dataset contains
 
-All-atom GROMACS **production trajectories** (`.xtc`) for **CPPF** with **human tubulin**: **three heterodimer replicates** (extended to **~400 ns** per replicate) and **six monomer replicates** (~**200 ns** each: α/β × three replicates).  
-Checksum sidecars: `HF_UPLOAD_SHA256SUMS_all.txt`, `HF_UPLOAD_SHA256SUMS_dimer_extensions.txt` (commit may split uploads across bundles).
+All-atom GROMACS **production trajectories** (`.xtc`) for **CPPF** with **human tubulin**:
+
+- **5IJ0 / soluble curved dimer (main text):** three heterodimer replicates extended to **~400 ns** each.
+- **6E7B / lattice straight dimer (supplementary):** three replicates × **200 ns** each (no cofactors; comparable to main-text 5IJ0 setup).
+- **Monomers:** six replicates (~**200 ns** each: α/β × three replicates).
+
+Checksum sidecars: `HF_UPLOAD_SHA256SUMS_all.txt`, `HF_UPLOAD_SHA256SUMS_dimer_extensions.txt`, `HF_UPLOAD_SHA256SUMS_6e7b.txt` (uploads may be split across bundles).
 
 ---
 
@@ -27,6 +32,22 @@ GROMACS often **keeps the first output basename** when the run is **continued** 
 Part indices **differ between rep1 and rep2/3** because of how extensions were launched (`-noappend`, run numbering).
 
 **Monomers:** `monomer_*_md_200ns.xtc` correspond to **~200 ns** production per replicate (standard naming matches length).
+
+---
+
+## 6E7B supplementary trajectories (lattice straight state)
+
+Reviewer-requested control matching the **6E7B** microtubule-lattice-related conformation. **No GTP/GDP/Mg²⁺** in the MD system (same cofactor-free protocol as main-text 5IJ0 for direct comparability).
+
+| Replicate | Hub filename | Typical on-disk path (`revision_exec_6e7b`) |
+|-----------|--------------|-----------------------------------------------|
+| rep1 | `6e7b_rep1_md_200ns.xtc` | `md/rep1/md_200ns.xtc` |
+| rep2 | `6e7b_rep2_md_200ns.xtc` | `md/rep2/md_200ns.xtc` or `/root/autodl-tmp/rep2_md/md_200ns.xtc` during production |
+| rep3 | `6e7b_rep3_md_200ns.xtc` | `md/rep3/md_200ns.xtc` or `/root/autodl-tmp/rep3_md/md_200ns.xtc` during production |
+
+Unlike the 5IJ0 dimer extensions above, **6E7B files are true 200 ns runs** — `md_200ns.xtc` means 0→200 ns (no continuation segments).
+
+Upload script (after all reps finish): `revision_exec/scripts/huggingface_upload_6e7b_trajectories.sh --all --update-readme`
 
 ---
 

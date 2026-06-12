@@ -93,3 +93,16 @@ revision_exec/monomer_alpha_rep2/
 revision_exec/monomer_alpha_rep3/
 revision_exec/monomer_beta_rep2/
 revision_exec/monomer_beta_rep3/
+
+# 6E7B supplementary MD — large production outputs stay on HF, not Git
+revision_exec_6e7b/md/
+revision_exec_6e7b/logs/
+revision_exec_6e7b/prep/*.gro
+revision_exec_6e7b/prep/*.log
+revision_exec_6e7b/prep/*.cpt
+revision_exec_6e7b/prep/*.edr
+revision_exec_6e7b/prep/*.tpr
+revision_exec_6e7b/prep/#*
+revision_exec_6e7b/*.gro
+revision_exec_6e7b/*.pdb
+revision_exec_6e7b/mdout.mdp

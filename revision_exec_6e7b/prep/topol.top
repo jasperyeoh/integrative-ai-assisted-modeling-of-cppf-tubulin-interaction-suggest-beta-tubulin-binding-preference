@@ -1,0 +1,57 @@
+;
+;	File 'prep/topol.top' was generated
+;	By user: root (0)
+;	On host: autodl-container-e0854686a9-0101412f
+;	At date: Tue Jun  9 13:53:25 2026
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	              :-) GROMACS - gmx pdb2gmx, 2024.5-conda_forge (-:
+;	
+;	Executable:   /root/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx_mpi
+;	Data prefix:  /root/miniconda3/envs/gmx-lite
+;	Working dir:  /root/integrative-ai-assisted-modeling-of-cppf-tubulin-interaction-suggest-beta-tubulin-binding-preferen../../revision_exec_6e7b
+;	Command line:
+;	  gmx pdb2gmx -f prep/protein_only_ab.pdb -o prep/processed.gro -p prep/topol.top -ff amber99sb-ildn -water tip3p -ignh
+;	Force field was read from the standard GROMACS share directory.
+;
+
+; Include forcefield parameters
+#include "amber99sb-ildn.ff/forcefield.itp"
+
+; Include CPPF ligand topology (GAFF2 + RESP2)
+#include "../../revision_exec/input/ligand/CPPF_RESP2.itp"
+
+; Include chain topologies
+#include "topol_Protein_chain_B.itp"
+#include "topol_Protein_chain_A.itp"
+
+#ifdef POSRES
+#include "../../revision_exec/input/ligand/posre_CPPF_RESP2.itp"
+#endif
+
+; Include water topology
+#include "amber99sb-ildn.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "amber99sb-ildn.ff/ions.itp"
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Protein_chain_B     1
+Protein_chain_A     1
+CPPF_RESP2          1
+SOL         51478
+NA               27

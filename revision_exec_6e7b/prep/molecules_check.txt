@@ -1,0 +1,5 @@
+[ molecules ]
+; Compound        #mols
+Protein_chain_B     1
+Protein_chain_A     1
+CPPF_RESP2          1
