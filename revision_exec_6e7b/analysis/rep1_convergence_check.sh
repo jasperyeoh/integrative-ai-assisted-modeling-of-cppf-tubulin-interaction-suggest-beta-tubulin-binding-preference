@@ -20,8 +20,39 @@ eval "$(conda shell.bash hook)"
 conda activate gmx-lite
 
 REP1="md/rep1"
-OUT="analysis/rep1_health"
+# OUT defaults to /root/autodl-tmp/rep1_health to avoid filling the 30G
+# overlay system disk. Override via env var if needed.
+OUT="${OUT:-/root/autodl-tmp/rep1_health}"
+
+# ── Disk + path sanity check ──────────────────────────────
+# PBC correction temporarily writes a 12 GB intermediate xtc.
+# Refuse to start if the OUT path is on overlay (system disk).
 mkdir -p "${OUT}"
+REAL_OUT="$(readlink -f "${OUT}")"
+DISK_INFO="$(df -h "${REAL_OUT}" | tail -1)"
+AVAIL_GB="$(df -BG "${REAL_OUT}" | tail -1 | awk '{print $4}' | tr -d 'G')"
+echo "Output real path: ${REAL_OUT}"
+echo "Disk:             ${DISK_INFO}"
+
+if [[ "${REAL_OUT}" != /root/autodl-tmp/* ]]; then
+    echo ""
+    echo "ERROR: Output path resolves to ${REAL_OUT}"
+    echo "       This is NOT on /root/autodl-tmp/ (the 406G data disk)."
+    echo "       PBC correction will fill the 30G overlay system disk."
+    echo ""
+    echo "FIX: redirect output to autodl-tmp, e.g.:"
+    echo "     OUT=/root/autodl-tmp/rep1_health bash analysis/rep1_convergence_check.sh"
+    exit 1
+fi
+
+if [ "${AVAIL_GB}" -lt 30 ]; then
+    echo ""
+    echo "ERROR: Only ${AVAIL_GB}G free on output disk."
+    echo "       PBC correction needs ~25G headroom (12G intermediate + 12G final)."
+    exit 1
+fi
+echo "Disk check: ${AVAIL_GB}G free — OK."
+echo ""
 
 cd "${REP1}"
 TRJ="md_200ns.xtc"
@@ -32,7 +63,7 @@ if [ ! -f "${TRJ}" ] || [ ! -f "${TPR}" ]; then
     exit 1
 fi
 
-OUT_ABS="$(cd ../../${OUT} && pwd)"
+OUT_ABS="$(readlink -f "${REAL_OUT}")"
 echo "============================================"
 echo " rep1 Convergence Check"
 echo "============================================"
@@ -87,16 +118,24 @@ echo "Backbone" | gmx gyrate \
     -tu ns 2>&1 | tail -3
 
 # ------ 6. H-bond count (CPPF–protein) ------
+# GROMACS 2024 'hbond' rewrote the API; ligand groups often have no
+# detectable donors/acceptors via the new code. Fall back to legacy.
+# H-bond is a secondary metric — failure here does NOT invalidate the verdict.
 echo ""
-echo "[6/6] CPPF–protein H-bonds..."
-echo -e "Other\nProtein" | gmx hbond-legacy \
+echo "[6/6] CPPF–protein H-bonds (legacy first, then new API)..."
+if echo -e "Protein\nOther" | gmx hbond-legacy \
     -s "${TPR}" -f "${CLEAN_TRJ}" \
     -num "${OUT_ABS}/rep1_hbond_num.xvg" \
-    -tu ns 2>&1 | tail -3 || \
-echo -e "Other\nProtein" | gmx hbond \
+    -tu ns 2>/dev/null; then
+    echo "  legacy hbond: OK"
+elif echo -e "Protein\nOther" | gmx hbond \
     -s "${TPR}" -f "${CLEAN_TRJ}" \
     -num "${OUT_ABS}/rep1_hbond_num.xvg" \
-    -tu ns 2>&1 | tail -3
+    -tu ns 2>/dev/null; then
+    echo "  new hbond: OK"
+else
+    echo "  H-bond computation failed — non-critical, continuing."
+fi
 
 # ============================================================
 # VERDICT — Python summary
@@ -196,6 +235,14 @@ print("=" * 88)
 # Overall verdict
 critical = ["Backbone RMSD", "min(CPPF-prot)"]
 crit_conv = [verdicts[k][0] for k in critical if k in verdicts]
+
+# Guard against empty verdict dict (XVG files missing) — was a bug in v1
+if len(crit_conv) < len(critical):
+    missing = [k for k in critical if k not in verdicts]
+    print(f">>> ERROR: critical metrics missing from analysis: {missing}")
+    print(">>> Cannot make a verdict. Check that XVG files were generated.")
+    print(">>> Likely cause: disk full during PBC correction, or trjconv failure.")
+    raise SystemExit(1)
 
 if all(crit_conv):
     print(">>> OVERALL: rep1 has CONVERGED on the binding-relevant metrics.")
