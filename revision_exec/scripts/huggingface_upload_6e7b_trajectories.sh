@@ -22,8 +22,8 @@ UPDATE_README=0
 REPS=()
 
 REP1_XTC="${REP1_XTC:-$ROOT/revision_exec_6e7b/md/rep1/md_200ns.xtc}"
-REP2_XTC="${REP2_XTC:-/root/autodl-tmp/rep2_md/md_200ns.xtc}"
-REP3_XTC="${REP3_XTC:-/root/autodl-tmp/rep3_md/md_200ns.xtc}"
+REP2_XTC="${REP2_XTC:-$ROOT/revision_exec_6e7b/md/rep2/md_200ns.xtc}"
+REP3_XTC="${REP3_XTC:-$ROOT/revision_exec_6e7b/md/rep3/md_200ns.xtc}"
 
 run_hf() {
   if command -v hf >/dev/null 2>&1; then
@@ -55,10 +55,25 @@ hf_upload() {
 }
 
 md_200ns_complete() {
-  local prod_dir="$1"
-  command -v gmx >/dev/null 2>&1 || return 1
+  local prod_dir="$1" gmx_bin
+  gmx_bin="${GMX:-}"
+  if [[ -z "$gmx_bin" ]]; then
+    for c in \
+      "${CONDA_PREFIX:-}/bin.AVX2_256/gmx" \
+      "${CONDA_PREFIX:-}/bin/gmx" \
+      /root/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx \
+      /root/autodl-tmp/miniconda3/envs/gmx-lite/bin.AVX2_256/gmx; do
+      if [[ -x "${c}" ]]; then
+        gmx_bin="${c}"
+        break
+      fi
+    done
+  fi
+  [[ -n "$gmx_bin" && -x "$gmx_bin" ]] || command -v gmx >/dev/null 2>&1 || return 1
+  gmx_bin="${gmx_bin:-gmx}"
   [[ -f "${prod_dir}/md_200ns.cpt" ]] || return 1
-  gmx check -f "${prod_dir}/md_200ns.cpt" 2>&1 | grep -qE 'time 200000(\.[0-9]+)?[[:space:]]'
+  "${gmx_bin}" check -f "${prod_dir}/md_200ns.cpt" 2>&1 | tr -d '\r' \
+    | grep -qE 'time 200000(\.[0-9]+)?'
 }
 
 remote_name() {
