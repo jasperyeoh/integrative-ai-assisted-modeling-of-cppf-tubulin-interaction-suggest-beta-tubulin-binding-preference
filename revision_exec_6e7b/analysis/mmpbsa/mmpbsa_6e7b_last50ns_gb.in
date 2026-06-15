@@ -1,0 +1,30 @@
+# MM-PBSA-GB on 6E7B last 50 ns (150-200 ns) of 200 ns production trajectories.
+# Settings match the 5IJ0 main-text protocol (revision_exec/analysis/mmpbsa/mmpbsa_dimer_rep1_last50ns_gb.in)
+# to ensure direct cross-system comparability.
+#
+# Trajectory: PBC-corrected from run_full_analysis.sh
+#   /root/autodl-tmp/analysis_6e7b/traj/rep{1,2,3}_pbc.xtc
+# Sampling: 200 ns trajectory at 10 ps frame spacing -> 20000 frames total.
+#           Sub-sample last 50 ns (steps 15000-20000) at interval=100 -> ~50 snapshots.
+
+&general
+  sys_name             = "6e7b_last50ns_gb"
+  startframe           = 15000
+  endframe             = 20000
+  interval             = 100
+  forcefields          = "oldff/leaprc.ff99SB,leaprc.gaff"
+  ions_parameters      = 1
+  PBRadii              = 3
+  temperature          = 298.15
+  gmx_path             = ""
+  keep_files           = 2
+  solvated_trajectory  = 1
+  verbose              = 1
+/
+
+&gb
+  igb                  = 5
+  intdiel              = 1.0
+  extdiel              = 78.5
+  saltcon              = 0.0
+/
