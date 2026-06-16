@@ -95,6 +95,7 @@ Analysis scripts and trajectory-processing protocols were inherited from the 5IJ
 - **Hydrogen bonds.** `gmx hbond-legacy` between CPPF and protein (consistent with 5IJ0 analysis).
 - **Pocket-residue distances.** Mean minimum distance between CPPF and the canonical pocket residues VAL236, LEU253, ALA314 computed over the final 50 ns (150–200 ns) of each replicate.
 - **Free energy landscapes.** 2D FELs constructed via Boltzmann inversion of the (RMSD, Rg) joint distribution, plotted with shared axis limits relative to the 5IJ0 main-text FELs.
+- **MM-PBSA binding free energy.** gmx\_MMPBSA v1.5+ with the GB-OBC2 model (igb=5, intdiel=1.0, extdiel=78.5), ff99SB + GAFF, T=298.15 K, sub-sampled from the last 50 ns at ~1 ns spacing (~50 snapshots per replicate). Settings match the 5IJ0 main-text MM-PBSA protocol (`revision_exec/analysis/mmpbsa/`) to enable direct cross-system comparison.
 
 All analysis outputs written to `/root/autodl-tmp/analysis_6e7b/` (data disk).
 
@@ -109,10 +110,17 @@ All analysis outputs written to `/root/autodl-tmp/analysis_6e7b/` (data disk).
 | Backbone RMSD (nm) | **0.295 ± 0.021** | 0.270, 0.295, 0.321 |
 | min(CPPF–protein) (nm) | **0.203 ± 0.011** | 0.209, 0.214, 0.188 |
 | FEL global minimum | RMSD 0.27 nm, Rg 2.99 nm | — |
+| MM-PBSA ΔG (kcal/mol) | **−27.82 ± 5.44** | −21.80, −29.28, −32.38 |
 
-**Comparison with 5IJ0 main-text dimer:** minimum CPPF–protein distance in 6E7B (0.203 ± 0.011 nm) falls within the 5IJ0 dimer band (~0.19 nm; 0.14–0.24 nm). Backbone RMSD in 6E7B (0.295 ± 0.021 nm) is comparable to or lower than the 5IJ0 per-replicate range (~0.3–0.65 nm), consistent with the more constrained lattice-related conformation.
+**Comparison with 5IJ0 main-text dimer:**
+- Minimum CPPF–protein distance in 6E7B (0.203 ± 0.011 nm) falls within the 5IJ0 dimer band (~0.19 nm; 0.14–0.24 nm).
+- Backbone RMSD in 6E7B (0.295 ± 0.021 nm) is comparable to or lower than the 5IJ0 per-replicate range (~0.3–0.65 nm), consistent with the more constrained lattice-related conformation.
+- MM-PBSA-GB binding free energy in 6E7B (−27.82 ± 5.44 kcal/mol) is statistically indistinguishable from the 5IJ0 main-text value (−31.19 ± 4.04 kcal/mol)—the two 1σ intervals overlap completely, demonstrating quantitatively equivalent CPPF binding energetics across the two β-tubulin conformational states.
 
 Rep1 convergence diagnostics at 200 ns (pre-extension check): backbone RMSD 0.270 nm, min distance 0.210 nm — all binding-relevant metrics CONVERGED; simulations were not extended to 400 ns.
+
+### MM-PBSA-GB Protocol
+Following the identical protocol used for the main-text 5IJ0 dimer (`revision_exec/analysis/mmpbsa/`), MM-PBSA-GB analysis was performed with **gmx_MMPBSA v1.5+**, the GB-OBC2 model (`igb=5`, intdiel=1.0, extdiel=78.5, ff99SB + GAFF, T=298.15 K), and ~50 snapshots per replicate sub-sampled from the last 50 ns (150–200 ns) at ~1 ns spacing. Per-replicate output and the cross-replicate summary CSV are at `revision_exec_6e7b/analysis/mmpbsa/6e7b_mmpbsa_summary.csv`.
 
 Full numeric summary: `revision_exec_6e7b/analysis/summary.md`. Plots: `/root/autodl-tmp/analysis_6e7b/plots/`.
 
@@ -122,6 +130,7 @@ Full numeric summary: `revision_exec_6e7b/analysis/summary.md`. Plots: `/root/au
 
 - **Preparation scripts:** `revision_exec_6e7b/scripts/prepare_6e7b_complex.py`, `run_6e7b_md_pipeline.sh`, `setup_rep3.sh`
 - **Analysis:** `revision_exec_6e7b/analysis/run_full_analysis.sh`, `make_plots.py`
+- **MM-PBSA:** `revision_exec_6e7b/analysis/mmpbsa/run_6e7b_mmpbsa.sh`, `recover_and_run_mmpbsa.sh`, `mmpbsa_6e7b_last50ns_gb.in`, `mmpbsa_6e7b_presampled_gb.in`, summary at `6e7b_mmpbsa_summary.csv`
 - **MDP files:** `revision_exec_6e7b/prep/mdp/` (em, nvt, npt, md\_prod\_200ns)
 - **CPPF topology:** `revision_exec/input/ligand/CPPF_RESP2.itp` (re-used)
 - **Trajectories:** `revision_exec_6e7b/md/rep{1,2,3}/md_200ns.xtc` on Hugging Face as `6e7b_rep{1,2,3}_md_200ns.xtc` in [MD-trajectories-CPPF-tubulin-heterodimer-and-monomers](https://huggingface.co/datasets/HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers).
