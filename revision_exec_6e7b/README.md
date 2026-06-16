@@ -54,11 +54,23 @@ All samples show excellent confidence (pLDDT > 94, ipTM > 0.93).
 ## Planned MD Simulation
 
 - **Starting pose:** Protenix sample_0 (rank 1, highest confidence)
+- **Alignment:** Cα RMSD **1.819 Å** to 6E7B template (`prep/alignment_summary.txt`)
 - **Force field:** AMBER99SB-ILDN (protein) + GAFF2/RESP2 (CPPF, reused from 5IJ0)
-- **Cofactors:** GTP (α) + G2P (β) + Mg²⁺ × 2, from 6E7B template
-- **Replicates:** 2 × 200 ns
-- **Analysis:** RMSD, RMSF, binding pocket distances, H-bond, PLIP, MM-PBSA
-- **GPU:** RTX 4090 24GB (cloud, ~50-55 ns/day estimated)
+- **Protocol:** **Cofactor-free** protein+ligand (same as main-text 5IJ0 for direct comparability)
+- **Replicates:** **3 × 200 ns** (complete)
+- **Analysis:** RMSD, min-distance, Rg, H-bond, FEL, MM-PBSA-GB (last 50 ns)
+- **Results:** STABLE binding; ΔG = **−27.82 ± 5.44 kcal/mol** (vs 5IJ0 −31.19 ± 4.04)
+
+## Data deposition
+
+| Asset | Location |
+|-------|----------|
+| Production `.xtc` (3 reps) | [Hugging Face dataset](https://huggingface.co/datasets/HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers) — `6e7b_rep{1,2,3}_md_200ns.xtc` |
+| Production `.tpr`, last-50ns XTC, analysis | Same HF dataset — see `revision_exec/scripts/huggingface_upload_6e7b_reproducibility.sh` |
+| Scripts, topology, plots, XVG | This Git repo under `revision_exec_6e7b/` |
+
+Upload trajectories: `bash revision_exec/scripts/huggingface_upload_6e7b_trajectories.sh --all --update-readme`  
+Upload reproducibility bundle: `bash revision_exec/scripts/huggingface_upload_6e7b_reproducibility.sh --all`
 
 ## Directory Structure
 
@@ -77,11 +89,11 @@ revision_exec_6e7b/
 │           ├── *_sample_4.cif
 │           ├── *_summary_confidence_sample_*.json  ← confidence scores
 │           └── 6E7B_pose0.pse         ← PyMOL session (pose 0 visualization)
-├── prep/                              ← (to be created) topology & solvation
-├── md/                                ← (to be created) production runs
+├── md/                                ← production runs (on disk + HF; gitignored)
 │   ├── rep1/
-│   └── rep2/
-└── analysis/                          ← (to be created) post-MD analysis
+│   ├── rep2/
+│   └── rep3/
+└── analysis/                          ← summary, plots, XVG, MM-PBSA (in git + HF)
 ```
 
 ## Manuscript Integration

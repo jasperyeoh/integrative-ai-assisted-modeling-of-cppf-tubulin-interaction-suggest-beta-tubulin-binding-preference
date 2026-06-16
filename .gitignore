@@ -107,3 +107,7 @@ revision_exec_6e7b/prep/#*
 revision_exec_6e7b/*.gro
 revision_exec_6e7b/*.pdb
 revision_exec_6e7b/mdout.mdp
+# Keep committed analysis artifacts (plots, xvg) for reproducibility
+!revision_exec_6e7b/analysis/**/*.xvg
+!revision_exec_6e7b/analysis/plots/**
+!revision_exec_6e7b/prep/alignment_summary.txt

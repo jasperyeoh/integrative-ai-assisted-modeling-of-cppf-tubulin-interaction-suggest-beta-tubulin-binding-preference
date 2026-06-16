@@ -17,6 +17,9 @@
 427188792	revision_exec/rep3/npt/npt.trr
 427188792	revision_exec/rep3/nvt/nvt.trr
 19648728272	revision_exec/rep3/prod/md_200ns.xtc
+12500000000	revision_exec_6e7b/md/rep1/md_200ns.xtc
+12500000000	revision_exec_6e7b/md/rep2/md_200ns.xtc
+12500000000	revision_exec_6e7b/md/rep3/md_200ns.xtc
 # emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#contacts_protein_ligand.xvg.1#
 # emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#mindist_protein_ligand.xvg.1#
 # emacs_backup	revision_exec/analysis_dimer_rep123_300ns/rep1/#rg_protein.xvg.1#

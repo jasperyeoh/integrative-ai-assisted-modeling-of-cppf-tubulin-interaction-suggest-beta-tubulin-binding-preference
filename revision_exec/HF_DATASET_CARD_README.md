@@ -42,12 +42,25 @@ Reviewer-requested control matching the **6E7B** microtubule-lattice-related con
 | Replicate | Hub filename | Typical on-disk path (`revision_exec_6e7b`) |
 |-----------|--------------|-----------------------------------------------|
 | rep1 | `6e7b_rep1_md_200ns.xtc` | `md/rep1/md_200ns.xtc` |
-| rep2 | `6e7b_rep2_md_200ns.xtc` | `md/rep2/md_200ns.xtc` or `/root/autodl-tmp/rep2_md/md_200ns.xtc` during production |
-| rep3 | `6e7b_rep3_md_200ns.xtc` | `md/rep3/md_200ns.xtc` or `/root/autodl-tmp/rep3_md/md_200ns.xtc` during production |
+| rep2 | `6e7b_rep2_md_200ns.xtc` | `md/rep2/md_200ns.xtc` |
+| rep3 | `6e7b_rep3_md_200ns.xtc` | `md/rep3/md_200ns.xtc` |
 
-Unlike the 5IJ0 dimer extensions above, **6E7B files are true 200 ns runs** — `md_200ns.xtc` means 0→200 ns (no continuation segments).
+**Paired run inputs (required to re-analyze `.xtc`):**
 
-Upload script (after all reps finish): `revision_exec/scripts/huggingface_upload_6e7b_trajectories.sh --all --update-readme`
+| Replicate | Hub filename | On-disk path |
+|-----------|--------------|--------------|
+| rep1 | `6e7b_rep1_md_200ns.tpr` | `revision_exec_6e7b/md/rep1/md_200ns.tpr` |
+| rep2 | `6e7b_rep2_md_200ns.tpr` | `revision_exec_6e7b/md/rep2/md_200ns.tpr` |
+| rep3 | `6e7b_rep3_md_200ns.tpr` | `revision_exec_6e7b/md/rep3/md_200ns.tpr` |
+
+**Last-50 ns subsampled trajectories** (51 frames, MM-PBSA / lightweight re-analysis):  
+`6e7b_rep{N}_md_200ns_last50ns_sub.xtc`
+
+**Analysis outputs** (plots, timeseries XVG, FEL): `analysis_6e7b/` on this Hub.  
+**Scripts & topology mirror:** `revision_exec_6e7b/` on this Hub (production `.xtc` excluded; use flat names above).
+
+Upload: `revision_exec/scripts/huggingface_upload_6e7b_trajectories.sh --all` then  
+`revision_exec/scripts/huggingface_upload_6e7b_reproducibility.sh --all`
 
 ---
 

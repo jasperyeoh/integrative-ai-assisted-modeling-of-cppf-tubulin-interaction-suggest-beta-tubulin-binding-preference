@@ -1,0 +1,5 @@
+6E7B starting structure alignment (Protenix sample_0 → 6E7B template)
+Source: prep/align.log (2026-06-09)
+
+CA RMSD after alignment: 1.819 Å
+Output: prep/complex_start.pdb (6768 protein + 21 ligand atoms, cofactor-free for MD)
