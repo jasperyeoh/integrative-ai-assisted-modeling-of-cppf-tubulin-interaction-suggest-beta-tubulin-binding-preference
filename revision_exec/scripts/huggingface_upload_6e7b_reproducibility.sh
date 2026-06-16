@@ -5,12 +5,13 @@
 #   - 6e7b_rep{N}_md_200ns.tpr          (pair with .xtc for re-analysis)
 #   - 6e7b_rep{N}_md_200ns_last50ns_sub.xtc  (MM-PBSA / lightweight re-analysis)
 #   - analysis_6e7b/                    (plots, timeseries XVG, FEL — from repo or autodl-tmp)
+#   - analysis_6e7b/traj/               (PBC-corrected trajectories, ~14 GB each)
 #   - revision_exec_6e7b/               (scripts, prep, analysis; excludes md/*.xtc)
 #
 # Prereq: hf CLI + ~/.huggingface_token (or HF_TOKEN)
 # Usage:
 #   bash .../huggingface_upload_6e7b_reproducibility.sh --dry-run
-#   bash .../huggingface_upload_6e7b_reproducibility.sh --all
+#   bash .../huggingface_upload_6e7b_reproducibility.sh --pbc
 #   bash .../huggingface_upload_6e7b_reproducibility.sh --tpr --analysis
 #
 set -euo pipefail
@@ -19,6 +20,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 HF_REPO="${HF_DATASET_REPO:-HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers}"
 TOKEN_FILE="${HF_TOKEN_FILE:-$HOME/.huggingface_token}"
 ANALYSIS_SRC="${ANALYSIS_6E7B_SRC:-$ROOT/revision_exec_6e7b/analysis}"
+TRAJ_SRC="${ANALYSIS_6E7B_TRAJ:-/root/autodl-tmp/analysis_6e7b/traj}"
 # Fallback to autodl-tmp if repo copy missing plots
 [[ -d "$ANALYSIS_SRC/plots" ]] || ANALYSIS_SRC="/root/autodl-tmp/analysis_6e7b"
 
@@ -26,6 +28,7 @@ DRY_RUN=0
 DO_TPR=0
 DO_LAST50=0
 DO_ANALYSIS=0
+DO_PBC=0
 DO_MIRROR=0
 
 run_hf() {
@@ -63,14 +66,15 @@ while [[ $# -gt 0 ]]; do
     --tpr) DO_TPR=1; shift ;;
     --last50ns) DO_LAST50=1; shift ;;
     --analysis) DO_ANALYSIS=1; shift ;;
+    --pbc) DO_PBC=1; shift ;;
     --mirror) DO_MIRROR=1; shift ;;
-    --all) DO_TPR=1; DO_LAST50=1; DO_ANALYSIS=1; DO_MIRROR=1; shift ;;
+    --all) DO_TPR=1; DO_LAST50=1; DO_ANALYSIS=1; DO_PBC=1; DO_MIRROR=1; shift ;;
     *) echo "Unknown arg: $1" >&2; exit 2 ;;
   esac
 done
 
-if [[ "$DO_TPR" -eq 0 && "$DO_LAST50" -eq 0 && "$DO_ANALYSIS" -eq 0 && "$DO_MIRROR" -eq 0 ]]; then
-  echo "ERROR: pass --tpr, --last50ns, --analysis, --mirror, or --all" >&2
+if [[ "$DO_TPR" -eq 0 && "$DO_LAST50" -eq 0 && "$DO_ANALYSIS" -eq 0 && "$DO_PBC" -eq 0 && "$DO_MIRROR" -eq 0 ]]; then
+  echo "ERROR: pass --tpr, --last50ns, --analysis, --pbc, --mirror, or --all" >&2
   exit 2
 fi
 
@@ -93,6 +97,10 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
   done
   [[ "$DO_ANALYSIS" -eq 1 && -d "$ANALYSIS_SRC" ]] && \
     echo "  analysis_6e7b/ <= $ANALYSIS_SRC ($(du -sh "$ANALYSIS_SRC" | cut -f1), no traj/)"
+  [[ "$DO_PBC" -eq 1 ]] && for r in 1 2 3; do
+    f="$TRAJ_SRC/rep${r}_pbc.xtc"
+    [[ -f "$f" ]] && echo "  analysis_6e7b/traj/6e7b_rep${r}_pbc.xtc <= $f ($(du -h "$f" | cut -f1))"
+  done
   [[ "$DO_MIRROR" -eq 1 ]] && \
     echo "  revision_exec_6e7b/ <= $ROOT/revision_exec_6e7b (exclude md/*.xtc)"
   exit 0
@@ -154,6 +162,17 @@ if [[ "$DO_ANALYSIS" -eq 1 ]]; then
     src="${ANALYSIS_SRC}/$f"
     [[ -f "$src" ]] || src="$ROOT/revision_exec_6e7b/analysis/summary.md"
     hf_upload "$src" "analysis_6e7b/$f" "Add 6E7B analysis summary"
+  done
+fi
+
+if [[ "$DO_PBC" -eq 1 ]]; then
+  for r in 1 2 3; do
+    f="$TRAJ_SRC/rep${r}_pbc.xtc"
+    key="analysis_6e7b/traj/6e7b_rep${r}_pbc.xtc"
+    [[ -f "$f" ]] || { echo "NOTE: skip $key — missing $f" >&2; continue; }
+    echo "=== Uploading $key ($(du -h "$f" | cut -f1)) ==="
+    hf_upload "$f" "$key" "Add 6E7B rep${r} PBC-corrected trajectory (~14 GB)"
+    grep -q "6e7b_rep${r}_pbc.xtc" "$SUMS" 2>/dev/null || append_sha "$f" "analysis_6e7b/traj/6e7b_rep${r}_pbc.xtc"
   done
 fi
 

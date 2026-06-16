@@ -23,11 +23,11 @@ Dataset: [HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers](h
 | Production trajectories | `6e7b_rep{1,2,3}_md_200ns.xtc` | `huggingface_upload_6e7b_trajectories.sh --all` |
 | Run inputs (TPR) | `6e7b_rep{1,2,3}_md_200ns.tpr` | `huggingface_upload_6e7b_reproducibility.sh --tpr` |
 | Last-50ns subsampled | `6e7b_rep{1,2,3}_md_200ns_last50ns_sub.xtc` | `--last50ns` |
-| Analysis bundle | `analysis_6e7b/{plots,timeseries,fel,summary.md}` | `--analysis` |
+| Analysis bundle | `analysis_6e7b/{plots,timeseries,fel,summary.md,traj/}` | `--analysis` + `--pbc` |
 | Full script mirror | `revision_exec_6e7b/` (no `md/*.xtc`) | `--mirror` |
 | Checksums | `HF_UPLOAD_SHA256SUMS_6e7b.txt` | auto-updated |
 
-**Not on HF (regenerate locally):** PBC-corrected full trajectories (`analysis_6e7b/traj/rep*_pbc.xtc`, ~14 GB each) — run `analysis/run_full_analysis.sh` from raw `.xtc` + `.tpr`.
+**PBC-corrected trajectories:** `analysis_6e7b/traj/6e7b_rep{N}_pbc.xtc` (~14 GB each) — upload via `--pbc`; skip local regeneration if downloading from Hub.
 
 ## Reproduce analysis from scratch
 

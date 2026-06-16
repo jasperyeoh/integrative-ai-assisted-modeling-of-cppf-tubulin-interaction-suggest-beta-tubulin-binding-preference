@@ -56,8 +56,8 @@ Reviewer-requested control matching the **6E7B** microtubule-lattice-related con
 **Last-50 ns subsampled trajectories** (51 frames, MM-PBSA / lightweight re-analysis):  
 `6e7b_rep{N}_md_200ns_last50ns_sub.xtc`
 
-**Analysis outputs** (plots, timeseries XVG, FEL): `analysis_6e7b/` on this Hub.  
-**Scripts & topology mirror:** `revision_exec_6e7b/` on this Hub (production `.xtc` excluded; use flat names above).
+**Analysis outputs** (plots, timeseries XVG, FEL, PBC-corrected traj): `analysis_6e7b/` on this Hub.  
+**Scripts & topology mirror:** `revision_exec_6e7b/` on this Hub (production `.xtc` also at flat root names).
 
 Upload: `revision_exec/scripts/huggingface_upload_6e7b_trajectories.sh --all` then  
 `revision_exec/scripts/huggingface_upload_6e7b_reproducibility.sh --all`
