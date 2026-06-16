@@ -22,8 +22,11 @@ We thank the reviewer for this constructive suggestion. We performed **three ind
 | min(CPPF–protein) distance | **0.203 ± 0.011 nm** | ~0.19 nm (0.14–0.24 nm range) |
 | Per-replicate backbone RMSD | 0.270, 0.295, 0.321 nm | — |
 | Per-replicate min distance | 0.209, 0.214, 0.188 nm | — |
+| MM-PBSA-GB ΔG (last 50 ns) | **−27.82 ± 5.44 kcal/mol** | −31.19 ± 4.04 kcal/mol |
 
 CPPF remained in close contact with the protein throughout all three trajectories (minimum heavy-atom distance consistently below 0.25 nm). The across-replicate spread is modest relative to the 5IJ0 dimer ensemble, and the **minimum CPPF–protein distance matches the main-text 5IJ0 dimer band (0.14–0.24 nm)**. We conclude that CPPF retains a **stable binding mode** in the lattice-related β-tubulin conformation, supporting the conformational-state comparison requested by the reviewer.
+
+**Binding free energy (MM-PBSA-GB, last 50 ns, 150–200 ns):** Using the same GB-OBC2 protocol as the main-text 5IJ0 dimer analysis (igb=5, 51 frames per replicate at 1 ns intervals), the average binding free energy was **−27.82 ± 5.44 kcal/mol** across three replicates (per-replicate ΔG: −21.80, −29.28, −32.38 kcal/mol), comparable in sign and magnitude to the 5IJ0 main-text value of **−31.19 ± 4.04 kcal/mol**.
 
 **Trajectory availability:** All three 6E7B production trajectories (`6e7b_rep{1,2,3}_md_200ns.xtc`) are deposited in the project Hugging Face dataset alongside the 5IJ0 and monomer trajectories: [MD-trajectories-CPPF-tubulin-heterodimer-and-monomers](https://huggingface.co/datasets/HUB_NAMESPACE/MD-trajectories-CPPF-tubulin-heterodimer-and-monomers).
 

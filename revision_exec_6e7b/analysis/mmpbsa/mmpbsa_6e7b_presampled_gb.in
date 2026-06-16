@@ -1,0 +1,20 @@
+&general
+  sys_name             = "6e7b_last50ns_presampled_gb"
+  startframe           = 1
+  endframe             = 999
+  interval             = 1
+  forcefields          = "oldff/leaprc.ff99SB,leaprc.gaff"
+  ions_parameters      = 1
+  PBRadii              = 3
+  temperature          = 298.15
+  gmx_path             = ""
+  keep_files           = 2
+  solvated_trajectory  = 1
+  verbose              = 1
+/
+&gb
+  igb                  = 5
+  intdiel              = 1.0
+  extdiel              = 78.5
+  saltcon              = 0.0
+/

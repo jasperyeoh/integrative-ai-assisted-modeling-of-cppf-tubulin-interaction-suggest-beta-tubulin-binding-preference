@@ -69,6 +69,7 @@ revision_exec/analysis_revision/fel/
 
 # MM-PBSA work directories can be very large; keep inputs/scripts + summary only
 revision_exec/analysis/mmpbsa/work_*/
+revision_exec_6e7b/analysis/mmpbsa/work_*/
 
 # Keep primary docs/scripts/config under version control.
 
