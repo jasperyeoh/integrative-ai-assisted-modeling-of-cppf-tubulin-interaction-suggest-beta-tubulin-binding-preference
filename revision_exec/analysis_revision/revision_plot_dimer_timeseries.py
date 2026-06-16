@@ -40,11 +40,11 @@ from revision_figure_export import save_figure
 from revision_xvg_io import read_xvg_xy, window_stats
 
 DIMER_REPS = ("dimer_rep1", "dimer_rep2", "dimer_rep3")
-PANEL_METRICS: list[tuple[str, str, str]] = [
-    ("rmsd_backbone", "rmsd_backbone.xvg", "Backbone RMSD (nm)"),
-    ("rg", "rg.xvg", "Rg protein (nm)"),
-    ("mindist_pl", "mindist_pl.xvg", "Min dist protein–ligand (nm)"),
-    ("hbond_num", "hbond_num.xvg", "H-bonds (#)"),
+PANEL_METRICS: list[tuple[str, str, str, str]] = [
+    ("rmsd_backbone", "rmsd_backbone.xvg", "Backbone RMSD (nm)", "Backbone RMSD"),
+    ("rg", "rg.xvg", "Rg protein (nm)", "Radius of gyration"),
+    ("mindist_pl", "mindist_pl.xvg", "Min dist protein–ligand (nm)", "Min dist protein–ligand"),
+    ("hbond_num", "hbond_num.xvg", "H-bonds (#)", "H-bonds"),
 ]
 
 def _apply_plos_style() -> None:
@@ -178,18 +178,23 @@ def run_panels(args: argparse.Namespace) -> None:
     raw = Path(args.raw_root)
     colors = ("#0072B2", "#D55E00", "#009E73")
     labels = ("rep1", "rep2", "rep3")
+    panel_titles = list(args.panel_titles) if args.panel_titles else [t for *_rest, t in PANEL_METRICS]
+    if len(panel_titles) != 4:
+        raise SystemExit("--panel-titles requires exactly 4 values")
     fig, axes = plt.subplots(2, 2, figsize=(10.5, 7.2))
     t_min = 0.0
     t0w = max(0.0, args.t_end_ns - args.window_ns)
     t1w = args.t_end_ns
 
-    for ax, (metric, fname, ylab) in zip(axes.ravel(), PANEL_METRICS):
+    for ax, (metric, fname, ylab, _default_title), panel_title in zip(
+        axes.ravel(), PANEL_METRICS, panel_titles
+    ):
         data: list[tuple[str, np.ndarray, np.ndarray]] = []
         for rep, lab in zip(DIMER_REPS, labels):
             p = raw / rep / fname
             if not p.is_file():
                 ax.text(0.5, 0.5, f"missing\n{p.name}", ha="center", va="center", transform=ax.transAxes)
-                ax.set_title(metric)
+                ax.set_title(panel_title)
                 continue
             t, y = read_xvg_xy(p)
             data.append((lab, t, y))
@@ -204,7 +209,7 @@ def run_panels(args: argparse.Namespace) -> None:
             ax.plot(t, y, color=colors[i % len(colors)], lw=0.85, label=lab, alpha=0.95)
         ax.set_xlim(t_min, t_max)
         ax.set_ylabel(ylab)
-        ax.set_title(metric)
+        ax.set_title(panel_title)
         ax.grid(True, alpha=0.25)
         ax.legend(loc="best", fontsize=7)
 
@@ -213,7 +218,8 @@ def run_panels(args: argparse.Namespace) -> None:
 
     for ax in axes[1, :]:
         ax.set_xlabel("Time (ns)")
-    fig.suptitle("Heterodimer — three replicates (convergence)", fontsize=12)
+    suptitle = args.suptitle or "Heterodimer — three replicates (convergence)"
+    fig.suptitle(suptitle, fontsize=12)
     fig.tight_layout()
     args.out_fig.parent.mkdir(parents=True, exist_ok=True)
     save_figure(fig, args.out_fig, dpi=args.dpi, fig_format=args.fig_format)
@@ -235,7 +241,7 @@ def run_panels(args: argparse.Namespace) -> None:
                 ],
             )
             w.writeheader()
-            for metric, fname, _yl in PANEL_METRICS:
+            for metric, fname, _ylab, _title in PANEL_METRICS:
                 for rep, lab in zip(DIMER_REPS, labels):
                     p = raw / rep / fname
                     if not p.is_file():
@@ -274,6 +280,18 @@ def main() -> None:
     ap.add_argument("--xlabel", default="Time (ns)")
     ap.add_argument("--ylabel", default="RMSD (nm)")
     ap.add_argument("--title", default="Heterodimer — backbone RMSD (three replicates)")
+    ap.add_argument(
+        "--suptitle",
+        default=None,
+        help="(panels) figure suptitle; default: Heterodimer — three replicates (convergence)",
+    )
+    ap.add_argument(
+        "--panel-titles",
+        nargs=4,
+        metavar=("T_A", "T_B", "T_C", "T_D"),
+        default=None,
+        help="(panels) subplot titles for A–D (default: short names from PANEL_METRICS)",
+    )
     ap.add_argument("--raw-root", type=Path, help="(panels) raw_xvg directory")
     ap.add_argument("--out-fig", type=Path, required=True)
     ap.add_argument("--out-csv", type=Path, default=None, help="required for single; optional for panels")

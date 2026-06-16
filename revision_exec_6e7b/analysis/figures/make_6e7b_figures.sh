@@ -107,6 +107,8 @@ echo "[2/4] Time-series 2x2 panels (Fig-4 style)..."
 python "$DIMER_TS_PY" --mode panels \
     --raw-root "$STAGE" \
     --t-end-ns 200 --window-ns 50 \
+    --suptitle "6E7B Supplementary Simulations" \
+    --panel-titles "Backbone RMSD" "Radius of gyration" "Min CPPF–protein distance" "CPPF–protein H-bonds" \
     --out-fig "$OUT/fig_S_6e7b_timeseries_panels.${FIG_FORMAT}" \
     --out-csv "$OUT/fig_S_6e7b_timeseries_panels.csv" \
     --dpi "$DPI" \
@@ -233,8 +235,6 @@ for i, (m, s) in enumerate(zip(means, sds)):
             ha="center", va="top", fontsize=10, fontweight="bold")
 
 ax.set_title("MM-PBSA-GB binding free energy: 5IJ0 vs 6E7B (3 replicates each)")
-ax.text(0.01, 0.99, "A", transform=ax.transAxes,
-        fontsize=22, fontweight="bold", ha="left", va="top")
 
 fig.tight_layout()
 
