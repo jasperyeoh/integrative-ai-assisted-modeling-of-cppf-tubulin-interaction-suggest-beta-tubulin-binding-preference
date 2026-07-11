@@ -35,10 +35,13 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
   - replicate runs (`rep1`, `rep2`, `rep3`)
   - production MD scripts and logs
   - analysis outputs
-- `revision_exec_6e7b/`: **6E7B supplementary MD** (β-GMPCPP microtubule-lattice state)
-  - Protenix predictions (5 samples, all pLDDT > 94, ipTM > 0.93)
-  - Planned: 2 × 200 ns production MD as control for 5IJ0 main-text simulations
-  - Addresses Reviewer Comment 4.2 (β-nucleotide state dependence)
+- `revision_exec_6e7b/`: **6E7B supplementary MD** (β-GTP / microtubule-lattice-related straight conformation) — **complete**
+  - Protenix predictions (5 samples, all pLDDT > 94, ipTM > 0.93), starting pose aligned to 6E7B (Cα RMSD 1.82 Å)
+  - 3 × 200 ns production MD, cofactor-free protocol identical to the 5IJ0 main-text simulations
+  - MM-PBSA-GB binding free energy: −27.82 ± 5.44 kcal/mol (statistically indistinguishable from 5IJ0's −31.19 ± 4.04 kcal/mol)
+  - Directly addresses Reviewer Comment 4.2 (β-nucleotide-state / conformational-state dependence) with completed data, not future work
+  - `analysis/figures/`: publication-quality TIFFs used as Supplementary Figs. S7–S9
+  - `REPRODUCIBILITY.md`: full clone-and-rerun checklist (Git + Hugging Face)
   - See `revision_exec_6e7b/README.md` for full details
 - `predictions/`: AI-assisted structure prediction outputs
   - `protenix/`: all Protenix predictions (CPPF + nocodazole benchmark)
