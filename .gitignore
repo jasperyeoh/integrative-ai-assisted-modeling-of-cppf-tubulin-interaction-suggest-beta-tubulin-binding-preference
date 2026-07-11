@@ -9,6 +9,11 @@ __pycache__/
 .huggingface_token
 revision_exec/scripts/HF_DATASET_REPO.env
 
+# Umol model weights (~354MB each; download separately from the Umol repo,
+# see predictions/umol/README.md). Path-scoped, not a blanket *.npy rule --
+# Chai-1's small per-rank PAE .npy files (predictions/chai1/) must stay tracked.
+predictions/umol/**/params*.npy
+
 # Environment and local IDE
 .env
 .venv/
