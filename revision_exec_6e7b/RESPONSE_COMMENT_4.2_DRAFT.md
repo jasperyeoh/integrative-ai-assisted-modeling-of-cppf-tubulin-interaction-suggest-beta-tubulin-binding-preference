@@ -18,8 +18,8 @@ We thank the reviewer for this constructive suggestion. We performed **three ind
 
 | Metric | 6E7B (this work) | 5IJ0 main-text (reference) |
 |--------|------------------|----------------------------|
-| Backbone RMSD | **0.295 ± 0.021 nm** | per-rep ~0.3–0.65 nm |
-| min(CPPF–protein) distance | **0.203 ± 0.011 nm** | ~0.19 nm (0.14–0.24 nm range) |
+| Backbone RMSD | **0.295 ± 0.026 nm** | per-rep ~0.3–0.65 nm |
+| min(CPPF–protein) distance | **0.203 ± 0.014 nm** | ~0.19 nm (0.14–0.24 nm range) |
 | Per-replicate backbone RMSD | 0.270, 0.295, 0.321 nm | — |
 | Per-replicate min distance | 0.209, 0.214, 0.188 nm | — |
 | MM-PBSA-GB ΔG (last 50 ns) | **−27.82 ± 5.44 kcal/mol** | −31.19 ± 4.04 kcal/mol |

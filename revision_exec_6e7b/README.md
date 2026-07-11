@@ -64,8 +64,8 @@ All samples show excellent confidence (pLDDT > 94, ipTM > 0.93).
 
 | Metric | 6E7B (this work) | 5IJ0 (main text) | Verdict |
 |--------|-------------------|-------------------|---------|
-| Backbone RMSD | 0.295 ± 0.021 nm | 0.30 / 0.55 / 0.65 nm (per-rep) | 6E7B comparable-to-better |
-| min(CPPF–protein) | 0.203 ± 0.011 nm | 0.14–0.24 nm | Within 5IJ0 range |
+| Backbone RMSD | 0.295 ± 0.026 nm | 0.30 / 0.55 / 0.65 nm (per-rep) | 6E7B comparable-to-better |
+| min(CPPF–protein) | 0.203 ± 0.014 nm | 0.14–0.24 nm | Within 5IJ0 range |
 | FEL global minimum | RMSD 0.27 nm, Rg 2.99 nm | RMSD 0.43 nm, Rg 2.19 nm (β) | Comparable basin localization |
 | **MM-PBSA-GB ΔG** | **−27.82 ± 5.44 kcal/mol** | **−31.19 ± 4.04 kcal/mol** | **1σ intervals overlap — statistically indistinguishable** |
 

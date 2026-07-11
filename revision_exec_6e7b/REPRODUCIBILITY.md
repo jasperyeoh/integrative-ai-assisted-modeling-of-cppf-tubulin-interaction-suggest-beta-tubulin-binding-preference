@@ -43,7 +43,7 @@ bash analysis/mmpbsa/recover_and_run_mmpbsa.sh  # → MM-PBSA CSV
 
 | Metric | 6E7B | 5IJ0 reference |
 |--------|------|----------------|
-| Backbone RMSD | 0.295 ± 0.021 nm | ~0.3–0.65 nm |
-| min(CPPF–prot) | 0.203 ± 0.011 nm | ~0.19 nm |
+| Backbone RMSD | 0.295 ± 0.026 nm | ~0.3–0.65 nm |
+| min(CPPF–prot) | 0.203 ± 0.014 nm | ~0.19 nm |
 | MM-PBSA ΔG | −27.82 ± 5.44 kcal/mol | −31.19 ± 4.04 kcal/mol |
 | Verdict | **STABLE** | — |
