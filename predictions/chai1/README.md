@@ -1,51 +1,15 @@
 # Chai-1 Predictions
 
-Protein-ligand complex predictions generated using **Chai-1** [Chai Discovery, 2024].
+Protein-ligand complex predictions generated using **Chai-1** [Chai Discovery, 2024] for six targets: CPPF and nocodazole (benchmark), each against the α/β-heterodimer, α-tubulin monomer, and β-tubulin monomer.
 
-Chai-1 is a multi-modal foundation model for molecular structure prediction. In this study,
-Chai-1 predictions were compared against Protenix and RFAA but showed notably less stable
-pose geometries (see main text).
+Chai-1 was evaluated alongside the other AI-assisted platforms (Protenix, RFAA, Umol) during initial method screening, but was **not used as primary evidence**: predicted pose geometries were notably less stable than Protenix/RFAA. See main-text Methods for the full comparison.
 
-## CPPF Predictions
+These outputs are retained here for provenance and transparency, consistent with the study's data-deposition policy — not as a claim of methodological equivalence to the platforms used for primary analysis.
 
-### `cppf_ab_tubulin_dimer/`
-- **Target:** α/β-tubulin heterodimer + CPPF
-- **Ranks:** 5 predicted poses (rank_0 to rank_4)
-- **Files:** CIF structures, PAE (predicted aligned error) matrices (.npy), score JSONs, PyMOL visualizations
+## Contents
 
-### `cppf_alpha_tubulin/`
-- **Target:** α-tubulin monomer (TUBA1B) + CPPF
-- **Ranks:** 5 predicted poses
+Each target directory (`cppf_{ab_tubulin_dimer,alpha_tubulin,beta_tubulin}/`, `nocodazole_{ab_tubulin_dimer,alpha_tubulin,beta_tubulin}/`) contains 5 ranked poses (rank_0–rank_4): predicted structures (`pred.rank_*.cif`), predicted aligned error matrices (`pae.rank_*.npy`), confidence scores (`scores.rank_*.json`), and PyMOL visualizations (`*.png`, `*.pse`).
 
-### `cppf_beta_tubulin/`
-- **Target:** β-tubulin monomer (TUBB3) + CPPF
-- **Ranks:** 5 predicted poses
+## Manuscript Reference
 
-## Nocodazole Benchmark
-
-### `nocodazole_ab_tubulin_dimer/`
-- **Target:** α/β-tubulin heterodimer + nocodazole
-- **Ranks:** 5 predicted poses
-
-### `nocodazole_alpha_tubulin/`
-- **Target:** α-tubulin monomer + nocodazole
-- **Ranks:** 5 predicted poses
-
-### `nocodazole_beta_tubulin/`
-- **Target:** β-tubulin monomer + nocodazole
-- **Ranks:** 5 predicted poses
-
-## File Types
-
-| Extension | Description |
-|-----------|-------------|
-| `pred.rank_*.cif` | Predicted structures in mmCIF format |
-| `pae.rank_*.npy` | Predicted aligned error matrices (NumPy) |
-| `scores.rank_*.json` | Confidence scores per rank |
-| `*.png` | PyMOL visualization snapshots with annotated residues |
-| `*.pse` | PyMOL session files |
-
-## Manuscript References
-
-- Main text mentions Chai-1 predictions were "notably less stable" compared to Protenix and RFAA
-- **Supplementary Fig. S4:** All-platform structural alignment comparison
+Main text: Chai-1 predictions were "notably less stable" compared to Protenix and RFAA — see Supplementary Fig. S4 for the all-platform structural alignment comparison.
