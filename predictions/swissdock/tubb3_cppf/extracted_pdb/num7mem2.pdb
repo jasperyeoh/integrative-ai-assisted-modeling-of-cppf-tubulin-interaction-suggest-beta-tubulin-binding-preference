@@ -1,0 +1,44 @@
+REMARK FILE_NAME : seed-1-65-0-3-3.crd
+REMARK CLUSTER_NUM : 7
+REMARK CLUSTER_MEMBER : 2
+REMARK MEMBER_ENERGY : 20.897581
+REMARK MEMBER_SCORE : 20.897581
+REMARK SP-dG : -7.0545
+REMARK Polar : 14.5241
+REMARK Nonpolar : -41.7909
+REMARK Inter : -27.2668
+REMARK Polar15 : -20.0047
+REMARK RMSD : 15.3530
+ATOM   6926  CL1 LIG     1      -6.470   6.240 -13.022  1.00  1.86      LIG 
+ATOM   6927  C1  LIG     1      -5.127   5.433 -12.310  1.00  1.99      LIG 
+ATOM   6928  C2  LIG     1      -3.893   5.471 -12.951  1.00  1.99      LIG 
+ATOM   6929  C3  LIG     1      -2.790   4.800 -12.400  1.00  1.99      LIG 
+ATOM   6930  C4  LIG     1      -2.964   4.057 -11.221  1.00  1.99      LIG 
+ATOM   6931  C5  LIG     1      -4.204   4.028 -10.575  1.00  1.99      LIG 
+ATOM   6932  C6  LIG     1      -5.281   4.730 -11.116  1.00  1.99      LIG 
+ATOM   6933  C7  LIG     1      -1.475   4.951 -13.001  1.00  2.09      LIG 
+ATOM   6934  C8  LIG     1      -1.121   5.060 -14.330  1.00  2.09      LIG 
+ATOM   6935  C9  LIG     1      -0.132   6.064 -14.417  1.00  2.09      LIG 
+ATOM   6936  C10 LIG     1       0.129   6.469 -13.124  1.00  2.09      LIG 
+ATOM   6937  O1  LIG     1      -0.628   5.732 -12.257  1.00  1.85      LIG 
+ATOM   6938  C11 LIG     1       0.886   7.577 -12.608  1.00  2.00      LIG 
+ATOM   6939  O2  LIG     1       1.369   7.612 -11.482  1.00  1.70      LIG 
+ATOM   6940  N1  LIG     1       0.922   8.630 -13.495  1.00  1.85      LIG 
+ATOM   6941  C12 LIG     1       1.774   9.749 -13.423  1.00  1.99      LIG 
+ATOM   6942  C13 LIG     1       2.970   9.790 -12.682  1.00  1.99      LIG 
+ATOM   6943  N2  LIG     1       3.842  10.836 -12.694  1.00  1.85      LIG 
+ATOM   6944  C14 LIG     1       3.461  11.919 -13.428  1.00  1.99      LIG 
+ATOM   6945  C15 LIG     1       2.293  11.977 -14.195  1.00  1.99      LIG 
+ATOM   6946  C16 LIG     1       1.452  10.858 -14.209  1.00  1.99      LIG 
+ATOM   6947  H1  LIG     1      -3.794   6.035 -13.872  1.00  1.32      LIG 
+ATOM   6948  H2  LIG     1      -2.131   3.499 -10.806  1.00  1.32      LIG 
+ATOM   6949  H3  LIG     1      -4.340   3.446  -9.670  1.00  1.32      LIG 
+ATOM   6950  H4  LIG     1      -6.246   4.703 -10.625  1.00  1.32      LIG 
+ATOM   6951  H5  LIG     1      -1.565   4.507 -15.145  1.00  1.32      LIG 
+ATOM   6952  H6  LIG     1       0.354   6.423 -15.314  1.00  1.32      LIG 
+ATOM   6953  H7  LIG     1       0.235   8.633 -14.239  1.00  0.22      LIG 
+ATOM   6954  H8  LIG     1       3.278   8.941 -12.088  1.00  1.32      LIG 
+ATOM   6955  H9  LIG     1       4.119  12.777 -13.381  1.00  1.32      LIG 
+ATOM   6956  H10 LIG     1       2.031  12.874 -14.749  1.00  1.32      LIG 
+ATOM   6957  H11 LIG     1       0.536  10.876 -14.790  1.00  1.32      LIG 
+TER
