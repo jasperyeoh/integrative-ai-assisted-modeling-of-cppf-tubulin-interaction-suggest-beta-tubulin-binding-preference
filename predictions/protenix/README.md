@@ -21,14 +21,14 @@ Predicted binding poses of CPPF with tubulin systems using the 5IJ0 (human alpha
 - **Target:** alpha-tubulin monomer (TUBA1B) + CPPF
 - **Job ID:** `protenix_job_4b907ebe` (seed 12330)
 - **Samples:** 5 raw CIF outputs (sample_0 to sample_4)
-- **Curated poses:** 4 PDB files (pose 0-3)
+- **Curated poses:** 6 PDB files — pose 0-3, plus zoomed-in ASN257 contact views for pose 0 and pose 1 (`*_Asn257.pdb`)
   - Key residue: ASN257 (H-bond at ~3.0 A)
 - **Manuscript:** Fig. 2B, Table 1 (alpha monomer rows)
 
 ### `cppf_beta_tubulin/`
 - **Target:** beta-tubulin monomer (TUBB3) + CPPF
 - **Job ID:** `protenix_job_6e06530a`
-- **Samples:** 3 raw CIF outputs (sample_0 to sample_2)
+- **Samples:** 5 raw CIF outputs (sample_0 to sample_4)
 - **Confidence JSONs:** 5 files (confidence_sample_0 to _4, renamed from 8.3 short filenames)
 - **Curated poses:** 3 PDB files (pose 0-2)
   - Key residues: TYR200, GLU198, LEU253, VAL236
@@ -43,21 +43,21 @@ with an experimentally determined crystal structure binding mode (PDB: 5CA1).
 ### `nocodazole_ab_tubulin_dimer/`
 - **Target:** alpha/beta-tubulin heterodimer + nocodazole
 - **Samples:** 5 raw CIF outputs
-- **Exported PDB:** 2 curated poses
-- **Visualizations:** 4 PNG + 4 PSE files
+- **Exported PDB:** 2 curated poses, in `exported_pdb/` (`pose_0.pdb`, `pose_1.pdb`)
+- **Visualizations:** 4 PNG + 3 PSE files (`pose_3.pse` was not generated; `pose_3.png` is present)
 - **Confidence JSONs:** 5 files
 
 ### `nocodazole_alpha_tubulin/`
 - **Target:** alpha-tubulin monomer (TUBA1B) + nocodazole
 - **Samples:** 5 raw CIF outputs
-- **Exported PDB:** 2 curated poses
+- **Exported PDB:** 2 curated poses, in `exported_pdb/` (`pose_0.pdb`, `pose_1.pdb`)
 - **Visualizations:** 2 PNG + 3 PSE files
 - **Confidence JSONs:** 5 files
 
 ### `nocodazole_beta_tubulin/`
 - **Target:** beta-tubulin monomer (TUBB3) + nocodazole
 - **Samples:** 5 raw CIF outputs
-- **Exported PDB:** 3 curated poses
+- **Exported PDB:** 3 curated poses, in `exported_pdb/` (`pose_0.pdb`, `pose_1.pdb`, `pose_2.pdb`)
 - **Visualizations:** 2 PNG + 3 PSE files
 - **Confidence JSONs:** 5 files
 
