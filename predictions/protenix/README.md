@@ -1,7 +1,7 @@
 # Protenix Structure Predictions
 
 AI-assisted protein-ligand complex predictions generated using **Protenix** (ByteDance).
-These predictions underlie Figures 2, 7, Table 1, and Supplementary Figures S2-S4 in the manuscript.
+These predictions underlie Figures 2, Table 1, Supplementary Figures S2-S4, and Supplementary Fig. S10 (the colchicine-site structural comparison, relocated from the main text) in the manuscript.
 
 ## CPPF Predictions (5IJ0 Template)
 
