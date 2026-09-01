@@ -2,7 +2,7 @@
 # Serial queue: rep1 → rep2 prep → rep2 → rep3 prep → rep3 (outputs on autodl-tmp)
 set -eo pipefail
 
-REPO="/root/integrative-ai-assisted-modeling-of-cppf-tubulin-interaction-suggest-beta-tubulin-binding-preference"
+REPO="${REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 WORK="${REPO}/revision_exec_6e7b"
 PREP="${WORK}/prep"
 REP2_MD="/root/autodl-tmp/rep2_md"

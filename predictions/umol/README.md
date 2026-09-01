@@ -15,7 +15,7 @@ protein sequence and ligand SMILES, using MSA features for improved accuracy.
   - `tubb3.a3m` — Multiple sequence alignment
   - `tubb3_pred_raw.pdb` — Raw predicted structure
   - `ligand_plddt.csv` — Ligand confidence scores
-- **Manuscript:** Supplementary Fig. S3A (independently confirms β-tubulin binding mode)
+- **Manuscript:** Supplementary Fig. S3A (shows a comparable predicted β-tubulin binding mode)
 
 ### `tuba1b_cppf/`
 - **Target:** α-tubulin monomer (TUBA1B) + CPPF
@@ -42,7 +42,7 @@ protein sequence and ligand SMILES, using MSA features for improved accuracy.
 
 ## Manuscript References
 
-- **Supplementary Fig. S3A:** Umol-predicted CPPF binding on β-tubulin, independently
-  confirming the VAL236-centered binding pocket identified by Protenix and RFAA
+- **Supplementary Fig. S3A:** Umol-predicted CPPF binding on β-tubulin, showing a
+  VAL236-centered pose comparable to the Protenix and RFAA predictions
 - **Main text:** "Umol independently predicted a comparable CPPF binding mode on the
   β-tubulin monomer, centering around residue VAL236"

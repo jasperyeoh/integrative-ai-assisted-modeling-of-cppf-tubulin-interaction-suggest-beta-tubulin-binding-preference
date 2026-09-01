@@ -115,7 +115,7 @@ All analysis outputs written to `/root/autodl-tmp/analysis_6e7b/` (data disk).
 **Comparison with 5IJ0 main-text dimer:**
 - Minimum CPPF–protein distance in 6E7B (0.203 ± 0.014 nm) falls within the 5IJ0 dimer band (~0.19 nm; 0.14–0.24 nm).
 - Backbone RMSD in 6E7B (0.295 ± 0.026 nm) is comparable to or lower than the 5IJ0 per-replicate range (~0.3–0.65 nm), consistent with the more constrained lattice-related conformation.
-- MM-PBSA-GB binding free energy in 6E7B (−27.82 ± 5.44 kcal/mol) is statistically indistinguishable from the 5IJ0 main-text value (−31.19 ± 4.04 kcal/mol)—the two 1σ intervals overlap completely, demonstrating quantitatively equivalent CPPF binding energetics across the two β-tubulin conformational states.
+- MM-PBSA-GB binding free energy in 6E7B (−27.82 ± 5.44 kcal/mol) is comparable to the 5IJ0 main-text value (−31.19 ± 4.04 kcal/mol), with overlapping 1σ intervals across the two β-tubulin conformational states.
 
 Rep1 convergence diagnostics at 200 ns (pre-extension check): backbone RMSD 0.270 nm, min distance 0.210 nm — all binding-relevant metrics CONVERGED; simulations were not extended to 400 ns.
 

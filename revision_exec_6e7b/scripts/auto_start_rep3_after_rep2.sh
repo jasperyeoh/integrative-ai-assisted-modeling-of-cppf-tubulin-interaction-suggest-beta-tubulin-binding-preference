@@ -2,7 +2,7 @@
 # Wait for rep2 to finish, prep rep3, then launch 200 ns production on autodl-tmp.
 set -eo pipefail
 
-REPO="/root/integrative-ai-assisted-modeling-of-cppf-tubulin-interaction-suggest-beta-tubulin-binding-preference"
+REPO="${REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 WORK="${REPO}/revision_exec_6e7b"
 SCRIPT_DIR="${WORK}/scripts"
 REP2_MD="/root/autodl-tmp/rep2_md"

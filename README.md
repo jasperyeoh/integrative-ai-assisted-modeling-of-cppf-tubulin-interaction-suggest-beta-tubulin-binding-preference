@@ -1,4 +1,4 @@
-# Integrative AI-Assisted Modeling of CPPF-Tubulin Interactions
+# Integrative AI-Assisted Modeling Suggests CPPF Binding at a Composite α/β-Tubulin Interface Pocket Dominated by β-Tubulin Contacts
 
 This repository contains the computational workflow and analysis assets for a CPPF-tubulin molecular modeling study.
 
@@ -16,7 +16,7 @@ This repository documents a structure-based computational workflow combining:
 
 ## Main Computational Finding
 
-Across the current modeling and MD evidence in this study, CPPF shows a **more stable and favorable interaction pattern with beta-tubulin** than with alpha-tubulin-containing alternatives, supporting a beta-tubulin binding preference hypothesis.
+Across the current modeling and MD evidence in this study, CPPF is predicted to occupy a **composite alpha/beta-tubulin interfacial pocket with dominant contact contributions from beta-tubulin residues**. Isolated-monomer comparisons show more favorable energetics and deeper, broader free-energy minima for beta-tubulin than for alpha-tubulin. These computational results provide structural hypotheses that require experimental validation.
 
 ## Repository Guide
 
@@ -38,7 +38,7 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 - `revision_exec_6e7b/`: **6E7B supplementary MD** (β-GTP / microtubule-lattice-related straight conformation) — **complete**
   - Protenix predictions (5 samples, all pLDDT > 94, ipTM > 0.93), starting pose aligned to 6E7B (Cα RMSD 1.82 Å)
   - 3 × 200 ns production MD, cofactor-free protocol identical to the 5IJ0 main-text simulations
-  - MM-PBSA-GB binding free energy: −27.82 ± 5.44 kcal/mol (statistically indistinguishable from 5IJ0's −31.19 ± 4.04 kcal/mol)
+  - MM-PBSA-GB binding free energy: −27.82 ± 5.44 kcal/mol (comparable to 5IJ0's −31.19 ± 4.04 kcal/mol, with overlapping 1σ intervals)
   - Directly addresses Reviewer Comment 4.2 (β-nucleotide-state / conformational-state dependence) with completed data, not future work
   - `analysis/figures/`: publication-quality TIFFs used as Supplementary Figs. S7–S9
   - `REPRODUCIBILITY.md`: full clone-and-rerun checklist (Git + Hugging Face)
@@ -54,7 +54,7 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
   - `rfaa/`: RoseTTAFold All-Atom predictions (CPPF + nocodazole, PDB + aux.pt)
   - `chai1/`: Chai-1 predictions (CPPF + nocodazole, 5 ranks each × 6 targets)
   - `swissdock/`: SwissDock docking results (dimer + α/β monomers, dock4 + extracted PDBs)
-  - `umol/`: Umol predictions (β-tubulin primary, α-tubulin, dimer notebooks)
+  - `umol/`: Umol predictions (β-tubulin, α-tubulin, and dimer notebooks)
   - See each platform's `README.md` for details
 - `cppf/`: CPPF provenance assets (for example, source structure files)
 - `inputs/`: downloaded source inputs and provenance records
@@ -63,7 +63,7 @@ Across the current modeling and MD evidence in this study, CPPF shows a **more s
 
 ### Key Files
 
-- Starting pose (AI-assisted): `Protenix/CPPF/ab Tub-CPPF/AlphaFold3_abTub_CPPF_pose1_V236_ptm0.96802771091.pdb`
+- Starting pose (AI-assisted): `predictions/protenix/cppf_ab_tubulin_dimer/AlphaFold3_abTub_CPPF_pose1_V236_ptm0.96802771091.pdb`
 - Tubulin template structure: `revision_exec/5IJ0.pdb`
 - Main topology entry: `revision_exec/prep/gate_topol.top`
 - Production MDP: `revision_exec/input/mdp/md_prod_200ns.mdp`
@@ -114,4 +114,3 @@ On the **Heterodimer (dimer) replicates**, the first production segment is still
 ## Citation
 
 If you use this repository, please cite the associated publication when it becomes available. Until then, cite this repository and the public trajectory dataset URL in any derivative work.
-

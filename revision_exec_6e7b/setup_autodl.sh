@@ -23,7 +23,7 @@ echo ""
 echo "[1/6] Cloning GitHub repo..."
 cd /root/autodl-tmp
 if [ ! -d "tubulin-cppf-md" ]; then
-    git clone https://github.com/GITHUB_NAMESPACE/integrative-ai-assisted-modeling-of-cppf-tubulin-interaction-suggest-beta-tubulin-binding-preference.git tubulin-cppf-md
+    git clone https://github.com/GITHUB_NAMESPACE/integrative-ai-assisted-modeling-of-cppf-tubulin-interactions.git tubulin-cppf-md
 else
     echo "Repo already exists, pulling latest..."
     cd tubulin-cppf-md && git pull && cd ..

@@ -67,9 +67,9 @@ All samples show excellent confidence (pLDDT > 94, ipTM > 0.93).
 | Backbone RMSD | 0.295 ± 0.026 nm | 0.30 / 0.55 / 0.65 nm (per-rep) | 6E7B comparable-to-better |
 | min(CPPF–protein) | 0.203 ± 0.014 nm | 0.14–0.24 nm | Within 5IJ0 range |
 | FEL global minimum | RMSD 0.27 nm, Rg 2.99 nm | RMSD 0.43 nm, Rg 2.19 nm (β) | Comparable basin localization |
-| **MM-PBSA-GB ΔG** | **−27.82 ± 5.44 kcal/mol** | **−31.19 ± 4.04 kcal/mol** | **1σ intervals overlap — statistically indistinguishable** |
+| **MM-PBSA-GB ΔG** | **−27.82 ± 5.44 kcal/mol** | **−31.19 ± 4.04 kcal/mol** | **Comparable estimates with overlapping 1σ intervals** |
 
-**Conclusion: CPPF binding is STABLE and energetically equivalent in the 6E7B (β-GTP/microtubule-lattice) conformation relative to the 5IJ0 (β-GDP/soluble dimer) main-text simulations.** This directly addresses Reviewer Comment 4.2 with data rather than deferring to future work.
+**Conclusion: CPPF binding is preserved in the 6E7B (β-GTP/microtubule-lattice) conformation, with stability metrics and binding energetics comparable to the 5IJ0 (β-GDP/soluble dimer) main-text simulations.** This directly addresses Reviewer Comment 4.2 with data rather than deferring to future work.
 
 ## Data deposition
 

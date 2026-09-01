@@ -2,7 +2,7 @@
 # Prep rep3: NVT/NPT from EM (new velocities) → md_200ns.tpr on autodl-tmp.
 set -eo pipefail
 
-REPO="/root/integrative-ai-assisted-modeling-of-cppf-tubulin-interaction-suggest-beta-tubulin-binding-preference"
+REPO="${REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 WORK="${REPO}/revision_exec_6e7b"
 PREP="${WORK}/prep"
 REP3_MD="/root/autodl-tmp/rep3_md"

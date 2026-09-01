@@ -1,7 +1,7 @@
 # MD-trajectories-CPPF-tubulin-heterodimer-and-monomers
 
 **Copy this file into the Hugging Face dataset “README” (Dataset card).**  
-Source of truth in Git: `https://github.com/GITHUB_NAMESPACE/integrative-ai-assisted-modeling-of-cppf-tubulin-interaction-suggest-beta-tubulin-binding-preference` — see `docs/DIMER_TRAJECTORY_NAMING.md`.
+Source of truth in Git: `https://github.com/GITHUB_NAMESPACE/integrative-ai-assisted-modeling-of-cppf-tubulin-interactions` — see `docs/DIMER_TRAJECTORY_NAMING.md`.
 
 ---
 
