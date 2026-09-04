@@ -92,17 +92,9 @@ If the journal **requires a DOI**, you can still deposit a **small Zenodo record
 
 See `docs/ZENODO_UPLOAD_SERVER.md` if you use Zenodo for a subset or second copy.
 
-## 6. Operational logs (what was uploaded, when, from which host)
+## 6. Operational logs
 
-All upload and polling transcripts intended for **provenance and debugging** live under `revision_exec/logs/`. They are safe to commit at typical sizes (individual files are usually well below GitHub’s hard limits; the largest HF nohup log may be ~10–15 MB—still acceptable if you need a paper trail in git).
-
-**Start here:** [`revision_exec/logs/HF_AND_PIPELINE_LOG_INDEX.md`](../revision_exec/logs/HF_AND_PIPELINE_LOG_INDEX.md) — tables for:
-
-- `hf_upload*.log`, `hf_poll*.log` — Hub CLI sessions  
-- `zenodo_upload_nohup.log` — Zenodo  
-- `rep*` / `monomer_*` / `auto_*` — MD production and chained extensions  
-
-When you run a new upload, prefer a **descriptive filename** and add a row to that index so users can tie Hub commits to local logs.
+Upload and polling logs can expose usernames, hostnames, local paths, scheduler IDs, and other operator metadata. Keep them outside the public repository. For public provenance, rely on the Hub commit history, checksums, and this dataset card rather than raw terminal transcripts.
 
 ## 7. Mirror the rest of `revision_exec/` (no duplicate prod `.xtc`)
 
@@ -120,4 +112,4 @@ bash revision_exec/scripts/huggingface_upload_revision_exec_mirror.sh --upload -
 
 The script passes `--exclude '**/prod/**/*.xtc'` to `hf upload`. Remote paths default to `revision_exec/<relative path>` (`HF_REVISION_MIRROR_PREFIX` overrides the `revision_exec` segment).
 
-**Logs:** `revision_exec/analysis_revision/work/` is gitignored. Copy `export_all_9sys.log` into `revision_exec/logs/analysis_revision_export_all_9sys_SNAPSHOT_<timestamp>.log` for GitHub (see `revision_exec/logs/HF_AND_PIPELINE_LOG_INDEX.md` § Revision export); the mirror script will also upload `analysis_revision/work/` to the Hub if you run a full mirror.
+**Local outputs:** `revision_exec/analysis_revision/work/` is gitignored. Review and redact any local logs before sharing them outside your own environment.

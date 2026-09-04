@@ -27,19 +27,7 @@ Do **not** use an OpenCL-only or CPU-only GROMACS build for production on NVIDIA
 - `conda/environment-mdprep.yml` — pin **`python=3.11`** and conda-forge/bioconda packages listed in the file.
 - `conda/environment-gmx-lite.yml` — **`gromacs=2024.5=*cuda*`** so conda selects a CUDA-enabled build.
 
-Full dependency snapshots (**no build hashes**, from the node that ran production MD) for closer reproduction:
-
-| Dated export (2026-05-18) | Canonical alias |
-|---------------------------|-----------------|
-| `conda/exports/environment-gmx-lite-full-2026-05-18.yml` | `environment-gmx-lite-full.yml` |
-| `conda/exports/environment-mdprep-full-2026-05-18.yml` | `environment-mdprep-full.yml` |
-| `conda/exports/environment-mmpbsa-full-2026-05-18.yml` | `environment-mmpbsa-full.yml` |
-| `conda/exports/environment-nextflow-full-2026-05-18.yml` | `environment-nextflow-full.yml` |
-
-Version checks from that export: `conda/exports/verification-2026-05-18.txt`.  
-Overview and refresh instructions: **`docs/REPRODUCTION_SNAPSHOT.md`**.
-
-Those files list the full transitive closure; they may still differ slightly on another OS or solver version. Prefer the **minimal** YAMLs for new clones, and use the **dated full** exports when versions must match the manuscript runs.
+Use the minimal YAMLs for new clones. Machine-specific full dependency exports and runtime logs are deliberately excluded from the public repository because they may contain operator, host, or local-path metadata. See **`docs/REPRODUCTION_SNAPSHOT.md`** for the sanitized reproducibility summary.
 
 ## Verification checklist
 

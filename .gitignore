@@ -22,6 +22,9 @@ venv/
 .vscode/
 
 # Logs and temporary files
+revision_exec/logs/
+conda/exports/
+work/
 nohup.out
 *.log
 *.log.*

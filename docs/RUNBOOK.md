@@ -19,7 +19,7 @@ This runbook is command-oriented and assumes execution from:
 Current directory layout (cleaned):
 - `docs/`: documentation (this runbook, plan, progress log)
 - `inputs/`: raw downloads / provenance (e.g. PubChem SDF, supplement zip)
-- `work/`: execution outputs and run directories
+- `work/`: local scratch area (not tracked)
 - `legacy/`: archived references from `yfeng494`
 
 Top-level working directories (real directories, no symlinks):
@@ -626,4 +626,3 @@ When reporting monomer results:
 - Clearly label as supplementary validation
 - Explicitly state fresh reruns were performed in revision workspace
 - Explicitly state parameter consistency with heterodimer production workflow
-
